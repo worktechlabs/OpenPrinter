@@ -18,6 +18,8 @@ TOP_Z = PULLEY_Z[1] + 1      # cara inferior de la placa superior de los soporte
 TOP_T = 8
 SLOT_Y = (YB + YF) / 2       # ranura superior del 4080
 FRONT_Y = P.PULLEY_Y + 28    # borde delantero de los soportes
+IDLER_X0 = P.BEAM_X1 - P.BEAM_END + 6
+HOME_SENSOR_SCREW = (IDLER_X0 + 22, -91)    # inserto M3 para el soporte del final de carrera X
 
 
 def _beam_bolts(solid, xs):
@@ -44,7 +46,7 @@ def motor_mount():
 
 
 def idler_mount():
-    x0, x1 = P.BEAM_X1 - P.BEAM_END + 6, P.BEAM_X1
+    x0, x1 = IDLER_X0, P.BEAM_X1
     ix, iy = P.IDLER_X, P.PULLEY_Y
     body = (box(x0, x1, YB, YF, ZT, ZT + BASE_T)
             .union(box(x0, x1, YB, YB + 8, ZT, TOP_Z + TOP_T))
@@ -57,6 +59,8 @@ def idler_mount():
     body = body.cut(slot).cut(slot.translate((0, 0, -(TOP_Z - ZT))))
     body = body.cut(cq.Workplane("YZ").circle(2.2).extrude(10)
                     .translate((x1 - 9, iy, P.BELT_Z)))
+    hx, hy = HOME_SENSOR_SCREW
+    body = body.cut(rod_z(TOP_Z + TOP_T - 6, TOP_Z + TOP_T + 1, hx, hy, 4.2))
     return _beam_bolts(body, (x0 + 10, x1 - 18))
 
 

@@ -10,9 +10,9 @@ Estructura;Escuadra interior serie 40;40 x 40 mm con tornillería;8;1.5;
 Estructura;Pata niveladora;M8, base Ø40;4;2.5;
 Movimiento X;Guía lineal MGN12;1000 mm;2;30;comprar con los patines
 Movimiento X;Patín MGN12H;;4;8;incluido a veces con la guía
-Movimiento X;Correa GT2 10 mm;2500 mm (abierta);1;8;fibra de vidrio o acero
-Movimiento X;Polea GT2 20T, 10 mm;eje 5 mm;1;3;
-Movimiento X;Polea loca GT2 20T lisa, 10 mm;eje 5 mm;1;3;
+Movimiento X;Correa GT2 10 mm;2500 mm (abierta);1;8;fibra de vidrio o acero; para la fase 1 vale una de 6 mm reutilizada
+Movimiento X;Polea GT2 20T, 10 mm;eje 5 mm;1;3;o de 6 mm reutilizada
+Movimiento X;Polea loca GT2 20T lisa, 10 mm;eje 5 mm;1;3;o de 6 mm reutilizada
 Arrastre Y;Eje acero calibrado Ø12 h6;1200 mm;1;12;eje del rodillo de arrastre
 Arrastre Y;Rodillo Ø30;640 mm;1;25;barra de aluminio taladrada a Ø12, o tubo Ø30 con tapones; recubrir con lija adhesiva o goma
 Arrastre Y;Rodamiento 6001-2RS;12 x 28 x 8;2;1.5;en las placas laterales
@@ -27,9 +27,8 @@ Rollos y guías;Barra aluminio Ø25;1140 mm;2;12;guías delantera y trasera; ros
 Rollos y guías;Rodamiento 6005-2RS;25 x 47 x 12;4;3;mandriles
 Rollos y guías;Fieltro adhesivo;3 mm;1;3;freno del rollo de entrada
 Mesa de vacío;Placa aluminio perforada;3 mm, 640 x 225 mm;1;45;corte láser con mesa_placa.dxf
-Mesa de vacío;Ventilador 80 mm 12 V;alta presión estática;4;6;
+Mesa de vacío;Ventilador 80 mm 24 V;alta presión estática;4;6;24 V para alimentarlos de la misma fuente
 Mesa de vacío;Cinta de espuma;3 x 10 mm, 5 m;1;5;juntas de cámaras y placa
-Motores (fase 1);Motor NEMA17;48 mm, 1,5-2 A;2;13;X e Y; en la fase 0 se mueve a mano
 Tornillería;Tuerca en T M8 ranura 8;;26;0.25;
 Tornillería;Tornillo M8;16 y 20 mm;36;0.2;10 de ellos a la testa de los perfiles entre placas
 Tornillería;Tuerca en T M5 ranura 8;;30;0.2;

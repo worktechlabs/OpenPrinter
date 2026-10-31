@@ -10,6 +10,7 @@ import cadquery as cq
 
 import carriage
 import chassis
+import motion
 import params as P
 import platen
 import rolls
@@ -24,6 +25,7 @@ OUT = Path(__file__).resolve().parent.parent / "out"
 def x_axis(assy, carriage_x):
     xaxis.add(assy)
     carriage.add(assy, carriage_x)
+    motion.add(assy, carriage_x)
     # Envolvente de recorrido del carro
     hw = P.CARRIAGE_W / 2
     assy.add(box(P.CARRIAGE_X_MIN - hw, P.CARRIAGE_X_MAX + hw, P.BEAM_Y_FRONT, P.SHELF_FRONT_Y,
@@ -40,11 +42,6 @@ def media_path(assy):
     film = strip_yz(rolls.film_path(), -fw / 2, fw / 2).translate((0, 0, 0.3))
     assy.add(film, name="film", color=FILM)
 
-    # Electrónica bajo la mesa
-    assy.add(box(-280, 200, -60, 100, P.FRAME_Z[0] + P.PROFILE + 20,
-                 P.PLATEN_RAIL_Z - P.PROFILE / 2 - 10),
-             name="reserva_electronica", color=RESERVED)
-
 
 def build(carriage_x=0.0):
     assy = cq.Assembly(name="openprinter_layout")
@@ -59,7 +56,7 @@ def export_printed(folder):
     folder.mkdir(exist_ok=True)
     parts = {**xaxis.printed_parts(), **carriage.printed_parts(),
              **platen.printed_parts(), **yfeed.printed_parts(),
-             **rolls.printed_parts(), **service.printed_parts()}
+             **rolls.printed_parts(), **service.printed_parts(), **motion.printed_parts()}
     for name, part in parts.items():
         cq.exporters.export(part, str(folder / f"{name}.stl"), tolerance=0.05, angularTolerance=0.1)
         bb = part.val().BoundingBox()

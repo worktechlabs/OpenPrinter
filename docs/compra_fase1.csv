@@ -1,0 +1,23 @@
+categoria;articulo;especificacion;cantidad;precio_unitario_eur;notas
+Control;Placa de impresora 3D compatible con Klipper;3+ drivers, SPI libre;1;0;reutilizable de impresora 3D
+Control;Raspberry Pi 3 o superior;con tarjeta microSD de 16 GB;1;0;ya disponible
+Control;Raspberry Pi Pico;RP2040;1;5;monitor del encoder X
+Motores;Motor NEMA17;48 mm, 1,5-2 A;2;0;X e Y; reutilizable de impresora 3D
+Motores;Motor NEMA17;40 mm;1;0;recogida (fase 1.5); reutilizable de impresora 3D
+Sensores;Cinta de encoder 180 LPI;1200 mm;1;15;recambio de plóter de gran formato, o de impresoras rotas
+Sensores;Sensor de encoder de cuadratura;tipo H9730/H9740, 180 LPI;1;6;o sacado de una impresora rota
+Sensores;Placa AS5047P + imán diametral;imán 6 x 2,5 mm;1;15;encoder Y
+Sensores;Sensor óptico de horquilla;tipo TCST2103, módulo;1;2;final de carrera X
+Sensores;Sensor reflexivo TCRT5000;módulo;1;1;detección de film
+Sensores;Microinterruptor;con palanca;1;1;palanca de presión
+Cableado;Cadena portacables;10 x 20 mm, 600 mm;1;8;
+Cableado;Cable apantallado 4 hilos;2 m;2;2;encoders
+Cableado;Alargadores de motor y conectores JST;;1;10;
+Alimentación;Fuente 24 V 350 W;Mean Well LRS-350-24 o similar;1;35;
+Alimentación;Convertidor 24 V a 5 V;5 A;1;8;Raspberry Pi y Pico
+Alimentación;Seta de emergencia NC;22 mm, con caja;1;8;corta los 24 V de los motores
+Alimentación;Conector IEC con interruptor y fusible;;1;5;
+Montaje;Placa de montaje de la electrónica;aluminio 3 mm, 480 x 160 mm;1;15;o tablero de PVC espumado
+Montaje;Separadores M3 de nylon;6 mm;16;0.1;
+Montaje;Tuerca en T M5 + tornillo M5;;11;0.3;placa de electrónica y bandeja
+Montaje;Inserto térmico M3 + tornillo M3;;12;0.15;soportes de sensores y brazo

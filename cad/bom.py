@@ -1,6 +1,6 @@
-"""Lista de compra de la fase 0, calculada a partir del modelo.
+"""Listas de compra de las fases 0 y 1, calculadas a partir del modelo.
 
-Genera docs/compra_fase0.md y docs/compra_fase0.csv. Las longitudes y
+Genera docs/compra_faseN.md y docs/compra_faseN.csv. Las longitudes y
 cantidades salen de params.py y de los módulos, así que si cambia el ancho de
 film la lista se actualiza sola. Los precios son una estimación orientativa
 para comparar opciones, no un presupuesto.
@@ -12,6 +12,7 @@ import cadquery as cq
 
 import carriage
 import chassis
+import motion
 import params as P
 import platen
 import rolls
@@ -33,6 +34,12 @@ PRINTED_QTY = {
     "rollo_mandril": 4, "rollo_collarin": 8,
     "mesa_entrada_segmento": rolls.ENTRY_SEGMENTS, "servicio_base": 1,
 }
+PRINTED_QTY_F1 = {
+    "encoder_soporte_cinta_izq": 1, "encoder_soporte_cinta_der": 1, "encoder_soporte_sensor": 1,
+    "final_x_bandera": 1, "final_x_soporte": 1, "encoder_y_soporte": 1,
+    "cadena_bandeja": 2, "cadena_brazo": 1,
+}
+REUSED = "reutilizable de impresora 3D"
 
 
 def _round_up(mm, step=50):
@@ -55,7 +62,7 @@ def items():
     d1, d2 = P.Y_PULLEY_PD
     c = P.Y_MOTOR_DZ
     belt_y = 2 * c + math.pi * (d1 + d2) / 2 + (d2 - d1) ** 2 / (4 * c)
-    grit_shaft = (yfeed.PULLEY_X[1] + 3) - (P.BEAM_X0 - P.SIDE_PLATE_T - 5)
+    grit_shaft = (yfeed.PULLEY_X[1] + 3) - (P.BEAM_X0 - P.SIDE_PLATE_T - P.GRIT_SHAFT_OUT_L)
     lift_shaft = (yfeed.OUT_R + 45) - (P.BEAM_X0 - P.SIDE_PLATE_T - 5)
     roll_shaft = rolls.SHAFT_X[1] - rolls.SHAFT_X[0]
     m8_tnuts = 6 + 2 * n_br + 4
@@ -75,9 +82,10 @@ def items():
         ("Estructura", "Pata niveladora", "M8, base Ø40", 4, 2.5, ""),
         ("Movimiento X", "Guía lineal MGN12", f"{P.RAIL_LENGTH} mm", 2, 30, "comprar con los patines"),
         ("Movimiento X", "Patín MGN12H", "", 4, 8, "incluido a veces con la guía"),
-        ("Movimiento X", "Correa GT2 10 mm", f"{_round_up(belt_x, 500)} mm (abierta)", 1, 8, "fibra de vidrio o acero"),
-        ("Movimiento X", "Polea GT2 20T, 10 mm", "eje 5 mm", 1, 3, ""),
-        ("Movimiento X", "Polea loca GT2 20T lisa, 10 mm", "eje 5 mm", 1, 3, ""),
+        ("Movimiento X", "Correa GT2 10 mm", f"{_round_up(belt_x, 500)} mm (abierta)", 1, 8,
+         "fibra de vidrio o acero; para la fase 1 vale una de 6 mm reutilizada"),
+        ("Movimiento X", "Polea GT2 20T, 10 mm", "eje 5 mm", 1, 3, "o de 6 mm reutilizada"),
+        ("Movimiento X", "Polea loca GT2 20T lisa, 10 mm", "eje 5 mm", 1, 3, "o de 6 mm reutilizada"),
         ("Arrastre Y", "Eje acero calibrado Ø12 h6", f"{_round_up(grit_shaft)} mm", 1, 12,
          "eje del rodillo de arrastre"),
         ("Arrastre Y", "Rodillo Ø30", f"{P.PLATEN_X[1] - P.PLATEN_X[0]:.0f} mm",
@@ -98,10 +106,9 @@ def items():
         ("Mesa de vacío", "Placa aluminio perforada",
          f"{P.PLATEN_TOP_T} mm, {P.PLATEN_X[1] - P.PLATEN_X[0]:.0f} x {P.PLATEN_Y[1] - P.PLATEN_Y[0]} mm",
          1, 45, "corte láser con mesa_placa.dxf"),
-        ("Mesa de vacío", "Ventilador 80 mm 12 V", "alta presión estática", P.PLATEN_SEGMENTS, 6, ""),
+        ("Mesa de vacío", "Ventilador 80 mm 24 V", "alta presión estática", P.PLATEN_SEGMENTS, 6,
+         "24 V para alimentarlos de la misma fuente"),
         ("Mesa de vacío", "Cinta de espuma", "3 x 10 mm, 5 m", 1, 5, "juntas de cámaras y placa"),
-        ("Motores (fase 1)", "Motor NEMA17", "48 mm, 1,5-2 A", 2, 13,
-         "X e Y; en la fase 0 se mueve a mano"),
         ("Tornillería", "Tuerca en T M8 ranura 8", "", m8_tnuts, 0.25, ""),
         ("Tornillería", "Tornillo M8", "16 y 20 mm", m8_tnuts + 10, 0.2,
          "10 de ellos a la testa de los perfiles entre placas"),
@@ -122,31 +129,68 @@ def items():
     return rows
 
 
-def printed_mass():
-    parts = {**xaxis.printed_parts(), **carriage.printed_parts(), **platen.printed_parts(),
-             **yfeed.printed_parts(), **rolls.printed_parts(), **service.printed_parts()}
+def items_fase1():
+    """Fase 1: movimiento, sensores, cableado y electrónica."""
+    x0, x1, y0, y1 = P.ELEC_PLATE
+    strip_len = P.ENC_STRIP_X[1] - P.ENC_STRIP_X[0] + 60
+    chain_len = (P.CHAIN_FIX_X - P.CARRIAGE_X_MIN) + math.pi * P.CHAIN_R + 60
+    return [
+        ("Control", "Placa de impresora 3D compatible con Klipper", "3+ drivers, SPI libre", 1, 0, REUSED),
+        ("Control", "Raspberry Pi 3 o superior", "con tarjeta microSD de 16 GB", 1, 0, "ya disponible"),
+        ("Control", "Raspberry Pi Pico", "RP2040", 1, 5, "monitor del encoder X"),
+        ("Motores", "Motor NEMA17", "48 mm, 1,5-2 A", 2, 0, f"X e Y; {REUSED}"),
+        ("Motores", "Motor NEMA17", "40 mm", 1, 0, f"recogida (fase 1.5); {REUSED}"),
+        ("Sensores", "Cinta de encoder 180 LPI", f"{_round_up(strip_len, 100)} mm", 1, 15,
+         "recambio de plóter de gran formato, o de impresoras rotas"),
+        ("Sensores", "Sensor de encoder de cuadratura", "tipo H9730/H9740, 180 LPI", 1, 6,
+         "o sacado de una impresora rota"),
+        ("Sensores", "Placa AS5047P + imán diametral", "imán 6 x 2,5 mm", 1, 15, "encoder Y"),
+        ("Sensores", "Sensor óptico de horquilla", "tipo TCST2103, módulo", 1, 2, "final de carrera X"),
+        ("Sensores", "Sensor reflexivo TCRT5000", "módulo", 1, 1, "detección de film"),
+        ("Sensores", "Microinterruptor", "con palanca", 1, 1, "palanca de presión"),
+        ("Cableado", "Cadena portacables", f"10 x 20 mm, {_round_up(chain_len, 100)} mm", 1, 8, ""),
+        ("Cableado", "Cable apantallado 4 hilos", "2 m", 2, 2, "encoders"),
+        ("Cableado", "Alargadores de motor y conectores JST", "", 1, 10, ""),
+        ("Alimentación", "Fuente 24 V 350 W", "Mean Well LRS-350-24 o similar", 1, 35, ""),
+        ("Alimentación", "Convertidor 24 V a 5 V", "5 A", 1, 8, "Raspberry Pi y Pico"),
+        ("Alimentación", "Seta de emergencia NC", "22 mm, con caja", 1, 8, "corta los 24 V de los motores"),
+        ("Alimentación", "Conector IEC con interruptor y fusible", "", 1, 5, ""),
+        ("Montaje", "Placa de montaje de la electrónica", f"aluminio 3 mm, {x1 - x0} x {y1 - y0} mm",
+         1, 15, "o tablero de PVC espumado"),
+        ("Montaje", "Separadores M3 de nylon", "6 mm", 16, 0.1, ""),
+        ("Montaje", "Tuerca en T M5 + tornillo M5", "", 3 + 2 * 4, 0.3, "placa de electrónica y bandeja"),
+        ("Montaje", "Inserto térmico M3 + tornillo M3", "", 12, 0.15, "soportes de sensores y brazo"),
+    ]
+
+
+def printed_mass(phase=0):
+    if phase == 0:
+        parts = {**xaxis.printed_parts(), **carriage.printed_parts(), **platen.printed_parts(),
+                 **yfeed.printed_parts(), **rolls.printed_parts(), **service.printed_parts()}
+        qtys = PRINTED_QTY
+    else:
+        parts, qtys = motion.printed_parts(), PRINTED_QTY_F1
     out = []
     for name, part in parts.items():
-        qty = PRINTED_QTY[name]
+        qty = qtys[name]
         grams = part.val().Volume() / 1000 * PETG_DENSITY * INFILL_FACTOR
         out.append((name, qty, grams))
     return out
 
 
-def write():
+def write_list(phase, rows, footnote):
     DOCS.mkdir(exist_ok=True)
-    rows = items()
-    printed = printed_mass()
+    printed = printed_mass(phase)
     total_printed = sum(q * g for _, q, g in printed)
     filament_cost = total_printed / 1000 * 20
 
-    with open(DOCS / "compra_fase0.csv", "w", encoding="utf-8") as f:
+    with open(DOCS / f"compra_fase{phase}.csv", "w", encoding="utf-8") as f:
         f.write("categoria;articulo;especificacion;cantidad;precio_unitario_eur;notas\n")
         for row in rows:
             f.write(";".join(str(v) for v in row) + "\n")
 
     lines = [
-        "# Lista de compra: fase 0",
+        f"# Lista de compra: fase {phase}",
         "",
         "Generada por `cad/bom.py` a partir del modelo (film de "
         f"{P.FILM_WIDTH} mm). Si cambias `params.py`, vuelve a generarla.",
@@ -177,11 +221,17 @@ def write():
               "| Concepto | € aprox. |", "|---|---:|",
               f"| Material comprado | {total:.0f} |",
               f"| Filamento (~{total_printed / 1000:.1f} kg a 20 €/kg) | {filament_cost:.0f} |",
-              f"| **Total fase 0** | **{total + filament_cost:.0f}** |", "",
-              "No incluye cabezales, electrónica, tintas ni herramientas.", ""]
-    (DOCS / "compra_fase0.md").write_text("\n".join(lines), encoding="utf-8")
-    print(f"Lista de compra: {len(rows)} líneas, ~{total:.0f} € + filamento "
-          f"{total_printed / 1000:.1f} kg -> {DOCS / 'compra_fase0.md'}")
+              f"| **Total fase {phase}** | **{total + filament_cost:.0f}** |", "",
+              footnote, ""]
+    (DOCS / f"compra_fase{phase}.md").write_text("\n".join(lines), encoding="utf-8")
+    print(f"Fase {phase}: {len(rows)} líneas, ~{total:.0f} € + filamento "
+          f"{total_printed / 1000:.2f} kg -> {DOCS / f'compra_fase{phase}.md'}")
+
+
+def write():
+    write_list(0, items(), "No incluye motores, electrónica (fase 1), cabezales, tintas ni herramientas.")
+    write_list(1, items_fase1(), "Las placas, la Raspberry Pi, los motores y las correas se cuentan a 0 € "
+               "porque se reutilizan de impresoras 3D. No incluye cabezales ni tintas.")
 
 
 if __name__ == "__main__":

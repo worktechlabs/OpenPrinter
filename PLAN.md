@@ -43,11 +43,17 @@ piezas impresas en 3D y, más adelante, electrónica abierta (Raspberry Pi + MCU
 **Hito fase 0**: chasis montado, el carro se desliza a lo largo de la viga y el
 film avanza del rollo de entrada al de recogida, todo movido a mano.
 
-### Más adelante (fuera de alcance por ahora)
+### Fase 1 — Movimiento
 
-- Motores, transmisión, encoder y electrónica de movimiento.
-- Lista de componentes (BOM) y proveedores.
-- Driver del cabezal, sistema de tinta, estación de servicio funcional.
+Arquitectura y decisiones en [docs/fase1_movimiento.md](docs/fase1_movimiento.md).
+Modelado en `cad/motion.py`: encoder X (cinta y sensor), final de carrera X,
+encoder Y en el rodillo, cadena portacables con su bandeja y placa de
+electrónica. Lista de compra en [docs/compra_fase1.md](docs/compra_fase1.md).
+
+### Más adelante
+
+- Driver del cabezal, sistema de tinta (rack de tanques ya reservado por fuera
+  de la placa izquierda), estación de servicio funcional.
 - Agitador de polvo y túnel de curado.
 - Cubierta y cerramiento.
 
@@ -69,7 +75,11 @@ OpenPrinter/
 │   ├── platen.py      mesa de vacío (fase 0.5): placa perforada, cámaras
 │   ├── yfeed.py       arrastre Y (fase 0.6): rodillo, presión, levante, motor Y
 │   ├── rolls.py       rollos y guías (fase 0.7)
-│   ├── service.py     estación de servicio (fase 0.8)
+│   ├── service.py     estación de servicio y reserva de tinta (fase 0.8)
+│   ├── motion.py      sensores, cadena y electrónica (fase 1)
+│   ├── bom.py         listas de compra
+│   ├── render_pv.py   renders de presentación
+│   ├── web.py         modelo 3D de la web
 │   ├── render.py      vistas PNG rápidas
 │   └── ...            un módulo por bloque a medida que se detallen
 └── out/               STEP / STL / vistas generadas (no se versiona)

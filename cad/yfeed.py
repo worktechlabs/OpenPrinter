@@ -160,7 +160,7 @@ def printed_parts():
 
 def add(assy):
     # Rodillo, eje y rodamientos
-    assy.add(rod_x(XL - T - 5, PULLEY_X[1] + 3, GY, GZ, P.GRIT_SHAFT_D),
+    assy.add(rod_x(XL - T - P.GRIT_SHAFT_OUT_L, PULLEY_X[1] + 3, GY, GZ, P.GRIT_SHAFT_D),
              name="eje_arrastre", color=STEEL)
     assy.add(rod_x(*P.PLATEN_X, GY, GZ, P.GRIT_ROLLER_D)
              .cut(rod_x(P.PLATEN_X[0] - 1, P.PLATEN_X[1] + 1, GY, GZ, P.GRIT_SHAFT_D)),

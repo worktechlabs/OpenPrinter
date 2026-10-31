@@ -93,6 +93,24 @@ Y_PULLEY_PD = (12.73, 50.93)   # GT2 20T en motor, 80T en rodillo (4:1)
 Y_MOTOR_DZ = 70             # motor Y por debajo del rodillo
 Y_BELT_W = 6
 
+# Fase 1: sensores y cableado
+ENC_STRIP_Y = -104          # cinta del encoder X (cara delantera de la viga, entre guías)
+ENC_STRIP_Z = (75, 85)      # 10 mm de alto, entre los patines superior e inferior
+ENC_STRIP_X = (-545, 545)
+ENC_SENSOR_Z = (72, 90)
+GRIT_SHAFT_OUT_L = 13       # el eje del rodillo sale por fuera de la placa izquierda (encoder Y)
+CHAIN_W, CHAIN_H = 27, 15   # cadena portacables exterior (interior 10 x 20)
+CHAIN_R = 38                # radio de curvatura a eje
+CHAIN_FIX_X = 5             # anclaje fijo, centro del recorrido
+CHAIN_Y = (-187, -160)
+CHAIN_TRAY_X = (-470, 40)
+ELEC_PLATE = (-280, 200, -60, 100)   # placa de montaje de la electrónica X0, X1, Y0, Y1
+
+# Tinta (fase 4): rack de tanques por fuera de la placa izquierda, nivel por
+# debajo de las boquillas. C, M, Y, K y blanco con agitación/recirculación.
+INK_RACK = (120, (0, 230), (-240, -40))   # fondo en X, rango Y, rango Z
+INK_TUBE_HOLE = (-185, 90, 20)             # paso de tubos en las placas (Y, Z, Ø)
+
 REAR_GUIDE_D = 25
 REAR_GUIDE_Y = -200
 UNWIND_ROLL = (-280, -150)  # centro (Y, Z) del rollo de entrada

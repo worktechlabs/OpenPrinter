@@ -26,9 +26,9 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 |---|---|---:|---:|---|
 | Guía lineal MGN12 | 1000 mm | 2 | 60 | comprar con los patines |
 | Patín MGN12H |  | 4 | 32 | incluido a veces con la guía |
-| Correa GT2 10 mm | 2500 mm (abierta) | 1 | 8 | fibra de vidrio o acero |
-| Polea GT2 20T, 10 mm | eje 5 mm | 1 | 3 |  |
-| Polea loca GT2 20T lisa, 10 mm | eje 5 mm | 1 | 3 |  |
+| Correa GT2 10 mm | 2500 mm (abierta) | 1 | 8 | fibra de vidrio o acero; para la fase 1 vale una de 6 mm reutilizada |
+| Polea GT2 20T, 10 mm | eje 5 mm | 1 | 3 | o de 6 mm reutilizada |
+| Polea loca GT2 20T lisa, 10 mm | eje 5 mm | 1 | 3 | o de 6 mm reutilizada |
 
 ## Arrastre Y
 
@@ -58,14 +58,8 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
 | Placa aluminio perforada | 3 mm, 640 x 225 mm | 1 | 45 | corte láser con mesa_placa.dxf |
-| Ventilador 80 mm 12 V | alta presión estática | 4 | 24 |  |
+| Ventilador 80 mm 24 V | alta presión estática | 4 | 24 | 24 V para alimentarlos de la misma fuente |
 | Cinta de espuma | 3 x 10 mm, 5 m | 1 | 5 | juntas de cámaras y placa |
-
-## Motores (fase 1)
-
-| Artículo | Especificación | Cant. | € aprox. | Notas |
-|---|---|---:|---:|---|
-| Motor NEMA17 | 48 mm, 1,5-2 A | 2 | 26 | X e Y; en la fase 0 se mueve a mano |
 
 ## Tornillería
 
@@ -106,14 +100,14 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 | `rollo_collarin` | 8 | 10 | 82 |
 | `mesa_entrada_segmento` | 4 | 36 | 142 |
 | `servicio_base` | 1 | 109 | 109 |
-| **Total** | | | **2059 g** |
+| **Total** | | | **2058 g** |
 
 ## Resumen
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 657 |
+| Material comprado | 631 |
 | Filamento (~2.1 kg a 20 €/kg) | 41 |
-| **Total fase 0** | **698** |
+| **Total fase 0** | **672** |
 
-No incluye cabezales, electrónica, tintas ni herramientas.
+No incluye motores, electrónica (fase 1), cabezales, tintas ni herramientas.

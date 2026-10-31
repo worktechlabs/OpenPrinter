@@ -8,6 +8,7 @@ aluminio 4040 y placas cortadas por un servicio de láser o agua.
 
 **[Modelo 3D interactivo](docs/model/openprinter.glb)** ·
 **[Lista de compra de la fase 0](docs/compra_fase0.md)** ·
+**[Fase 1: movimiento](docs/fase1_movimiento.md)** ·
 **[Plan de diseño](PLAN.md)**
 
 *Open source DTF (Direct To Film) printer, designed from scratch to be built
@@ -78,7 +79,7 @@ el diseño.
 | Fase | Contenido | Estado |
 |---|---|---|
 | 0 | Mecánica sin cubierta: chasis, viga X, carro, mesa de vacío, arrastre, rollos | Diseño completo, falta validar con piezas reales |
-| 1 | Movimiento: motores, encoder, electrónica de control, firmware | Pendiente |
+| 1 | Movimiento: motores, encoder, electrónica de control, firmware ([arquitectura](docs/fase1_movimiento.md)) | En diseño: arquitectura y piezas modeladas |
 | 2 | Software: RIP abierto, primera impresión en papel | Pendiente |
 | 3 | Cabezal XP600: estudio de la señal y placa driver abierta | Pendiente |
 | 4 | Tinta y servicio: presión negativa, circulación del blanco, estación de servicio | Pendiente |
@@ -119,11 +120,29 @@ presentación con visor 3D; para verla, sírvela en local desde la carpeta `docs
 
 ## Lista de compra
 
-La [lista de compra de la fase 0](docs/compra_fase0.md) se calcula a partir del
-modelo: perfiles con sus longitudes, placas, guías, correas, rodamientos, ejes,
-tornillería y gramos de filamento. Una primera estimación orientativa ronda los
-**700 €** de material y filamento, sin cabezales ni electrónica. También está en
-[CSV](docs/compra_fase0.csv).
+Las listas de compra se calculan a partir del modelo: perfiles con sus
+longitudes, placas, guías, correas, rodamientos, ejes, tornillería, sensores y
+gramos de filamento. Son estimaciones orientativas:
+
+| Fase | Lista | Aprox. |
+|---|---|---:|
+| 0 · mecánica | [MD](docs/compra_fase0.md) · [CSV](docs/compra_fase0.csv) | ~670 € |
+| 1 · movimiento | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~150 € |
+
+La fase 1 cuenta a 0 € la placa de control, la Raspberry Pi, los motores y las
+correas, porque se reutilizan de impresoras 3D. Ninguna incluye cabezales ni
+tintas.
+
+## Cabezales y tinta
+
+- **Dos cabezales Epson XP600**: uno para CMYK y otro dedicado al blanco, con
+  todos sus canales en blanco para que la capa base cubra bien. Con
+  `HEAD_COUNT = 1` se obtiene una versión más barata de un solo cabezal.
+- **Tanques de tinta**: rack por fuera de la placa izquierda (volumen
+  reservado). Se rellena desde fuera, el nivel queda a la vista y la tinta por
+  debajo de las boquillas, como necesita la presión negativa. Los tubos entran
+  por un agujero de la placa y suben al carro por la cadena portacables. El
+  rack, la agitación y la recirculación del blanco se diseñan en la fase 4.
 
 ## Medidas principales (film de 600 mm)
 
@@ -175,14 +194,16 @@ cad/
 ├── platen.py     mesa de vacío (0.5)
 ├── yfeed.py      arrastre Y (0.6)
 ├── rolls.py      rollos y guías (0.7)
-├── service.py    estación de servicio (0.8)
+├── service.py    estación de servicio y reserva de tinta (0.8)
+├── motion.py     encoders, final de carrera, cadena y electrónica (fase 1)
 ├── bom.py        lista de compra
 ├── render_pv.py  renders de presentación
 ├── web.py        modelo 3D de la web
 └── render.py     vistas rápidas de trabajo
 docs/
 ├── index.html    página de presentación con visor 3D
-├── compra_fase0.md / .csv
+├── compra_fase0.md / .csv, compra_fase1.md / .csv
+├── fase1_movimiento.md   arquitectura de la fase 1
 ├── img/          renders
 └── model/        openprinter.glb
 ```

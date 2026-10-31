@@ -32,6 +32,14 @@ VIEWS = {
     "mesa_camara": dict(direction=(-0.5, 0.8, 1.6), zoom=1.1, only=("mesa_camara_1",)),
     "motor_y": dict(direction=(1.4, 1.0, 0.6), zoom=1.1,
                     only=("soporte_motor_y", "motor_y", "polea_80t_y", "polea_20t_y", "correa_y")),
+    "carro_trasera": dict(direction=(0.9, -1.4, 0.8), zoom=1.1,
+                          only=("carro", "patin", "cabezal", "encoder_soporte_sensor", "encoder_sensor",
+                                "final_x_bandera")),
+    "cadena": dict(direction=(0.6, -1.5, 0.9), zoom=1.15,
+                   only=("cadena", "carro", "patin", "viga_x", "encoder_s")),
+    "electronica": dict(direction=(-0.8, 1.3, 1.3), zoom=1.1, only=("electronica",)),
+    "encoder_y": dict(direction=(-1.4, 0.5, 0.5), zoom=1.0,
+                      only=("encoder_y", "rodamiento_arrastre_0")),
     "mandril": dict(direction=(1.3, -0.9, 0.6), zoom=1.0,
                     only=("mandril_entrada_+1", "collarin_entrada_+1")),
 }
@@ -84,13 +92,17 @@ def render(items, path, direction, zoom=1.0, only=None, hide=None, parallel=Fals
     pl.close()
 
 
-def main():
+def main(names=None):
+    """Renderiza todas las vistas, o solo las indicadas: render_pv.py carro mesa"""
     IMG.mkdir(parents=True, exist_ok=True)
     items = meshes(layout.build(carriage_x=-120))
     for name, view in VIEWS.items():
+        if names and name not in names:
+            continue
         render(items, IMG / f"{name}.png", **view)
         print("Render:", IMG / f"{name}.png")
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    main(sys.argv[1:])

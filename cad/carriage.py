@@ -11,6 +11,7 @@ hay que confirmarlas con un cabezal real antes de imprimir la bandeja.
 """
 import cadquery as cq
 
+import motion
 import params as P
 from lib import HEAD, PRINTED, RESERVED, STEEL, box, rod_y
 
@@ -55,6 +56,11 @@ def plate(cx=0.0):
     # Insertos térmicos M4 para la bandeja
     for dx, dz in ADJ_SCREWS:
         body = body.cut(rod_y(PY1 - 8, PY1 + 1, cx + dx, dz, 5.6))
+    # Insertos M3: sensor del encoder X (atrás) y bandera del final de carrera (arriba)
+    for dx, z in motion.SENSOR_SCREWS:
+        body = body.cut(rod_y(PY0 - 1, PY0 + 6, cx + dx, z, 4.2))
+    fx, fy = motion.FLAG_SCREW
+    body = body.cut(cq.Workplane("XY").circle(2.1).extrude(7).translate((cx + fx, fy, P.CARRIAGE_TOP_Z - 6)))
     # Insertos M3 para la pinza de correa (desde atrás)
     for dx in (-20, 20):
         body = body.cut(rod_y(PY0 - 1, PY0 + 6, cx + dx, P.CARRIAGE_TOP_Z - 8, 4.2))
@@ -99,6 +105,10 @@ def belt_clamp(cx=0.0):
                         P.BELT_Z - P.BELT_W / 2 - 0.5, P.BELT_Z + P.BELT_W / 2 + 0.5))
     for dx in (-20, 20):
         body = body.cut(rod_y(y0 - 1, y1 + 1, cx + dx, z1 - 8, 3.4))
+    # Insertos M3 arriba para el brazo de la cadena portacables
+    for dx in (-8, 8):
+        body = body.cut(cq.Workplane("XY").circle(2.1).extrude(7)
+                        .translate((cx + dx, (y0 + y1) / 2, z1 - 6)))
     return body
 
 
