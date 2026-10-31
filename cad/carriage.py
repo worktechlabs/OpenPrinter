@@ -26,9 +26,10 @@ SHELF_TOP = P.SHELF_Z + P.SHELF_T
 ADJ_SCREWS = [(dx, dz) for dx in (-60, 60) for dz in (P.SHELF_Z + 22, P.SHELF_Z + 47)]
 
 
-def head_xs(cx=0.0):
-    first = cx - (P.HEAD_COUNT - 1) * P.HEAD_PITCH_X / 2
-    return [first + i * P.HEAD_PITCH_X for i in range(P.HEAD_COUNT)]
+def head_xs(cx=0.0, n=P.HEAD_COUNT):
+    """Centros de los n primeros huecos; los cabezales montados ocupan los de -X."""
+    first = cx - (P.HEAD_SLOTS - 1) * P.HEAD_PITCH_X / 2
+    return [first + i * P.HEAD_PITCH_X for i in range(n)]
 
 
 def blocks(cx=0.0):
@@ -82,7 +83,7 @@ def shelf(cx=0.0):
 
     hx, hy, _ = P.HEAD_SIZE
     fy = P.HEAD_FLANGE[1]
-    for x in head_xs(cx):
+    for x in head_xs(cx, P.HEAD_SLOTS):   # ventanas para todos los huecos
         body = body.cut(box(x - hx / 2 - 0.5, x + hx / 2 + 0.5, -hy / 2 - 0.5, hy / 2 + 0.5,
                             P.SHELF_Z - 1, SHELF_TOP + 1))
         for y in (-fy / 2 + 3.5, fy / 2 - 3.5):

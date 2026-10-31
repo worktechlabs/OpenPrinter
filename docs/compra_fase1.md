@@ -19,7 +19,6 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
 | Motor NEMA17 | 40 mm | 2 | 0 | X e Y; del inventario (Creality 42-40, 42HD4041) |
-| Motor NEMA17 | 40 mm | 1 | 0 | recogida (fase 1.5); reutilizable de impresora 3D |
 
 ## Sensores
 
@@ -54,26 +53,34 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
 | Bandeja inferior de electrónica | MDF 10 mm, 1100 x 160 mm | 1 | 4 | apoya en los largueros laterales y el central |
-| Convertidor 24 V a 12 V | 3 A | 1 | 4 | ventiladores 4010 de la caja de electrónica |
+| Convertidor 24 V a 12 V | 5 A | 1 | 6 | ventiladores 4010 y bombas de tinta |
 | Tapa de ranura 8 mm | 2 m | 1 | 6 | cables de sensores por las ranuras de la viga |
 | Bridas y portabridas adhesivos |  | 1 | 4 |  |
 | Separadores M3 de nylon | 6 mm | 16 | 2 |  |
 | Tuerca en T M5 + tornillo M5 |  | 11 | 3 | placa de electrónica y bandeja |
 | Inserto térmico M3 + tornillo M3 |  | 12 | 2 | soportes de sensores y brazo |
 
-## Compartimento de tinta
+## Pantalla
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Perfil 2020 V-slot | 180 mm, montante del compartimento de tinta | 4 | 0 | del inventario (V-slot 2020) |
-| Perfil 2020 V-slot | 210 mm, larguero del compartimento de tinta | 4 | 0 | del inventario (V-slot 2020) |
-| Perfil 2020 V-slot | 80 mm, travesaño del compartimento de tinta | 4 | 0 | del inventario (V-slot 2020) |
-| Escuadras 2020 + tuercas en T M5 |  | 16 | 0 | del inventario |
-| MDF 6 mm | paneles delantero, trasero y tapa | 1 | 4 |  |
-| Metacrilato 3 mm | 262 x 180 mm | 1 | 8 | panel exterior para ver los niveles |
-| Depósito de tinta tipo CISS | 250 ml | 5 | 15 | fase 4; el de blanco, más ancho |
-| Agitador magnético mini + imán |  | 1 | 12 | fase 4, bajo el blanco |
-| Tubo de tinta 3 x 2 mm | 5 m | 1 | 6 | fase 4 |
+| Pantalla táctil 7" HDMI + USB | 1024 x 600, KlipperScreen | 1 | 35 | medir la que se compre y ajustar SCREEN_SIZE |
+| Cable HDMI fino + USB | 1,5 m | 1 | 6 | por las canaletas hasta la Raspberry Pi |
+
+## Tinta
+
+| Artículo | Especificación | Cant. | € aprox. | Notas |
+|---|---|---:|---:|---|
+| Caja de plástico con tapa | 395 x 255 x 155 mm o mayor | 1 | 9 | tipo Really Useful Box 9 L; bandeja antiderrames de las botellas |
+| Repisa | MDF 12 mm, 420 x 300 mm | 1 | 3 |  |
+| Tapón de botella con 2 racores | salida de tubo + respiradero | 5 | 15 | para las botellas de 1 L del fabricante |
+| Filtro de aire para respiradero |  | 5 | 5 |  |
+| Bomba peristáltica 12 V | tubo de silicona 2 x 4 mm | 5 | 35 | rellena los subdepósitos; parada, cierra el tubo |
+| Subdepósito de tinta con sensor de nivel | ~100 ml, flotador | 5 | 30 | recambio de DTF/UV, o depósito + interruptor de flotador |
+| Módulo MOSFET 4 + 1 canales o placa ULN2803 | entrada 3,3 V | 1 | 6 | bombas desde los GPIO de la Raspberry Pi |
+| Agitador magnético mini + imán |  | 1 | 12 | bajo la botella de blanco |
+| Tubo de tinta 3 x 2 mm | 10 m | 1 | 10 | botella, bomba, subdepósito y carro |
+| Racores y uniones para tubo de 3 mm |  | 1 | 5 |  |
 
 ## Piezas impresas
 
@@ -89,21 +96,28 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 | `encoder_y_soporte` | 1 | 7 | 7 |
 | `cadena_bandeja` | 2 | 68 | 136 |
 | `cadena_brazo` | 1 | 18 | 18 |
-| `tinta_bandeja` | 1 | 76 | 76 |
+| `tinta_escuadra_repisa` | 2 | 71 | 141 |
+| `tinta_pata_repisa` | 1 | 79 | 79 |
+| `tinta_base_botellas` | 1 | 177 | 177 |
+| `tinta_soporte_bombas` | 1 | 118 | 118 |
+| `tinta_soporte_subdepositos` | 1 | 198 | 198 |
+| `tinta_caja_driver` | 1 | 21 | 21 |
 | `tinta_clip_tubos` | 2 | 2 | 5 |
 | `electronica_caja` | 1 | 109 | 109 |
 | `electronica_brida_fuente` | 2 | 9 | 18 |
 | `panel_iec` | 1 | 21 | 21 |
 | `panel_seta` | 1 | 25 | 25 |
-| `canaleta_tramo_200` | 12 | 46 | 549 |
-| **Total** | | | **990 g** |
+| `canaleta_tramo_200` | 13 | 46 | 594 |
+| `pantalla_carcasa` | 1 | 185 | 185 |
+| `pantalla_soporte` | 1 | 40 | 40 |
+| **Total** | | | **1920 g** |
 
 ## Resumen
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 158 |
-| Filamento (~1.0 kg a 20 €/kg) | 20 |
-| **Total fase 1** | **178** |
+| Material comprado | 286 |
+| Filamento (~1.9 kg a 20 €/kg) | 38 |
+| **Total fase 1** | **324** |
 
 Las placas, la Raspberry Pi, los motores y las correas se cuentan a 0 € porque se reutilizan de impresoras 3D. No incluye cabezales ni tintas.

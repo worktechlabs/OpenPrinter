@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Montaje interactivo · OpenPrinter</title>
+<meta name="description" content="Montaje paso a paso de OpenPrinter en 3D: pulsa una pieza para ver qué es, en qué paso va y descargar su STL.">
+<style>
+  :root {
+    --bg: #f6f7f9; --surface: #ffffff; --text: #1b1f24; --muted: #5b6470; --line: #e2e5ea;
+    --accent: #e8761a; --accent-soft: #fdf0e4; --blue: #2a5ea8; --radius: 14px;
+    --view-top: #ffffff; --view-bottom: #e9ecf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111418; --surface: #1a1f25; --text: #e8ebef; --muted: #9aa4b0; --line: #2b323b;
+      --accent: #f08a35; --accent-soft: #2c2117; --blue: #6c9be0;
+      --view-top: #232a32; --view-bottom: #15191e;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; flex-direction: column;
+  }
+  a { color: var(--blue); }
+  header {
+    display: flex; align-items: center; gap: 16px; padding: 0 16px; height: 52px; flex: none;
+    border-bottom: 1px solid var(--line); background: var(--surface);
+  }
+  .brand { font-weight: 700; text-decoration: none; color: var(--text); }
+  .brand span { color: var(--accent); }
+  header .sub { color: var(--muted); font-size: 14px; }
+  header .back { margin-left: auto; font-size: 14px; text-decoration: none; }
+
+  main { flex: 1; display: grid; grid-template-columns: 1fr 380px; min-height: 0; }
+  #view { position: relative; min-height: 0; background: linear-gradient(var(--view-top), var(--view-bottom)); }
+  #view canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  #loading {
+    position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px;
+  }
+  .tools {
+    position: absolute; left: 12px; top: 12px; display: flex; flex-wrap: wrap; gap: 6px; max-width: calc(100% - 24px);
+  }
+  .tools button, .tools label {
+    font: inherit; font-size: 13px; padding: 6px 10px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--text);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .tools button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  #tip {
+    position: absolute; pointer-events: none; padding: 4px 8px; border-radius: 6px; font-size: 12px;
+    background: rgba(20, 24, 28, .85); color: #fff; white-space: nowrap; display: none;
+  }
+
+  aside {
+    border-left: 1px solid var(--line); background: var(--surface); overflow-y: auto;
+    padding: 16px; display: flex; flex-direction: column; gap: 14px;
+  }
+  .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .steps button {
+    font: inherit; font-weight: 600; padding: 8px 0; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text);
+  }
+  .steps button.done { color: var(--muted); }
+  .steps button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .nav { display: flex; gap: 8px; }
+  .nav button {
+    flex: 1; font: inherit; padding: 8px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  }
+  .nav button:disabled { opacity: .4; cursor: default; }
+  h1 { font-size: 20px; line-height: 1.25; margin: 0; }
+  .kicker { color: var(--accent); font-weight: 600; font-size: 13px; }
+  .text { margin: 0; }
+  .hw { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+  h2 { font-size: 14px; margin: 4px 0 0; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .parts { list-style: none; margin: 0; padding: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .parts li {
+    display: flex; align-items: center; gap: 8px; padding: 7px 10px; cursor: pointer; font-size: 14px;
+    border-top: 1px solid var(--line);
+  }
+  .parts li:first-child { border-top: 0; }
+  .parts li:hover { background: var(--bg); }
+  .parts li.sel { background: var(--accent-soft); }
+  .parts .q { color: var(--muted); font-variant-numeric: tabular-nums; margin-left: auto; }
+  .parts .p { font-size: 11px; font-weight: 700; color: var(--accent); border: 1px solid var(--accent); border-radius: 4px; padding: 0 4px; }
+  .card {
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--bg); font-size: 14px;
+  }
+  .card b { display: block; font-size: 15px; }
+  .card .meta { color: var(--muted); }
+  .card a.dl {
+    display: inline-block; margin-top: 8px; padding: 6px 12px; border-radius: 8px; text-decoration: none;
+    background: var(--accent); color: #fff; font-weight: 600;
+  }
+  input[type=search] {
+    width: 100%; font: inherit; padding: 8px 10px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--text);
+  }
+  .foot { color: var(--muted); font-size: 13px; }
+
+  @media (max-width: 860px) {
+    body { height: auto; }
+    main { grid-template-columns: 1fr; }
+    #view { height: 62vh; }
+    aside { border-left: 0; border-top: 1px solid var(--line); overflow: visible; }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<header>
+  <a class="brand" href="index.html">Open<span>Printer</span></a>
+  <span class="sub">Montaje interactivo</span>
+  <a class="back" href="index.html">← Volver a la web</a>
+</header>
+<main>
+  <div id="view">
+    <div id="loading">Cargando el modelo 3D…</div>
+    <div class="tools">
+      <button id="bAll" aria-pressed="false" title="Mostrar la máquina completa">Ver todo</button>
+      <button id="bGrey" aria-pressed="true" title="Lo de pasos anteriores en gris">Atenuar anteriores</button>
+      <button id="bPlay" title="Repetir la animación del paso">▶ Animar</button>
+      <button id="bFit" title="Encuadrar">Encuadrar</button>
+    </div>
+    <div id="tip"></div>
+  </div>
+  <aside>
+    <div class="steps" id="steps"></div>
+    <div class="nav"><button id="prev">← Anterior</button><button id="next">Siguiente →</button></div>
+    <div>
+      <div class="kicker" id="kicker"></div>
+      <h1 id="title"></h1>
+    </div>
+    <p class="text" id="text"></p>
+    <ul class="hw" id="hw"></ul>
+    <div class="card" id="card" hidden></div>
+    <h2>Piezas de este paso</h2>
+    <ul class="parts" id="parts"></ul>
+    <h2>Buscar cualquier pieza</h2>
+    <input type="search" id="search" placeholder="p. ej. leva, bomba, pantalla…">
+    <ul class="parts" id="results" hidden></ul>
+    <p class="foot">Arrastra para girar, rueda o pellizca para acercar y botón derecho para desplazar.
+      Las piezas con <span class="parts"><span class="p">STL</span></span> se imprimen: pulsa para descargarlas.
+      Guía en texto: <a href="montaje.md">montaje.md</a>.</p>
+  </aside>
+</main>
+<script type="module">
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+const $ = (id) => document.getElementById(id);
+const view = $("view");
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+view.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 5, 20000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f98, 1.6));
+const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+sun.position.set(-1, 2, 1.5);
+scene.add(sun);
+const fill = new THREE.DirectionalLight(0xffffff, 0.5);
+fill.position.set(1.5, 0.5, -1);
+scene.add(fill);
+
+const GREY = new THREE.Color(0xc4c8ce);
+const HILITE = new THREE.Color(0xe8761a);
+const SELECT = new THREE.Color(0x2a7de1);
+let data, root, parts = {}, step = 0, showAll = false, grey = true, selected = null, anim = 0;
+
+function resize() {
+  const w = view.clientWidth, h = view.clientHeight;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(view);
+
+function fit(objs) {
+  const box = new THREE.Box3();
+  objs.forEach((o) => { if (o.visible) box.expandByObject(o); });
+  if (box.isEmpty()) return;
+  const size = box.getSize(new THREE.Vector3()).length();
+  const center = box.getCenter(new THREE.Vector3());
+  const dir = camera.position.clone().sub(controls.target).normalize();
+  if (!isFinite(dir.x) || dir.lengthSq() === 0) dir.set(-0.55, 0.55, 0.8).normalize();
+  controls.target.copy(center);
+  camera.position.copy(center).addScaledVector(dir, size * 1.25);
+}
+
+function partsOfStep(i) {
+  return Object.keys(parts).filter((n) => data.parts[n] && data.parts[n].step === i);
+}
+
+function paint() {
+  for (const [name, p] of Object.entries(parts)) {
+    const info = data.parts[name];
+    const s = info ? info.step : 99;
+    p.obj.visible = showAll || s <= step;
+    const current = !showAll && s === step;
+    p.mats.forEach((m) => {
+      const base = (grey && !showAll && s < step) ? GREY : m.userData.color;
+      m.color.copy(base);
+      m.opacity = (grey && !showAll && s < step) ? Math.min(m.userData.opacity, 0.45) : m.userData.opacity;
+      m.transparent = m.opacity < 1;
+      m.depthWrite = m.opacity >= 0.99;
+      m.emissive.copy(name === selected ? SELECT : current ? HILITE : new THREE.Color(0));
+      m.emissiveIntensity = name === selected ? 0.55 : current ? 0.18 : 0;
+    });
+  }
+}
+
+function animateStep() {
+  anim = performance.now();
+}
+
+function explodeOffsets(t) {
+  const e = data.steps[step].explode;
+  const k = (1 - t) * (1 - t) * 260;
+  for (const name of partsOfStep(step)) {
+    const p = parts[name];
+    p.obj.position.set(p.home.x + e[0] * k, p.home.y + e[1] * k, p.home.z + e[2] * k);
+  }
+}
+
+function resetOffsets() {
+  for (const p of Object.values(parts)) p.obj.position.copy(p.home);
+}
+
+function setStep(i, refit = true) {
+  step = Math.max(0, Math.min(data.steps.length - 1, i));
+  showAll = false;
+  $("bAll").setAttribute("aria-pressed", "false");
+  resetOffsets();
+  const s = data.steps[step];
+  $("kicker").textContent = `Paso ${step + 1} de ${data.steps.length}`;
+  $("title").textContent = s.title;
+  $("text").textContent = s.text;
+  $("hw").innerHTML = s.hardware.map((h) => `<li>${h}</li>`).join("");
+  document.querySelectorAll(".steps button").forEach((b, k) => {
+    b.className = k === step ? "on" : k < step ? "done" : "";
+  });
+  $("prev").disabled = step === 0;
+  $("next").disabled = step === data.steps.length - 1;
+  listParts($("parts"), partsOfStep(step));
+  paint();
+  if (refit) fit(Object.values(parts).map((p) => p.obj));
+  animateStep();
+  history.replaceState(null, "", `#paso-${step + 1}`);
+}
+
+function grouped(names) {
+  const groups = new Map();
+  for (const n of names) {
+    const info = data.parts[n];
+    const key = info.label + "|" + (info.stl || "");
+    if (!groups.has(key)) groups.set(key, { info, names: [] });
+    groups.get(key).names.push(n);
+  }
+  return [...groups.values()];
+}
+
+function listParts(ul, names) {
+  ul.innerHTML = "";
+  for (const g of grouped(names)) {
+    const li = document.createElement("li");
+    li.innerHTML = `<span>${g.info.label}</span>${g.info.stl ? '<span class="p">STL</span>' : ""}` +
+      `<span class="q">× ${g.names.length}</span>`;
+    li.onclick = () => select(g.names[0], true);
+    li.dataset.names = g.names.join(" ");
+    ul.append(li);
+  }
+}
+
+function select(name, jump = false) {
+  selected = name;
+  const info = data.parts[name];
+  if (jump && info && !showAll && info.step > step) setStep(info.step, false);
+  const card = $("card");
+  if (!name || !info) { card.hidden = true; paint(); return; }
+  const s = data.steps[info.step];
+  card.hidden = false;
+  card.innerHTML = `<b>${info.label}</b><span class="meta">Paso ${info.step + 1}: ${s.title} · <code>${name}</code></span>` +
+    (info.stl ? `<br><a class="dl" href="${info.stl}" download>Descargar STL</a>` : `<br><span class="meta">Pieza comprada o cortada (ver la lista de compra).</span>`);
+  document.querySelectorAll(".parts li").forEach((li) => {
+    li.classList.toggle("sel", li.dataset.names.split(" ").includes(name));
+  });
+  paint();
+}
+
+// Selección con el ratón
+const ray = new THREE.Raycaster();
+const ptr = new THREE.Vector2();
+let down = null;
+function pick(ev) {
+  const r = renderer.domElement.getBoundingClientRect();
+  ptr.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
+  ray.setFromCamera(ptr, camera);
+  const hits = ray.intersectObjects(Object.values(parts).filter((p) => p.obj.visible).map((p) => p.obj), true);
+  for (const h of hits) {
+    let o = h.object;
+    while (o && !o.userData.part) o = o.parent;
+    if (o) return o.userData.part;
+  }
+  return null;
+}
+renderer.domElement.addEventListener("pointerdown", (e) => { down = [e.clientX, e.clientY]; });
+renderer.domElement.addEventListener("pointerup", (e) => {
+  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return;
+  select(pick(e));
+});
+renderer.domElement.addEventListener("pointermove", (e) => {
+  if (e.buttons || !data) return;
+  const n = pick(e), tip = $("tip");
+  if (!n) { tip.style.display = "none"; return; }
+  const r = view.getBoundingClientRect();
+  tip.textContent = data.parts[n] ? data.parts[n].label : n;
+  tip.style.display = "block";
+  tip.style.left = (e.clientX - r.left + 14) + "px";
+  tip.style.top = (e.clientY - r.top + 10) + "px";
+});
+renderer.domElement.addEventListener("pointerleave", () => { $("tip").style.display = "none"; });
+
+$("prev").onclick = () => setStep(step - 1);
+$("next").onclick = () => setStep(step + 1);
+$("bPlay").onclick = () => { if (!showAll) animateStep(); };
+$("bFit").onclick = () => fit(Object.values(parts).map((p) => p.obj));
+$("bAll").onclick = (e) => {
+  showAll = !showAll;
+  e.currentTarget.setAttribute("aria-pressed", String(showAll));
+  resetOffsets(); anim = 0; paint(); fit(Object.values(parts).map((p) => p.obj));
+};
+$("bGrey").onclick = (e) => {
+  grey = !grey;
+  e.currentTarget.setAttribute("aria-pressed", String(grey));
+  paint();
+};
+$("search").oninput = (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  const ul = $("results");
+  if (q.length < 2) { ul.hidden = true; return; }
+  const names = Object.keys(parts).filter((n) => {
+    const i = data.parts[n];
+    return n.includes(q) || (i && i.label.toLowerCase().includes(q));
+  });
+  ul.hidden = names.length === 0;
+  listParts(ul, names);
+};
+document.addEventListener("keydown", (e) => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === "ArrowRight") setStep(step + 1);
+  if (e.key === "ArrowLeft") setStep(step - 1);
+});
+
+function loop(now) {
+  if (anim) {
+    const t = Math.min(1, (now - anim) / 900);
+    explodeOffsets(t);
+    if (t >= 1) anim = 0;
+  }
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(loop);
+}
+
+const [json, gltf] = await Promise.all([
+  fetch("model/montaje.json").then((r) => r.json()),
+  new GLTFLoader().loadAsync("model/openprinter.glb"),
+]);
+data = json;
+root = gltf.scene.children[0];
+scene.add(gltf.scene);
+for (const obj of [...root.children]) {
+  const mats = [];
+  obj.traverse((o) => {
+    if (!o.isMesh) return;
+    const m = o.material.clone();
+    m.userData.color = m.color.clone();
+    m.userData.opacity = m.opacity;
+    m.side = THREE.DoubleSide;
+    o.material = m;
+    mats.push(m);
+  });
+  obj.userData.part = obj.name;
+  parts[obj.name] = { obj, mats, home: obj.position.clone() };
+}
+$("steps").innerHTML = data.steps.map((s, i) => `<button title="${s.title}">${i + 1}</button>`).join("");
+document.querySelectorAll(".steps button").forEach((b, i) => { b.onclick = () => setStep(i); });
+$("loading").remove();
+resize();
+camera.position.set(-900, 800, -1400);
+const m = location.hash.match(/paso-(\d+)/);
+setStep(m ? Number(m[1]) - 1 : 0);
+requestAnimationFrame(loop);
+</script>
+</body>
+</html>

@@ -12,7 +12,8 @@ FILM_CORE_OD = 86           # núcleo de cartón de 3" (interior 76,2)
 FILM_ROLL_OD_MAX = 130      # ~100 m de film de 75 µm
 
 # Cabezales (maqueta XP600: cotas aproximadas, verificar con un cabezal real)
-HEAD_COUNT = 2              # CMYK + blanco
+HEAD_COUNT = 1              # cabezales montados: 1 = CMYK+WW (ver docs/cabezales.md)
+HEAD_SLOTS = 2              # huecos en carro y recorrido: el 2.º (blanco) se añade sin tocar el chasis
 HEAD_SIZE = (40, 33, 60)    # cuerpo X, Y, Z desde la cara de boquillas
 HEAD_FLANGE = (40, 47, 3)   # pestaña de fijación X, Y, espesor (tornillos delante/detrás)
 HEAD_FLANGE_Z = 35          # cara de boquillas -> cara inferior de la pestaña
@@ -109,18 +110,27 @@ CHAIN_Y = (-187, -160)
 CHAIN_TRAY_X = (-560, 40)     # llega a la placa izquierda: canaleta y tubos de tinta
 ELEC_PLATE = (-545, 555, -60, 100)   # bandeja inferior: apoya en los largueros laterales y el central
 
-# Tinta: compartimento cerrado por fuera de la placa izquierda (marco de V-slot
-# 2020 del inventario, paneles de MDF 6 mm y frontal de metacrilato). El nivel
-# medio de tinta queda unos 40 mm por debajo de las boquillas.
-INK_BOX_DEPTH = 120                 # hacia fuera de la placa (X)
-INK_BOX_Y = (-40, 210)            # deja libres las cabezas M8 de los travesaños de mesa
-INK_BOX_Z = (-125, 55)
-INK_PANEL_T = 6
-INK_TANK = (70, 40, 120)            # depósito de color: X, Y, Z (~250 ml útiles)
-INK_TANK_WHITE = (70, 55, 100)      # depósito de blanco, sobre agitador magnético
-INK_STIRRER_H = 25
+# Tinta a granel, detrás: botellas de 1 L en una caja comprada (bandeja
+# antiderrames) sobre una repisa colgada del larguero trasero. Una bomba
+# peristáltica por color rellena un subdepósito con flotador, fijado a la placa
+# izquierda a altura fija: él fija la presión en las boquillas, no la botella.
 INK_COLORS = ("C", "M", "Y", "K", "W")
+INK_BOX = (395, 255, 155)           # caja de referencia (Really Useful Box 9 L), exterior X, Y, Z
+INK_BOX_BOTTOM = (355, 215)         # base exterior (las paredes tienen desmoldeo)
+INK_BOX_X0 = 320                    # a la derecha, fuera del ancho del rollo (se carga desde atrás)
+INK_SHELF_DEPTH = 270               # repisa de MDF 12 mm detrás del larguero trasero
+INK_BOTTLE = (90, 90, 190)          # botella de tinta de 1 L (cuerpo)
+INK_STIRRER = (100, 100, 25)        # agitador magnético bajo la botella de blanco
+INK_PUMP = (40, 33, 50)             # bomba peristáltica 12 V (cuerpo + cabezal)
+INK_SUBTANK = (55, 25, 90)          # subdepósito con flotador: X, Y, Z (~100 ml)
+INK_SUBTANK_Y0 = -355               # banco de subdepósitos, por fuera de la placa izquierda
+INK_SUBTANK_Z0 = -95
+INK_LEVEL_DROP = 42                 # nivel del flotador por debajo de las boquillas
 INK_TUBE_HOLE = (-185, 102, 20)     # paso de tubos en las placas, sobre la bandeja de la cadena (Y, Z, Ø)
+
+# Pantalla táctil (KlipperScreen en la Raspberry Pi): esquina delantera derecha
+SCREEN_SIZE = (194, 110, 20)        # módulo de 7" (ajustar a la que se compre): ancho, alto, fondo
+SCREEN_TILT = 20                    # grados hacia atrás
 
 # Electrónica: placa de MDF sobre el travesaño central, bajo la mesa
 ELEC_PLATE_T = 10
@@ -132,7 +142,7 @@ CABLE_DUCT = (20, 15)               # canaleta impresa: ancho, alto
 REAR_GUIDE_D = 25
 REAR_GUIDE_Y = -200
 UNWIND_ROLL = (-280, -150)  # centro (Y, Z) del rollo de entrada
-TAKEUP_ROLL = (240, -150)   # centro (Y, Z) del rollo de recogida
+OUTPUT_EDGE = (335, -80)    # borde de la rampa de salida: el film impreso cae por delante
 FRONT_GUIDE_Y = 135         # tubo de salida delante de la mesa (mismo Ø que la trasera)
 CORE_ID = 76.2              # interior del núcleo de 3"
 CHUCK_FLANGE_D = 100        # mandriles impresos con rodamiento 6005 (25x47x12)
@@ -145,7 +155,7 @@ FOOT_H = 23                 # pata niveladora: base 8 + rosca vista 15
 
 # --- Derivadas --------------------------------------------------------------
 
-HEAD_GROUP_W = (HEAD_COUNT - 1) * HEAD_PITCH_X + HEAD_SIZE[0]
+HEAD_GROUP_W = (HEAD_SLOTS - 1) * HEAD_PITCH_X + HEAD_SIZE[0]
 
 # Posiciones del centro del carro
 SERVICE_X0 = FILM_WIDTH / 2 + SERVICE_MARGIN

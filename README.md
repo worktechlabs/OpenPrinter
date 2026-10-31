@@ -42,7 +42,8 @@ el diseño.
 
 - **Formato**: rollo de film de 600 mm de ancho, configurable a 330 mm (A3+)
   cambiando un solo parámetro.
-- **Color**: CMYK + blanco con dos cabezales piezoeléctricos Epson XP600.
+- **Color**: CMYK + blanco con un cabezal piezoeléctrico Epson XP600 (CMYK + WW),
+  ampliable a dos con un cabezal dedicado al blanco ([análisis](docs/cabezales.md)).
 - **Fabricación accesible**:
   - Chasis de perfil 4040 y dos placas laterales de aluminio (DXF incluido).
   - Carro, soportes y piezas auxiliares impresas en 3D.
@@ -71,8 +72,9 @@ el diseño.
   terceros. Solo mediciones y desarrollos propios.
 - No es un producto terminado ni certificado. Se ofrece sin garantía (ver
   licencias).
-- Los cabezales térmicos (tipo HP45) solo se usarán, si acaso, para probar el
-  movimiento y el software en papel. No sirven para la tinta DTF de producción.
+- No se usan cabezales térmicos (tipo HP45): la tinta DTF, y sobre todo el
+  blanco, necesita un cabezal piezoeléctrico. Todas las pruebas se hacen
+  directamente en DTF, con el XP600, tinta DTF y film.
 
 ## Hoja de ruta
 
@@ -80,8 +82,8 @@ el diseño.
 |---|---|---|
 | 0 | Mecánica sin cubierta: chasis, viga X, carro, mesa de vacío, arrastre, rollos | Diseño completo, falta validar con piezas reales |
 | 1 | Movimiento: motores, encoder, electrónica de control, firmware ([arquitectura](docs/fase1_movimiento.md)) | En diseño: arquitectura y piezas modeladas |
-| 2 | Software: RIP abierto, primera impresión en papel | Pendiente |
-| 3 | Cabezal XP600: estudio de la señal y placa driver abierta | Pendiente |
+| 2 | Software: RIP abierto con capa de blanco, tramado y pasadas | Pendiente |
+| 3 | Cabezal XP600: estudio de la señal, placa driver y primera impresión DTF sobre film | Pendiente |
 | 4 | Tinta y servicio: presión negativa, circulación del blanco, estación de servicio | Pendiente |
 | 5 | Postproceso: agitador de polvo y túnel de curado | Pendiente |
 | 6 | Cubierta y cerramiento | Pendiente |
@@ -107,18 +109,27 @@ diseño, está en [PLAN.md](PLAN.md).
 | | |
 |---|---|
 | ![Sección lateral](docs/img/lateral.png) | ![Vista trasera](docs/img/general_trasera.png) |
-| **Sección lateral**: rollo de entrada, guía y mesa de entrada, rodillo con presión, mesa de vacío, guía delantera y rollo de recogida | **Vista trasera**: viga 4080 con guías MGN12, motor X y correa |
+| **Sección lateral**: rollo de entrada, guía y mesa de entrada, rodillo con presión, mesa de vacío, guía delantera y rampa de salida | **Vista trasera**: viga 4080 con guías MGN12, motor X y correa |
 | ![Carro](docs/img/carro.png) | ![Mesa de vacío](docs/img/mesa.png) |
 | **Carro impreso** con dos XP600 (maqueta) y ajuste de altura | **Mesa de vacío**: placa perforada sobre 4 cámaras con ventilador |
 | ![Unidad de presión](docs/img/presion.png) | ![Motor Y](docs/img/motor_y.png) |
 | **Unidad de presión** con leva de levante | **Motor Y** con reducción 4:1 |
-| ![Compartimento de tinta](docs/img/general_izquierda.png) | ![Depósitos](docs/img/tinta_interior.png) |
-| **Compartimento de tinta** por fuera de la placa izquierda | **Depósitos** C, M, Y, K y blanco sobre agitador |
+| ![Botellas de tinta](docs/img/tinta_botellas.png) | ![Bombas y subdepósitos](docs/img/tinta_bombas.png) |
+| **Botellas de 1 L** en una repisa detrás de la máquina | **Bombas peristálticas y subdepósitos** con flotador en la placa izquierda |
+| ![Pantalla](docs/img/pantalla.png) | ![Paso 10 del montaje](docs/img/montaje_10.png) |
+| **Pantalla táctil de 7"** con KlipperScreen | **Esquema de montaje**: cada paso en color sobre lo ya montado |
 | ![Electrónica](docs/img/electronica.png) | ![Canaletas](docs/img/cableado.png) |
 | **Caja de electrónica y fuente** bajo la mesa | **Canaletas**, paneles de red y emergencia y cadena portacables |
 
 El modelo 3D completo está en [`docs/model/openprinter.glb`](docs/model/openprinter.glb)
-(GitHub lo muestra en 3D al abrirlo). En `docs/index.html` hay además una página de
+(GitHub lo muestra en 3D al abrirlo) y en un solo STL en
+[`docs/model/openprinter_completo.stl`](docs/model/openprinter_completo.stl); el sistema de
+tinta solo, en [`tinta_completo.stl`](docs/model/tinta_completo.stl). Los STL de cada pieza
+impresa están en [`docs/stl/`](docs/stl).
+
+**Montaje**: [docs/montaje.md](docs/montaje.md) explica los 10 pasos con un esquema por paso
+y la tabla de piezas de cada uno. En `docs/montaje.html` está la versión interactiva en 3D:
+ves cada paso montándose y, al pulsar una pieza, qué es, en qué paso va y su STL. En `docs/index.html` hay además una página de
 presentación con visor 3D; para verla, sírvela en local desde la carpeta `docs/`
 (por ejemplo `python -m http.server`) y abre `http://localhost:8000`.
 
@@ -131,11 +142,11 @@ gramos de filamento. Son estimaciones orientativas:
 | Fase | Lista | Aprox. |
 |---|---|---:|
 | 0 · mecánica | [MD](docs/compra_fase0.md) · [CSV](docs/compra_fase0.csv) | ~550 € |
-| 1 · movimiento, tinta y electrónica | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~160 € |
+| 1 · movimiento, tinta y electrónica | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~290 € |
 
 La fase 1 cuenta a 0 € la placa de control, la Raspberry Pi, los motores, la
-fuente, las correas y el V-slot 2020, porque se reutilizan de impresoras 3D.
-Ninguna incluye cabezales ni tintas.
+fuente y las correas, porque se reutilizan de impresoras 3D. Ninguna incluye
+cabezales ni tintas.
 
 **Comprar en Reino Unido**: [compra_uk.md](docs/compra_uk.md) tiene enlaces de
 Amazon UK, eBay UK y AliExpress, proveedores de perfil cortado a medida y el
@@ -143,25 +154,40 @@ orden de compra recomendado.
 
 ## Cabezales y tinta
 
-- **Dos cabezales Epson XP600**: uno para CMYK y otro dedicado al blanco, con
-  todos sus canales en blanco para que la capa base cubra bien. Con
-  `HEAD_COUNT = 1` se obtiene una versión más barata de un solo cabezal.
-- **Tanques de tinta**: en un compartimento cerrado por fuera de la placa
-  izquierda, con marco de V-slot 2020, paneles de MDF, frontal de metacrilato
-  para ver los niveles y tapa para rellenar. Dentro, 4 depósitos de 250 ml
-  (C, M, Y, K) y el del blanco sobre un agitador magnético. El nivel medio de
-  tinta queda unos 40 mm por debajo de las boquillas. Los tubos suben pegados a
-  la placa con clips y entran por detrás hasta la cadena portacables, que los
-  lleva al carro. La regulación fina de presión y la recirculación del blanco
-  son de la fase 4.
+- **Un cabezal Epson XP600** con CMYK y dos canales de blanco (`HEAD_COUNT = 1`).
+  El carro y el recorrido tienen hueco para un segundo XP600 dedicado al blanco
+  (`HEAD_SLOTS = 2`), que se añade con `HEAD_COUNT = 2` sin tocar el chasis.
+  Las pruebas se hacen directamente en DTF. El análisis de alternativas
+  (impresora donante, i1600/i3200, placas cerradas o abiertas) está en
+  [docs/cabezales.md](docs/cabezales.md).
+- **Tinta a granel con relleno automático**, como en las DTF comerciales:
+  - **Botellas de 1 L**: las del fabricante, con un tapón con salida de tubo y
+    respiradero. Van en una caja de plástico comprada (vale cualquiera de unos
+    395 × 255 mm o mayor), que hace de bandeja antiderrames. La caja va en una
+    repisa detrás de la máquina, a la derecha, fuera del ancho del rollo para
+    poder cargarlo desde atrás. El blanco va sobre un agitador magnético.
+  - **Bombas**: una peristáltica de 12 V por color, por fuera de la placa
+    izquierda.
+  - **Subdepósitos**: uno de ~100 ml con flotador por color, también por fuera
+    de la placa izquierda. Cuando el flotador baja, su bomba rellena.
+  - **Presión**: el subdepósito está a altura fija y es lo que fija la presión
+    en las boquillas, con el nivel unos 40 mm por debajo. Por eso da igual
+    dónde estén las botellas y nunca hay que rellenar a mano.
+  - **Recorrido**: los tubos suben a la cadena portacables, que los lleva al
+    carro.
+  - **Control**: Klipper usa la Raspberry Pi como segunda MCU. Las bombas van
+    por un módulo MOSFET desde sus GPIO y los flotadores a otros GPIO.
 - **Electrónica y cables**: bajo la mesa de vacío, en una bandeja de MDF de lado
   a lado. A la izquierda va una caja impresa con la placa de control, la
   Raspberry Pi y los convertidores; a la derecha, la fuente de 24 V. Los cables
   van ocultos en canaletas impresas, por la cadena portacables y por las
   ranuras de los perfiles. Detrás está la entrada de red con fusible y delante
-  la seta de emergencia.
-- **Rollos de film**: van dentro del chasis, entre las dos placas y bajo la
-  mesa. Con la cubierta (fase 6) quedan cerrados; el film DTF es sensible a la
+  la seta de emergencia. Una **pantalla táctil de 7"** con KlipperScreen va en
+  la esquina delantera derecha para las funciones básicas sin ordenador.
+- **Film**: el rollo va detrás, dentro del chasis, entre las dos placas y bajo
+  la mesa. El film impreso no se enrolla, porque la tinta está húmeda hasta el
+  polvo y el horno: baja por una rampa y cae por delante, a una bandeja o, más
+  adelante, a la agitadora de polvo. Con la cubierta (fase 6) quedan cerrados; el film DTF es sensible a la
   humedad, así que conviene un sobre de gel de sílice dentro y guardar el rollo
   en su bolsa cuando no se usa.
 
@@ -184,7 +210,7 @@ orden de compra recomendado.
 |---|---|
 | Ancho imprimible | 580 mm |
 | Recorrido del carro | 820 mm |
-| Dimensiones exteriores | ~1380 × 725 × 480 mm (sobremesa, con compartimento de tinta y motor Y) |
+| Dimensiones exteriores | ~1415 × 1025 × 480 mm (con la repisa de botellas detrás, las bombas y la pantalla) |
 | Guías | 2 × MGN12, 1000 mm |
 | Placas laterales | 2 × MDF de 19 mm, 690 × 430 mm (aluminio de 10 mm en la versión final) |
 
@@ -232,7 +258,8 @@ cad/
 ├── service.py    estación de servicio y reserva de tinta (0.8)
 ├── motion.py     encoders, final de carrera y cadena portacables (fase 1)
 ├── wiring.py     electrónica, fuente, paneles y canaletas (fase 1)
-├── ink.py        compartimento de tinta (fase 1, depósitos de la fase 4)
+├── ink.py        tinta: botellas, bombas peristálticas y subdepósitos (fase 1)
+├── montaje.py    pasos de montaje y catálogo de piezas (web y montaje.md)
 ├── bom.py        lista de compra
 ├── render_pv.py  renders de presentación
 ├── web.py        modelo 3D de la web
@@ -282,7 +309,8 @@ OpenPrinter is an open source **DTF (Direct To Film) printer** designed from
 scratch for makers:
 
 - 600 mm roll film, configurable to 330 mm (A3+).
-- CMYK + white with two Epson XP600 piezo heads.
+- CMYK + white with one Epson XP600 piezo head (CMYK + WW), with room for a
+  second, white-only head.
 - 4040 aluminium extrusion frame, laser or waterjet-cut side plates and
   3D-printed carriage and brackets.
 - Parametric CAD in Python (CadQuery), exported to STEP, STL and DXF.

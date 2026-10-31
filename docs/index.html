@@ -104,6 +104,9 @@
   .card .body { padding: 16px 18px 18px; }
   .card h3 { margin: 0 0 6px; font-size: 18px; }
   .card p { margin: 0; color: var(--muted); font-size: 15px; }
+  a.step-card { text-decoration: none; color: var(--text); transition: border-color .15s, transform .15s; }
+  a.step-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  a.step-card img { cursor: pointer; }
   .tag { font-size: 12px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.04em; }
 
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
@@ -146,6 +149,7 @@
       <a href="#modelo">Modelo 3D</a>
       <a href="#como">Cómo funciona</a>
       <a href="#modulos">Mecánica</a>
+      <a href="#montaje">Montaje</a>
       <a href="#tinta">Tinta</a>
       <a href="#electronica">Electrónica</a>
       <a href="#compra">Lista de compra</a>
@@ -166,7 +170,9 @@
       <a class="btn primary" href="https://github.com/worktechlabs/OpenPrinter">Ver en GitHub</a>
       <a class="btn" href="#compra">Lista de compra</a>
       <a class="btn" href="plantillas/placa_lateral_A4.pdf" download>Plantilla de las placas (PDF A4)</a>
+      <a class="btn primary" href="montaje.html">Montaje interactivo en 3D</a>
       <a class="btn" href="model/openprinter.glb" download>Modelo 3D (.glb)</a>
+      <a class="btn" href="model/openprinter_completo.stl" download>Máquina completa (.stl)</a>
     </div>
   </div>
 
@@ -189,9 +195,9 @@
       <div class="spec"><b>600 mm</b><span>ancho de film (580 imprimibles)</span></div>
       <div class="spec"><b>CMYK + W</b><span>2 cabezales Epson XP600</span></div>
       <div class="spec"><b>820 mm</b><span>recorrido del carro</span></div>
-      <div class="spec"><b>1380 × 725 × 480</b><span>mm, de sobremesa, con tinta y motor Y</span></div>
+      <div class="spec"><b>1415 × 1025 × 480</b><span>mm en total, con las botellas, las bombas y la pantalla</span></div>
       <div class="spec"><b>4 zonas</b><span>de vacío en la mesa</span></div>
-      <div class="spec"><b>83</b><span>piezas impresas en 3D (fases 0 y 1)</span></div>
+      <div class="spec"><b>77</b><span>piezas impresas en 3D (fases 0 y 1), sin contar canaletas</span></div>
     </div>
   </section>
 
@@ -206,7 +212,8 @@
         <li><strong>Rodillo de arrastre</strong>: 6 ruedas de presión lo aprietan contra él. Una palanca las levanta para meter el film.</li>
         <li><strong>Mesa de vacío</strong>: el film queda plano bajo los cabezales. El carro cuelga de la cara delantera
           de la viga X y barre en X sobre dos guías MGN12.</li>
-        <li><strong>Guía delantera y rollo de recogida</strong>: el transfer impreso sale hacia el polvo y el curado.</li>
+        <li><strong>Guía delantera y rampa de salida</strong>: el film impreso no se enrolla, porque la tinta está húmeda
+          hasta que lleva polvo y pasa por el horno. Cae por delante a una bandeja o, más adelante, a la agitadora de polvo.</li>
       </ol>
     </div>
   </section>
@@ -222,9 +229,9 @@
             MGN12. Correa GT2 por encima de la viga.</p></div>
       </article>
       <article class="card">
-        <img src="img/carro.png" alt="Carro impreso con dos cabezales" data-zoom>
+        <img src="img/carro.png" alt="Carro impreso con huecos para dos cabezales" data-zoom>
         <div class="body"><div class="tag">0.4</div><h3>Carro</h3>
-          <p>Impreso en 3D. La bandeja de los dos XP600 sube y baja ±4 mm en colisos para ajustar la distancia cabezal–film.</p></div>
+          <p>Impreso en 3D. La bandeja, con hueco para dos XP600, sube y baja ±4 mm en colisos para ajustar la distancia cabezal–film.</p></div>
       </article>
       <article class="card">
         <img src="img/mesa.png" alt="Mesa de vacío" data-zoom>
@@ -249,33 +256,91 @@
       <article class="card">
         <img src="img/mandril.png" alt="Mandril y collarín del rollo" data-zoom>
         <div class="body"><div class="tag">0.7</div><h3>Rollos</h3>
-          <p>Ejes fijos de Ø25 en ranuras inclinadas; mandriles impresos con rodamiento 6005 que entran en el núcleo de 3".</p></div>
+          <p>El rollo va detrás, en un eje fijo de Ø25 que entra por ranuras inclinadas; mandriles impresos con rodamiento
+            6005 que entran en el núcleo de 3".</p></div>
       </article>
+      <article class="card">
+        <img src="img/salida.png" alt="Rampa de salida del film" data-zoom>
+        <div class="body"><div class="tag">0.7</div><h3>Rampa de salida</h3>
+          <p>Cuatro segmentos impresos que se enganchan a la guía delantera. El film impreso baja por ellos y cae por
+            delante, sin tocar la cara con tinta.</p></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="montaje">
+    <h2>Montaje</h2>
+    <p class="sub">Diez pasos, del bastidor a la tinta. En el <a href="montaje.html">montaje interactivo</a> giras la
+      máquina en 3D, ves cada paso montándose y, al pulsar una pieza, qué es, en qué paso va y su STL para imprimirla.
+      Guía en texto: <a href="https://github.com/worktechlabs/OpenPrinter/blob/main/docs/montaje.md">montaje.md</a>.</p>
+    <div class="cards">
+      <a class="card step-card" href="montaje.html#paso-1">
+        <img src="img/montaje_01.png" alt="Paso 1: Bastidor inferior" loading="lazy">
+        <div class="body"><div class="tag">Paso 1</div><h3>Bastidor inferior</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-2">
+        <img src="img/montaje_02.png" alt="Paso 2: Placas laterales y travesaños" loading="lazy">
+        <div class="body"><div class="tag">Paso 2</div><h3>Placas laterales y travesaños</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-3">
+        <img src="img/montaje_03.png" alt="Paso 3: Viga X, guías y motor X" loading="lazy">
+        <div class="body"><div class="tag">Paso 3</div><h3>Viga X, guías y motor X</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-4">
+        <img src="img/montaje_04.png" alt="Paso 4: Carro y cabezales" loading="lazy">
+        <div class="body"><div class="tag">Paso 4</div><h3>Carro y cabezales</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-5">
+        <img src="img/montaje_05.png" alt="Paso 5: Mesa de vacío y estación de servicio" loading="lazy">
+        <div class="body"><div class="tag">Paso 5</div><h3>Mesa de vacío y estación de servicio</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-6">
+        <img src="img/montaje_06.png" alt="Paso 6: Arrastre del film (eje Y)" loading="lazy">
+        <div class="body"><div class="tag">Paso 6</div><h3>Arrastre del film (eje Y)</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-7">
+        <img src="img/montaje_07.png" alt="Paso 7: Guías, rollo y salida del film" loading="lazy">
+        <div class="body"><div class="tag">Paso 7</div><h3>Guías, rollo y salida del film</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-8">
+        <img src="img/montaje_08.png" alt="Paso 8: Electrónica, fuente y pantalla" loading="lazy">
+        <div class="body"><div class="tag">Paso 8</div><h3>Electrónica, fuente y pantalla</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-9">
+        <img src="img/montaje_09.png" alt="Paso 9: Cadena portacables y canaletas" loading="lazy">
+        <div class="body"><div class="tag">Paso 9</div><h3>Cadena portacables y canaletas</h3></div>
+      </a>
+      <a class="card step-card" href="montaje.html#paso-10">
+        <img src="img/montaje_10.png" alt="Paso 10: Tinta: botellas, bombas y subdepósitos" loading="lazy">
+        <div class="body"><div class="tag">Paso 10</div><h3>Tinta: botellas, bombas y subdepósitos</h3></div>
+      </a>
     </div>
   </section>
 
   <section id="tinta">
     <h2>Tinta</h2>
-    <p class="sub">Compartimento cerrado por fuera de la placa izquierda, protegido del polvo y la luz. El nivel medio de
-      tinta queda unos 40 mm por debajo de las boquillas.</p>
+    <p class="sub">Como en las DTF comerciales: botellas de 1 L, una bomba por color y un subdepósito con flotador a altura
+      fija. El subdepósito fija la presión en las boquillas (nivel unos 40 mm por debajo), así que las botellas pueden ir
+      abajo, detrás, y se cambian sin rellenar nada a mano.</p>
     <div class="cards">
       <article class="card">
-        <img src="img/general_izquierda.png" alt="Máquina vista desde la izquierda con el compartimento de tinta" data-zoom>
-        <div class="body"><div class="tag">Fase 1 · estructura</div><h3>Dónde va</h3>
-          <p>Marco de V-slot 2020 atornillado a la placa lateral, paneles de MDF y frontal de metacrilato para ver los
-            niveles. Tapa abatible para rellenar.</p></div>
+        <img src="img/tinta_botellas.png" alt="Botellas de tinta de 1 L en su caja sobre la repisa trasera" data-zoom>
+        <div class="body"><div class="tag">Fase 1 · tinta</div><h3>Botellas de 1 L</h3>
+          <p>Las botellas del fabricante, con un tapón con salida de tubo y respiradero, dentro de una caja de plástico
+            comprada que hace de bandeja antiderrames. Van en una repisa detrás, a la derecha, fuera del ancho del rollo
+            para poder cargarlo desde atrás. El blanco, sobre un agitador magnético.</p></div>
       </article>
       <article class="card">
-        <img src="img/tinta.png" alt="Compartimento de tinta cerrado" data-zoom>
-        <div class="body"><div class="tag">Fase 1 · estructura</div><h3>Compartimento</h3>
-          <p>Los tubos salen por la tapa, suben pegados a la placa con clips impresos y entran por detrás hasta la bandeja
-            de la cadena portacables, que los lleva al carro.</p></div>
+        <img src="img/tinta_bombas.png" alt="Bombas peristálticas y subdepósitos con flotador" data-zoom>
+        <div class="body"><div class="tag">Fase 1 · tinta</div><h3>Bombas y subdepósitos</h3>
+          <p>Por fuera de la placa izquierda, detrás: cinco bombas peristálticas de 12 V y cinco subdepósitos con flotador.
+            Cuando el nivel baja, la bomba rellena; parada, cierra el tubo. Los tubos suben a la cadena portacables.</p></div>
       </article>
       <article class="card">
-        <img src="img/tinta_interior.png" alt="Depósitos de tinta y agitador del blanco" data-zoom>
-        <div class="body"><div class="tag">Fase 4 · tinta</div><h3>Depósitos</h3>
-          <p>Cuatro depósitos de 250 ml para C, M, Y y K, y uno más ancho para el blanco sobre un agitador magnético, para
-            que el dióxido de titanio no se deposite.</p></div>
+        <img src="img/general_trasera.png" alt="Máquina vista desde atrás con la repisa de tinta" data-zoom>
+        <div class="body"><div class="tag">Fase 1 · tinta</div><h3>Control</h3>
+          <p>Klipper usa la Raspberry Pi como segunda MCU: un módulo MOSFET mueve las bombas desde sus GPIO y los
+            flotadores van a otros GPIO. Una macro rellena con tiempo máximo y avisa si una botella se vacía.</p></div>
       </article>
     </div>
   </section>
@@ -307,6 +372,12 @@
         <img src="img/cadena.png" alt="Cadena portacables detrás de la viga" data-zoom>
         <div class="body"><div class="tag">Fase 1</div><h3>Cadena portacables</h3>
           <p>Cadena de 10 × 20 mm en una bandeja impresa detrás de la viga: lleva al carro los cables y los tubos de tinta.</p></div>
+      </article>
+      <article class="card">
+        <img src="img/pantalla.png" alt="Pantalla táctil en su carcasa" data-zoom>
+        <div class="body"><div class="tag">Fase 1</div><h3>Pantalla táctil</h3>
+          <p>Pantalla de 7" con KlipperScreen en la esquina delantera derecha, inclinada 20°: mover ejes, cargar film,
+            limpiar cabezales, rellenar tinta y lanzar trabajos sin ordenador.</p></div>
       </article>
       <article class="card">
         <img src="img/carro_trasera.png" alt="Sensor del encoder X en el carro" data-zoom>
@@ -348,10 +419,10 @@
     <p class="sub">Nada se ha fabricado ni probado todavía. Cada fase se valida con piezas reales antes de pasar a la siguiente.</p>
     <div class="roadmap">
       <div class="step active"><div class="n">0</div><div><strong>Mecánica sin cubierta</strong> — chasis, viga X, carro, mesa de vacío, arrastre, rollos</div><span class="pill">diseño completo</span></div>
-      <div class="step active"><div class="n">1</div><div><strong>Movimiento</strong> — motores, encoders, electrónica, cableado, compartimento de tinta</div><span class="pill">en diseño</span></div>
-      <div class="step"><div class="n">2</div><div><strong>Software</strong> — RIP abierto con capa de blanco, primera impresión en papel</div><span class="pill">pendiente</span></div>
-      <div class="step"><div class="n">3</div><div><strong>Cabezal XP600</strong> — estudio de la señal y placa driver abierta</div><span class="pill">pendiente</span></div>
-      <div class="step"><div class="n">4</div><div><strong>Tinta y servicio</strong> — presión negativa, circulación del blanco, estación de servicio</div><span class="pill">pendiente</span></div>
+      <div class="step active"><div class="n">1</div><div><strong>Movimiento</strong> — motores, encoders, electrónica, cableado, pantalla, tinta a granel</div><span class="pill">en diseño</span></div>
+      <div class="step"><div class="n">2</div><div><strong>Software</strong> — RIP abierto con capa de blanco, tramado y pasadas</div><span class="pill">pendiente</span></div>
+      <div class="step"><div class="n">3</div><div><strong>Cabezal XP600</strong> — estudio de la señal, placa driver y primera impresión DTF sobre film</div><span class="pill">pendiente</span></div>
+      <div class="step"><div class="n">4</div><div><strong>Tinta y servicio</strong> — ajuste de la presión, circulación del blanco, estación de servicio</div><span class="pill">pendiente</span></div>
       <div class="step"><div class="n">5</div><div><strong>Postproceso</strong> — agitador de polvo y túnel de curado</div><span class="pill">pendiente</span></div>
       <div class="step"><div class="n">6</div><div><strong>Cubierta y cerramiento</strong></div><span class="pill">pendiente</span></div>
     </div>

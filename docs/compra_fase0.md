@@ -49,9 +49,9 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Tubo aluminio Ø25 | 1250 mm | 2 | 20 | ejes de los rollos |
+| Tubo aluminio Ø25 | 1250 mm | 1 | 10 | eje del rollo |
 | Barra aluminio Ø25 | 1140 mm | 2 | 24 | guías delantera y trasera; roscar M6 en las testas |
-| Rodamiento 6005-2RS | 25 x 47 x 12 | 4 | 12 | mandriles |
+| Rodamiento 6005-2RS | 25 x 47 x 12 | 2 | 6 | mandriles |
 | Fieltro adhesivo | 3 mm | 1 | 3 | freno del rollo de entrada |
 
 ## Mesa de vacío
@@ -98,18 +98,19 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 | `presion_palanca` | 1 | 5 | 5 |
 | `soporte_motor_y` | 1 | 57 | 57 |
 | `rodillo_alojamiento_6001` | 2 | 18 | 35 |
-| `rollo_mandril` | 4 | 102 | 408 |
-| `rollo_collarin` | 8 | 10 | 82 |
+| `rollo_mandril` | 2 | 102 | 204 |
+| `rollo_collarin` | 4 | 10 | 41 |
 | `mesa_entrada_segmento` | 4 | 36 | 142 |
+| `mesa_salida_segmento` | 4 | 86 | 343 |
 | `servicio_base` | 1 | 109 | 109 |
-| **Total** | | | **2094 g** |
+| **Total** | | | **2192 g** |
 
 ## Resumen
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 508 |
-| Filamento (~2.1 kg a 20 €/kg) | 42 |
-| **Total fase 0** | **550** |
+| Material comprado | 492 |
+| Filamento (~2.2 kg a 20 €/kg) | 44 |
+| **Total fase 0** | **536** |
 
 No incluye motores, electrónica (fase 1), cabezales, tintas ni herramientas.

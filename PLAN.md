@@ -41,7 +41,7 @@ piezas impresas en 3D y, más adelante, electrónica abierta (Raspberry Pi + MCU
 | 0.8 | Estación de servicio | Base impresa y volúmenes reservados (tapas, limpiador, bomba) | Primera versión, en revisión |
 
 **Hito fase 0**: chasis montado, el carro se desliza a lo largo de la viga y el
-film avanza del rollo de entrada al de recogida, todo movido a mano.
+film avanza del rollo de entrada a la rampa de salida, todo movido a mano.
 
 ### Fase 1 — Movimiento
 
@@ -78,7 +78,8 @@ OpenPrinter/
 │   ├── service.py     estación de servicio y reserva de tinta (fase 0.8)
 │   ├── motion.py      sensores y cadena portacables (fase 1)
 │   ├── wiring.py      electrónica, fuente, paneles y canaletas (fase 1)
-│   ├── ink.py         compartimento de tinta (fase 1)
+│   ├── ink.py         tinta: botellas, bombas y subdepósitos (fase 1)
+│   ├── montaje.py     pasos de montaje y catálogo de piezas
 │   ├── bom.py         listas de compra
 │   ├── render_pv.py   renders de presentación
 │   ├── web.py         modelo 3D de la web
@@ -153,8 +154,9 @@ Todo impreso (PETG o ASA en fase 0; PA-CF o aluminio si hace falta más rigidez)
 - **Ajuste de altura cabezal-film**: la bandeja sube y baja ±4 mm en los
   colisos. Se fija con 4 M4; más adelante se puede añadir un tornillo de
   reglaje o una leva.
-- **Cabezales**: dos XP600 separados 50 mm en X, colgando por ventanas en la
-  bandeja y apoyados en su pestaña.
+- **Cabezales**: un XP600 (CMYK + WW) en el hueco de −X y un segundo hueco a
+  50 mm para el XP600 de blanco (`HEAD_SLOTS = 2`). Cuelgan por ventanas en la
+  bandeja y se apoyan en su pestaña. Ver [docs/cabezales.md](docs/cabezales.md).
 - **Pendiente de verificar con un cabezal XP600 real** (son cotas aproximadas):
   tamaño del cuerpo, forma y posición de la pestaña y de sus tornillos, y
   distancia de la cara de boquillas a la pestaña. Hasta entonces la bandeja no

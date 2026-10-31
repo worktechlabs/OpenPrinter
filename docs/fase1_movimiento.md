@@ -21,7 +21,9 @@ flowchart LR
     PI -- USB --> MON
     CTRL --> MX[Motor X]
     CTRL --> MY[Motor Y]
-    CTRL --> MR[Motor de recogida]
+    PI -- GPIO --> PUMP["5 bombas de tinta<br/>módulo MOSFET"]
+    FLOAT[5 flotadores de los subdepósitos] -- GPIO --> PI
+    PI -- HDMI + USB --> LCD[Pantalla táctil de 7 pulgadas]
     CTRL --> FAN[4 ventiladores de vacío]
     HOME[Final de carrera X] --> CTRL
     PINCH[Interruptor de palanca de presión] --> CTRL
@@ -53,7 +55,7 @@ con lo que suele haber en un taller con impresoras 3D:
   llegue el RIP (fase 2) puede hacer falta una Pi 4 o 5 para procesar imágenes
   grandes.
 - **Cualquier placa de impresora 3D compatible con Klipper** (SKR, MKS, Creality,
-  Octopus…) con al menos 3 drivers: X, Y y recogida. Si no tiene 4 salidas de
+  Octopus…) con al menos 2 drivers: X e Y. Si no tiene 4 salidas de
   ventilador libres, los ventiladores de vacío se gobiernan con un módulo de
   MOSFET desde pines libres.
 - **Motores NEMA17, correas y poleas GT2** de impresora 3D. La correa X está
@@ -64,11 +66,12 @@ con lo que suele haber en un taller con impresoras 3D:
 | Bloque | Elección | Por qué |
 |---|---|---|
 | Host | Raspberry Pi 3 o superior | Klipper, interfaz web y, más adelante, el RIP |
-| Placa de control | BTT SKR Mini E3 V3.0 con Klipper (del inventario) | 4 drivers TMC2209: X, Y, recogida y uno libre; si más adelante faltan salidas, una Octopus da 8 drivers |
+| Placa de control | BTT SKR Mini E3 V3.0 con Klipper (del inventario) | 4 drivers TMC2209: X, Y y dos libres; si más adelante faltan salidas, una Octopus da 8 drivers |
 | Drivers | TMC2209 en UART, 24 V | Silenciosos y con corriente configurable; si el eje X se queda corto, TMC5160 |
 | Motor X | NEMA17 de 40 mm (del inventario) | Ver cálculo abajo; uno de 48 mm da más margen |
 | Motor Y | NEMA17 de 40 mm (del inventario) | Con la reducción 4:1 le sobra par |
-| Motor de recogida | NEMA17 de 40 mm (fase 1.5, del inventario) | Controlado por un brazo de tensión (*dancer*) |
+| Pantalla | Táctil de 7" HDMI + USB con KlipperScreen | Mover ejes, cargar film, limpiar, rellenar tinta y lanzar trabajos sin ordenador |
+| Tinta | 5 bombas peristálticas de 12 V y 5 subdepósitos con flotador | Relleno automático desde botellas de 1 L; GPIO de la Raspberry Pi como segunda MCU de Klipper |
 | Encoder X | Cinta de 180 LPI + sensor óptico de cuadratura (tipo H9730) | Estándar en impresoras de inyección; se pueden sacar de impresoras rotas |
 | Encoder Y | AS5047P magnético en el extremo del eje del rodillo | 14 bits: 5,8 µm de film por cuenta; lo lee el Pico por SPI |
 | Final de carrera X | Sensor óptico de horquilla + bandera en el carro | Sin contacto y repetible; marca el *home* junto a la estación de servicio |
@@ -116,12 +119,11 @@ ventiladores de vacío.
 |---|---|---|
 | Motor X | paso/dirección + UART | X |
 | Motor Y | paso/dirección + UART | Y |
-| Motor de recogida | paso/dirección + UART | Z |
-| (libre: bomba o agitador del blanco, fase 4) | paso/dirección + UART | E |
+| (libre) | paso/dirección + UART | Z |
+| (libre: circulación del blanco, fase 4) | paso/dirección + UART | E |
 | Final de carrera X | entrada digital | X-STOP |
 | Interruptor de palanca de presión | entrada digital | Y-STOP |
 | Sensor de film | entrada digital | E0-STOP (la entrada de fin de filamento) |
-| Brazo de tensión de recogida | entrada analógica | TH0 |
 | Ventiladores de vacío centrales (2) | 24 V conmutado | HE0 |
 | Ventiladores de vacío laterales (2) | 24 V conmutado | HB |
 | Ventilador de la electrónica | PWM | FAN0 |
@@ -170,13 +172,26 @@ comprobando el esquema oficial de la placa.
     motor Y. Las placas llevan sus pasos de cable.
   - Los cables sueltos de sensores (final de carrera, palanca de presión) van
     por las ranuras de los perfiles con tapa de ranura.
-- **Compartimento de tinta** (`cad/ink.py`): por fuera de la placa izquierda,
-  con marco de V-slot 2020 del inventario, paneles de MDF de 6 mm, frontal de
-  metacrilato y tapa abatible. Dentro, una bandeja impresa con 4 depósitos de
-  250 ml (C, M, Y, K) y el del blanco sobre un agitador magnético. Los tubos
-  salen por la tapa, suben pegados a la placa con clips impresos y entran por
-  detrás hasta la bandeja de la cadena. El nivel medio de tinta queda unos
-  40 mm por debajo de las boquillas.
+- **Pantalla** (`cad/wiring.py`): táctil de 7" en una carcasa impresa en la
+  esquina delantera derecha, inclinada 20°, con una pletina atornillada a la
+  cara interior de la placa derecha. El HDMI y el USB bajan por una canaleta
+  vertical hasta la canaleta del larguero.
+- **Tinta a granel** (`cad/ink.py`):
+  - **Botellas**: 5 botellas de 1 L en una caja de plástico comprada (bandeja
+    antiderrames) con una base impresa, sobre una repisa de MDF de 12 mm detrás
+    de la máquina, a la derecha. La repisa se atornilla al larguero trasero y
+    apoya en la mesa con una pata. Queda fuera del ancho del rollo, para
+    cargarlo desde atrás.
+  - **Bombas**: 5 peristálticas de 12 V en un soporte impreso por fuera de la
+    placa izquierda, detrás, junto a la caja del módulo MOSFET.
+  - **Subdepósitos**: encima de las bombas, 5 subdepósitos con flotador a
+    altura fija, con el nivel unos 40 mm por debajo de las boquillas.
+  - **Tubos**: suben pegados a la placa con clips y entran por el agujero
+    trasero a la bandeja de la cadena portacables.
+  - **Control**: Klipper usa la Raspberry Pi como segunda MCU (`[mcu host]`).
+    Cada bomba es un `output_pin` y cada flotador un `gcode_button`. Una macro
+    rellena hasta que el flotador sube, con un tiempo máximo, y si se pasa avisa
+    de que esa botella está vacía.
 
 | | |
 |---|---|
@@ -186,13 +201,16 @@ comprobando el esquema oficial de la placa.
 | Encoder Y: AS5047P frente al imán en la punta del eje del rodillo | Caja de electrónica y fuente de 24 V sobre la bandeja inferior |
 | ![Dentro de la caja](img/electronica_interior.png) | ![Canaletas](img/cableado.png) |
 | SKR Mini E3 V3.0, Raspberry Pi 3, Pico y convertidores | Canaletas, paneles de red y emergencia, cadena y compartimento de tinta |
-| ![Compartimento de tinta](img/tinta.png) | ![Depósitos](img/tinta_interior.png) |
-| Compartimento de tinta cerrado | Depósitos C, M, Y, K y blanco sobre el agitador |
+| ![Botellas](img/tinta_botellas.png) | ![Bombas y subdepósitos](img/tinta_bombas.png) |
+| Botellas de 1 L en su caja sobre la repisa trasera | Bombas peristálticas y subdepósitos con flotador |
+| ![Pantalla](img/pantalla.png) | ![Salida](img/salida.png) |
+| Pantalla táctil en su carcasa | Rampa de salida del film en la guía delantera |
 
 Piezas impresas de esta fase (STL en `out/stl/`): soportes del encoder X, final
 de carrera, soporte del encoder Y, bandeja y brazo de la cadena, caja de
 electrónica, bridas de la fuente, paneles IEC y de emergencia, canaletas,
-bandeja de la tinta y clips de los tubos. Algo menos de 1 kg de filamento; las
+repisa, base de botellas, soportes de bombas y subdepósitos, caja del driver,
+clips de los tubos y carcasa de la pantalla. Unos 2 kg de filamento; las
 cantidades exactas están en [compra_fase1.md](compra_fase1.md).
 
 ## Pruebas de la fase 1
@@ -211,5 +229,5 @@ cantidades exactas están en [compra_fase1.md](compra_fase1.md).
 ## Fuera de esta fase
 
 - El cabezal, la placa de disparo y el RIP (fases 2 y 3).
-- La recogida motorizada queda como fase 1.5: primero se prueba con recogida
-  manual o por peso.
+- No hay rollo de recogida: el film impreso cae por delante hasta que llegue la
+  agitadora de polvo con horno (fase 5), que tiene su propia recogida.

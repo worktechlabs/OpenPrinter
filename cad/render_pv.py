@@ -10,6 +10,7 @@ import pyvista as pv
 import cadquery as cq
 
 import layout
+import montaje
 import params as P
 
 IMG = Path(__file__).resolve().parent.parent / "docs" / "img"
@@ -23,7 +24,7 @@ VIEWS = {
     "lateral": dict(direction=(1, 0, 0), zoom=1.9, parallel=True,
                     hide=("placa_der", "pata_2", "pata_3", "soporte_motor_y", "motor_y", "polea_80t_y",
                           "polea_20t_y", "correa_y", "presion_palanca", "collarin_placa_entrada_1",
-                          "collarin_placa_recogida_1", "eje_", "rodamiento_arrastre_1")),
+                          "eje_", "rodamiento_arrastre_1", "tinta_", "pantalla")),
     "carro": dict(direction=(-0.9, 1.4, 0.7), zoom=1.1, only=("carro", "patin", "cabezal")),
     "presion": dict(direction=(-1.2, 1.0, 0.5), zoom=1.0,
                     only=tuple(f"presion_{p}_2" for p in ("soporte", "brazo", "rueda", "leva", "muelle"))),
@@ -38,9 +39,17 @@ VIEWS = {
     "cadena": dict(direction=(0.6, -1.5, 0.9), zoom=1.15,
                    only=("cadena", "carro", "patin", "viga_x", "encoder_s")),
     "general_izquierda": dict(direction=(-1.6, 0.9, 0.8), zoom=1.2),
-    "tinta": dict(direction=(-1.5, 0.7, 0.8), zoom=1.05, only=("tinta",)),
-    "tinta_interior": dict(direction=(-1.5, 0.7, 0.9), zoom=1.1,
-                           only=("tinta_perfil", "tinta_bandeja", "tinta_deposito", "tinta_agitador")),
+    "tinta_botellas": dict(direction=(1.2, -1.6, 1.0), zoom=1.1,
+                           only=("tinta_repisa", "tinta_escuadra", "tinta_pata", "tinta_caja_botellas",
+                                 "tinta_base", "tinta_botella", "tinta_tapon", "tinta_agitador",
+                                 "tinta_tubo_botella")),
+    "tinta_bombas": dict(direction=(-1.5, -0.9, 0.6), zoom=1.1,
+                         only=("tinta_soporte", "tinta_bomba", "tinta_caja_driver", "tinta_subdeposito",
+                               "tinta_flotador", "tinta_tubo_bomba", "tinta_tubo_sub", "tinta_tubos_carro",
+                               "tinta_clip")),
+    "pantalla": dict(direction=(-0.5, 1.6, 0.7), zoom=1.2, only=("pantalla",)),
+    "salida": dict(direction=(-1.2, 1.3, 0.7), zoom=1.15,
+                   only=("mesa_salida", "guia_delantera", "mesa_placa", "mesa_camara")),
     "electronica": dict(direction=(-0.8, 1.3, 1.1), zoom=1.05,
                         only=("electronica_caja", "electronica_fuente", "electronica_brida",
                               "electronica_ventilador")),
@@ -49,7 +58,7 @@ VIEWS = {
                                        "electronica_conversor", "electronica_fuente", "electronica_brida")),
     "cableado": dict(direction=(-1.0, 1.3, 1.0), zoom=1.2,
                      only=("canaleta", "electronica", "panel", "cadena", "larguero", "travesano_central",
-                           "placa_izq", "tinta")),
+                           "placa_izq", "tinta_tubos_carro", "tinta_caja_driver")),
     "encoder_y": dict(direction=(-1.4, 0.5, 0.5), zoom=1.0,
                       only=("encoder_y", "rodamiento_arrastre_0")),
     "mandril": dict(direction=(1.3, -0.9, 0.6), zoom=1.0,
@@ -104,10 +113,48 @@ def render(items, path, direction, zoom=1.0, only=None, hide=None, parallel=Fals
     pl.close()
 
 
+GREY = (0.80, 0.81, 0.83)
+
+
+def render_steps(items):
+    """Esquema de cada paso de montaje: lo anterior en gris, lo del paso en color."""
+    for i, (sid, title, _, _, cam, *_rest) in enumerate(montaje.STEPS):
+        pl = pv.Plotter(off_screen=True, window_size=SIZE)
+        pl.set_background("#f4f5f7", top="#ffffff")
+        pl.enable_anti_aliasing("ssaa")
+        shown = []
+        for name, mesh, (r, g, b, a) in items:
+            step = montaje.step_of(name)
+            if step > i:
+                continue
+            color, opacity = ((r, g, b), a) if step == i else (GREY, min(a, 0.55))
+            pl.add_mesh(mesh, color=color, opacity=opacity, smooth_shading=True,
+                        specular=0.25, specular_power=20, ambient=0.2, diffuse=0.85)
+            shown.append(mesh)
+        bounds = pv.MultiBlock([m for _, m, _ in items]).bounds
+        center = np.array([(bounds[0] + bounds[1]) / 2, (bounds[2] + bounds[3]) / 2,
+                           (bounds[4] + bounds[5]) / 2])
+        radius = np.linalg.norm([bounds[1] - bounds[0], bounds[3] - bounds[2], bounds[5] - bounds[4]]) / 2
+        d = np.array(cam, dtype=float)
+        d /= np.linalg.norm(d)
+        pl.camera.focal_point = center
+        pl.camera.position = center + d * radius * 3.2
+        pl.camera.up = (0, 0, 1)
+        pl.reset_camera(bounds=bounds)
+        pl.camera.zoom(1.25)
+        pl.add_text(f"{i + 1}. {title}", position="upper_left", font_size=14, color="#222222")
+        path = IMG / f"montaje_{i + 1:02d}.png"
+        pl.screenshot(str(path))
+        pl.close()
+        print("Render:", path)
+
+
 def main(names=None):
     """Renderiza todas las vistas, o solo las indicadas: render_pv.py carro mesa"""
     IMG.mkdir(parents=True, exist_ok=True)
     items = meshes(layout.build(carriage_x=-120))
+    if not names or "montaje" in names:
+        render_steps(items)
     for name, view in VIEWS.items():
         if names and name not in names:
             continue

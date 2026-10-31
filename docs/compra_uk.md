@@ -24,8 +24,8 @@ Las cantidades salen de las listas generadas desde el modelo
 Se descartan las ruedas en V para el carro. En DTF cualquier holgura del carro
 se ve como bandas, y el POM se desgasta y se aplana si la máquina está parada.
 Las MGN12 cuestan poco en Amazon UK, así que la diferencia es de unas £35. El
-V-slot 2020 y sus escuadras del inventario se usarán en el compartimento de
-tinta y en la estructura de la cubierta.
+V-slot 2020 y sus escuadras del inventario se usarán en la estructura de la
+cubierta.
 
 ## Perfiles (fuera de Amazon)
 
@@ -93,6 +93,20 @@ bolas.
 Pendientes de buscar: sensor óptico de horquilla, TCRT5000, seta de emergencia,
 conector IEC con fusible, insertos térmicos y surtido de tornillería
 M3/M4/M5/M8.
+
+## Tinta a granel y pantalla (fase 1)
+
+Aún sin producto concreto elegido: los enlaces son búsquedas, para comparar
+medidas y precios. Lo que hay que mirar está en la columna de la derecha.
+
+| Pieza | Cant. | Dónde buscar | Qué comprobar |
+|---|---:|---|---|
+| Caja de plástico con tapa | 1 | [Amazon UK: Really Useful Box 9 L](https://www.amazon.co.uk/s?k=really+useful+box+9+litre) | Exterior 395 × 255 × 155 mm o mayor (interior 335 × 210 mm caben 5 botellas de 1 L). Si es más grande, cambia `INK_BOX` en `params.py` |
+| Bomba peristáltica 12 V | 5 | [Amazon UK](https://www.amazon.co.uk/s?k=12v+peristaltic+pump) · [AliExpress](https://www.aliexpress.com/w/wholesale-12v-peristaltic-pump.html) | Tubo de silicona de 2 × 4 mm o similar, ~0,3 A |
+| Subdepósito de tinta con sensor | 5 | [AliExpress: DTF sub ink tank sensor](https://www.aliexpress.com/w/wholesale-dtf-sub-ink-tank-sensor.html) | Con flotador; si no, depósito pequeño + interruptor de flotador vertical |
+| Módulo MOSFET o ULN2803 | 1 | [Amazon UK](https://www.amazon.co.uk/s?k=mosfet+module+4+channel+3.3v) | Que dispare con 3,3 V (GPIO de la Raspberry Pi) |
+| Pantalla táctil de 7" HDMI + USB | 1 | [Amazon UK](https://www.amazon.co.uk/s?k=7+inch+hdmi+touchscreen+raspberry+pi) | 1024 × 600 va bien con KlipperScreen. Al comprarla, mide el módulo y ajusta `SCREEN_SIZE` |
+| Agitador magnético mini | 1 | [Amazon UK](https://www.amazon.co.uk/s?k=mini+magnetic+stirrer) | De perfil bajo (~25 mm) y con imán incluido |
 
 ## Opciones en eBay UK
 

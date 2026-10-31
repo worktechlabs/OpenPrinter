@@ -1,0 +1,1216 @@
+{
+ "steps": [
+  {
+   "id": "bastidor",
+   "title": "Bastidor inferior",
+   "explode": [
+    0,
+    0,
+    -1
+   ],
+   "text": "Corta los perfiles 4040 según la lista de corte. Une los largueros delantero, trasero y el travesaño central a los dos largueros laterales con escuadras. Antes de apretar, comprueba que las dos diagonales miden lo mismo (±1 mm). Enrosca las patas niveladoras en la ranura inferior de los largueros laterales.",
+   "hardware": [
+    "Escuadras 4040 con tornillo M8 x 16 y tuerca en T M8",
+    "4 patas niveladoras M8"
+   ],
+   "image": "img/montaje_01.png"
+  },
+  {
+   "id": "placas",
+   "title": "Placas laterales y travesaños",
+   "explode": [
+    1,
+    0,
+    0
+   ],
+   "text": "Corta y taladra las dos placas de MDF de 19 mm con la plantilla A4 a escala 1:1. Atorníllalas a los largueros laterales. Rosca M8 en las testas de los dos travesaños de la mesa y del tirante superior, y atorníllalos desde fuera de las placas. Mide la separación interior entre placas arriba y abajo: debe ser 1140 mm.",
+   "hardware": [
+    "M8 x 35 + arandela + tuerca en T M8 (3 por placa)",
+    "M8 x 40 en las testas (6)"
+   ],
+   "image": "img/montaje_02.png"
+  },
+  {
+   "id": "viga",
+   "title": "Viga X, guías y motor X",
+   "explode": [
+    0,
+    1,
+    0
+   ],
+   "text": "Rosca 2 x M8 en cada testa de la viga 4080 y atorníllala entre las placas. Fija la guía MGN12 de arriba en la cara delantera con tornillos cada 25 mm, alineada con una regla. Coloca la de abajo paralela a la primera, midiendo con calibre a lo largo de todo el recorrido. Monta el soporte del motor X a la izquierda y el del tensor a la derecha. Pon la cinta del encoder en sus soportes, tensa y sin tocar la viga, y el soporte del sensor de final de carrera.",
+   "hardware": [
+    "M8 x 40 (4)",
+    "M3 x 8 + tuerca en T M3 (80)",
+    "M5 x 10 + tuerca en T M5 (8)",
+    "Polea GT2 20T y polea loca"
+   ],
+   "image": "img/montaje_03.png"
+  },
+  {
+   "id": "carro",
+   "title": "Carro y cabezales",
+   "explode": [
+    0,
+    1,
+    0
+   ],
+   "text": "Mete los patines MGN12H en las guías sin sacarlos de su tapón: si se salen, se pierden las bolas. Atornilla la placa del carro a los 4 patines y la bandeja de los cabezales con el ajuste de altura a media carrera. Cierra la correa GT2 de 10 mm en la pinza y ténsala. Monta el sensor del encoder y la bandera de home en el carro.",
+   "hardware": [
+    "M3 x 10 (16) para los patines",
+    "M3 + insertos térmicos para sensor y bandera"
+   ],
+   "image": "img/montaje_04.png"
+  },
+  {
+   "id": "mesa",
+   "title": "Mesa de vacío y estación de servicio",
+   "explode": [
+    0,
+    0,
+    1
+   ],
+   "text": "Atornilla las 4 cámaras impresas a los travesaños de la mesa, cada una con su ventilador de 80 mm debajo. Encima va la placa de aluminio perforada: sella el borde con cinta de espuma para que el vacío no se escape. La estación de servicio va a la derecha, bajo la posición de home del carro.",
+   "hardware": [
+    "M4 + tuerca en T M4 para las cámaras",
+    "Cinta de espuma de 3 mm"
+   ],
+   "image": "img/montaje_05.png"
+  },
+  {
+   "id": "arrastre",
+   "title": "Arrastre del film (eje Y)",
+   "explode": [
+    0,
+    -1,
+    0
+   ],
+   "text": "Atornilla los alojamientos de los rodamientos 6001 por dentro de las placas. Pasa el eje de 12 mm con el rodillo de arrastre. Fuera de la placa derecha van la polea de 80 dientes, el motor Y con su soporte y la correa de 6 mm. Monta el eje de levante de 8 mm con las 6 levas y las 6 unidades de presión. Termina con la palanca y el imán del encoder Y en la punta izquierda del eje; el sensor AS5047P queda a 1-2 mm del imán.",
+   "hardware": [
+    "M4 x 30 (6) para los alojamientos",
+    "M5 x 30 (4) para el soporte del motor Y",
+    "Rodamientos 6001 (2)"
+   ],
+   "image": "img/montaje_06.png"
+  },
+  {
+   "id": "film",
+   "title": "Guías, rollo y salida del film",
+   "explode": [
+    0,
+    -1,
+    0.3
+   ],
+   "text": "Atornilla las guías de 25 mm trasera y delantera con M6 en las testas. Engancha a presión los 4 segmentos de la mesa de entrada en la guía trasera y los 4 de la rampa de salida en la delantera. Mete los mandriles en el núcleo del rollo y fíjalos con los collarines. Deja caer el eje del rollo por las ranuras traseras de las placas. Recorrido del film: rollo, guía trasera, bajo las ruedas de presión, mesa de vacío y rampa de salida, por donde cae hacia delante.",
+   "hardware": [
+    "M6 x 30 (4)",
+    "Rodamientos 6005 (2) en los mandriles"
+   ],
+   "image": "img/montaje_07.png"
+  },
+  {
+   "id": "electronica",
+   "title": "Electrónica, fuente y pantalla",
+   "explode": [
+    0,
+    0,
+    1
+   ],
+   "text": "Atornilla la bandeja de MDF de 10 mm a los largueros laterales y al travesaño central. Encima van la caja impresa con la SKR, la Raspberry Pi, el Pico y los convertidores, y la fuente de 24 V sujeta con sus dos bridas. El panel de red va en el larguero trasero y la seta de emergencia en el delantero. La pantalla va en la esquina delantera derecha: su pletina se atornilla a la placa y el brazo de la carcasa a la pletina.",
+   "hardware": [
+    "M5 x 12 + tuerca en T M5 (6) para la bandeja",
+    "Separadores M3 de nylon (16)",
+    "M5 x 30 (3) para la pantalla"
+   ],
+   "image": "img/montaje_08.png"
+  },
+  {
+   "id": "cables",
+   "title": "Cadena portacables y canaletas",
+   "explode": [
+    0,
+    0,
+    1
+   ],
+   "text": "Pega o atornilla las canaletas impresas sobre los largueros y por dentro de las placas. Monta la bandeja de la cadena portacables sobre la viga y el brazo en el carro. Por la cadena van los cables de los cabezales, el sensor del encoder y los tubos de tinta. Separa la potencia (motores, 24 V) de las señales (encoders, flat de los cabezales); el cable de los encoders, apantallado.",
+   "hardware": [
+    "Tornillo para madera 3 x 12 para las canaletas",
+    "Bridas"
+   ],
+   "image": "img/montaje_09.png"
+  },
+  {
+   "id": "tinta",
+   "title": "Tinta: botellas, bombas y subdepósitos",
+   "explode": [
+    0,
+    -1,
+    0
+   ],
+   "text": "Atornilla las dos escuadras de la repisa a la ranura trasera del larguero trasero; la pata apoya en la mesa de trabajo. Encima van la caja de plástico, la base impresa y las 5 botellas de 1 L, con el blanco sobre el agitador. Por fuera de la placa izquierda atornilla los soportes de las bombas y de los subdepósitos, y la caja del driver. Recorrido de cada color: botella, bomba, subdepósito, cadena portacables y carro. Para cebar, se rellenan los subdepósitos con las bombas y se aspira desde los dampers con jeringa.",
+   "hardware": [
+    "M5 x 12 + tuerca en T M5 (2) para la repisa",
+    "M5 x 30 + arandela + tuerca (12) por la placa",
+    "Clips de tubo (2)"
+   ],
+   "image": "img/montaje_10.png"
+  }
+ ],
+ "parts": {
+  "placa_izq": {
+   "label": "Placa lateral izquierda, MDF 19 mm",
+   "step": 1,
+   "stl": null
+  },
+  "placa_der": {
+   "label": "Placa lateral derecha, MDF 19 mm",
+   "step": 1,
+   "stl": null
+  },
+  "larguero_izq": {
+   "label": "Larguero lateral izquierdo 4040",
+   "step": 0,
+   "stl": null
+  },
+  "larguero_der": {
+   "label": "Larguero lateral derecho 4040",
+   "step": 0,
+   "stl": null
+  },
+  "larguero_tras": {
+   "label": "Larguero trasero 4040",
+   "step": 0,
+   "stl": null
+  },
+  "travesano_central": {
+   "label": "Travesaño central 4040",
+   "step": 0,
+   "stl": null
+  },
+  "larguero_del": {
+   "label": "Larguero delantero 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_0": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_1": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_2": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_3": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_4": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_5": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_6": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "escuadra_7": {
+   "label": "Escuadra 4040",
+   "step": 0,
+   "stl": null
+  },
+  "viga_x": {
+   "label": "Viga X 4080",
+   "step": 2,
+   "stl": null
+  },
+  "tirante_sup": {
+   "label": "Tirante superior trasero 4040",
+   "step": 1,
+   "stl": null
+  },
+  "travesano_mesa_0": {
+   "label": "Travesaño de la mesa 4040",
+   "step": 1,
+   "stl": null
+  },
+  "travesano_mesa_1": {
+   "label": "Travesaño de la mesa 4040",
+   "step": 1,
+   "stl": null
+  },
+  "pata_0": {
+   "label": "Pata niveladora M8",
+   "step": 0,
+   "stl": null
+  },
+  "pata_1": {
+   "label": "Pata niveladora M8",
+   "step": 0,
+   "stl": null
+  },
+  "pata_2": {
+   "label": "Pata niveladora M8",
+   "step": 0,
+   "stl": null
+  },
+  "pata_3": {
+   "label": "Pata niveladora M8",
+   "step": 0,
+   "stl": null
+  },
+  "guia_mgn12_0": {
+   "label": "Guía lineal MGN12",
+   "step": 2,
+   "stl": null
+  },
+  "guia_mgn12_1": {
+   "label": "Guía lineal MGN12",
+   "step": 2,
+   "stl": null
+  },
+  "soporte_motor_x": {
+   "label": "Soporte del motor X",
+   "step": 2,
+   "stl": "stl/soporte_motor_x.stl"
+  },
+  "soporte_tensor_x": {
+   "label": "Soporte del tensor X",
+   "step": 2,
+   "stl": "stl/soporte_tensor_x.stl"
+  },
+  "motor_x": {
+   "label": "Motor NEMA17 del eje X",
+   "step": 2,
+   "stl": null
+  },
+  "polea_motor_x": {
+   "label": "Polea GT2 20T del motor X",
+   "step": 2,
+   "stl": null
+  },
+  "polea_loca_x": {
+   "label": "Polea loca GT2 del tensor X",
+   "step": 2,
+   "stl": null
+  },
+  "correa_x": {
+   "label": "Correa GT2 10 mm del eje X",
+   "step": 3,
+   "stl": null
+  },
+  "patin_0": {
+   "label": "Patín MGN12H",
+   "step": 3,
+   "stl": null
+  },
+  "patin_1": {
+   "label": "Patín MGN12H",
+   "step": 3,
+   "stl": null
+  },
+  "patin_2": {
+   "label": "Patín MGN12H",
+   "step": 3,
+   "stl": null
+  },
+  "patin_3": {
+   "label": "Patín MGN12H",
+   "step": 3,
+   "stl": null
+  },
+  "carro_placa": {
+   "label": "Placa del carro",
+   "step": 3,
+   "stl": "stl/carro_placa.stl"
+  },
+  "carro_bandeja": {
+   "label": "Bandeja de cabezales (ajuste de altura)",
+   "step": 3,
+   "stl": "stl/carro_bandeja.stl"
+  },
+  "carro_pinza_correa": {
+   "label": "Pinza de la correa",
+   "step": 3,
+   "stl": "stl/carro_pinza_correa.stl"
+  },
+  "cabezal_0": {
+   "label": "Cabezal Epson XP600 (maqueta)",
+   "step": 3,
+   "stl": null
+  },
+  "encoder_cinta": {
+   "label": "Cinta del encoder 180 LPI",
+   "step": 2,
+   "stl": null
+  },
+  "encoder_soporte_cinta_izq": {
+   "label": "Soporte izquierdo de la cinta del encoder",
+   "step": 2,
+   "stl": "stl/encoder_soporte_cinta_izq.stl"
+  },
+  "encoder_soporte_cinta_der": {
+   "label": "Soporte derecho de la cinta del encoder",
+   "step": 2,
+   "stl": "stl/encoder_soporte_cinta_der.stl"
+  },
+  "encoder_soporte_sensor": {
+   "label": "Soporte del sensor del encoder X",
+   "step": 3,
+   "stl": "stl/encoder_soporte_sensor.stl"
+  },
+  "encoder_sensor": {
+   "label": "Sensor del encoder X (H9730)",
+   "step": 3,
+   "stl": null
+  },
+  "final_x_bandera": {
+   "label": "Bandera de home X",
+   "step": 3,
+   "stl": "stl/final_x_bandera.stl"
+  },
+  "final_x_soporte": {
+   "label": "Soporte del sensor de home X",
+   "step": 2,
+   "stl": "stl/final_x_soporte.stl"
+  },
+  "encoder_y_soporte": {
+   "label": "Soporte del encoder Y",
+   "step": 5,
+   "stl": "stl/encoder_y_soporte.stl"
+  },
+  "encoder_y_iman": {
+   "label": "Imán diametral del encoder Y",
+   "step": 5,
+   "stl": null
+  },
+  "encoder_y_pcb": {
+   "label": "Placa AS5047P del encoder Y",
+   "step": 5,
+   "stl": null
+  },
+  "cadena_bandeja_0": {
+   "label": "Bandeja de la cadena portacables",
+   "step": 8,
+   "stl": "stl/cadena_bandeja.stl"
+  },
+  "cadena_bandeja_1": {
+   "label": "Bandeja de la cadena portacables",
+   "step": 8,
+   "stl": "stl/cadena_bandeja.stl"
+  },
+  "cadena_portacables": {
+   "label": "Cadena portacables 10 x 20",
+   "step": 8,
+   "stl": null
+  },
+  "cadena_brazo": {
+   "label": "Brazo de la cadena en el carro",
+   "step": 8,
+   "stl": "stl/cadena_brazo.stl"
+  },
+  "mesa_placa": {
+   "label": "Placa perforada de aluminio de la mesa",
+   "step": 4,
+   "stl": null
+  },
+  "mesa_camara_0": {
+   "label": "Cámara de vacío impresa",
+   "step": 4,
+   "stl": "stl/mesa_camara.stl"
+  },
+  "ventilador_0": {
+   "label": "Ventilador 80 mm 24 V de la mesa",
+   "step": 4,
+   "stl": null
+  },
+  "mesa_camara_1": {
+   "label": "Cámara de vacío impresa",
+   "step": 4,
+   "stl": "stl/mesa_camara.stl"
+  },
+  "ventilador_1": {
+   "label": "Ventilador 80 mm 24 V de la mesa",
+   "step": 4,
+   "stl": null
+  },
+  "mesa_camara_2": {
+   "label": "Cámara de vacío impresa",
+   "step": 4,
+   "stl": "stl/mesa_camara.stl"
+  },
+  "ventilador_2": {
+   "label": "Ventilador 80 mm 24 V de la mesa",
+   "step": 4,
+   "stl": null
+  },
+  "mesa_camara_3": {
+   "label": "Cámara de vacío impresa",
+   "step": 4,
+   "stl": "stl/mesa_camara.stl"
+  },
+  "ventilador_3": {
+   "label": "Ventilador 80 mm 24 V de la mesa",
+   "step": 4,
+   "stl": null
+  },
+  "eje_arrastre": {
+   "label": "Eje del rodillo de arrastre Ø12",
+   "step": 5,
+   "stl": null
+  },
+  "rodillo_arrastre": {
+   "label": "Rodillo de arrastre Ø30",
+   "step": 5,
+   "stl": null
+  },
+  "rodamiento_arrastre_0": {
+   "label": "Rodamiento 6001",
+   "step": 5,
+   "stl": null
+  },
+  "rodamiento_arrastre_1": {
+   "label": "Rodamiento 6001",
+   "step": 5,
+   "stl": null
+  },
+  "alojamiento_rodamiento_0": {
+   "label": "Alojamiento del rodamiento 6001",
+   "step": 5,
+   "stl": "stl/rodillo_alojamiento_6001.stl"
+  },
+  "alojamiento_rodamiento_1": {
+   "label": "Alojamiento del rodamiento 6001",
+   "step": 5,
+   "stl": "stl/rodillo_alojamiento_6001.stl"
+  },
+  "presion_soporte_0": {
+   "label": "Soporte de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_soporte.stl"
+  },
+  "presion_brazo_0": {
+   "label": "Brazo de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_brazo.stl"
+  },
+  "presion_rueda_0": {
+   "label": "Rueda de presión (TPU)",
+   "step": 5,
+   "stl": "stl/presion_rueda_tpu.stl"
+  },
+  "presion_leva_0": {
+   "label": "Leva de levante",
+   "step": 5,
+   "stl": "stl/presion_leva.stl"
+  },
+  "presion_muelle_0": {
+   "label": "Muelle de la unidad de presión",
+   "step": 5,
+   "stl": null
+  },
+  "presion_soporte_1": {
+   "label": "Soporte de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_soporte.stl"
+  },
+  "presion_brazo_1": {
+   "label": "Brazo de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_brazo.stl"
+  },
+  "presion_rueda_1": {
+   "label": "Rueda de presión (TPU)",
+   "step": 5,
+   "stl": "stl/presion_rueda_tpu.stl"
+  },
+  "presion_leva_1": {
+   "label": "Leva de levante",
+   "step": 5,
+   "stl": "stl/presion_leva.stl"
+  },
+  "presion_muelle_1": {
+   "label": "Muelle de la unidad de presión",
+   "step": 5,
+   "stl": null
+  },
+  "presion_soporte_2": {
+   "label": "Soporte de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_soporte.stl"
+  },
+  "presion_brazo_2": {
+   "label": "Brazo de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_brazo.stl"
+  },
+  "presion_rueda_2": {
+   "label": "Rueda de presión (TPU)",
+   "step": 5,
+   "stl": "stl/presion_rueda_tpu.stl"
+  },
+  "presion_leva_2": {
+   "label": "Leva de levante",
+   "step": 5,
+   "stl": "stl/presion_leva.stl"
+  },
+  "presion_muelle_2": {
+   "label": "Muelle de la unidad de presión",
+   "step": 5,
+   "stl": null
+  },
+  "presion_soporte_3": {
+   "label": "Soporte de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_soporte.stl"
+  },
+  "presion_brazo_3": {
+   "label": "Brazo de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_brazo.stl"
+  },
+  "presion_rueda_3": {
+   "label": "Rueda de presión (TPU)",
+   "step": 5,
+   "stl": "stl/presion_rueda_tpu.stl"
+  },
+  "presion_leva_3": {
+   "label": "Leva de levante",
+   "step": 5,
+   "stl": "stl/presion_leva.stl"
+  },
+  "presion_muelle_3": {
+   "label": "Muelle de la unidad de presión",
+   "step": 5,
+   "stl": null
+  },
+  "presion_soporte_4": {
+   "label": "Soporte de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_soporte.stl"
+  },
+  "presion_brazo_4": {
+   "label": "Brazo de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_brazo.stl"
+  },
+  "presion_rueda_4": {
+   "label": "Rueda de presión (TPU)",
+   "step": 5,
+   "stl": "stl/presion_rueda_tpu.stl"
+  },
+  "presion_leva_4": {
+   "label": "Leva de levante",
+   "step": 5,
+   "stl": "stl/presion_leva.stl"
+  },
+  "presion_muelle_4": {
+   "label": "Muelle de la unidad de presión",
+   "step": 5,
+   "stl": null
+  },
+  "presion_soporte_5": {
+   "label": "Soporte de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_soporte.stl"
+  },
+  "presion_brazo_5": {
+   "label": "Brazo de la unidad de presión",
+   "step": 5,
+   "stl": "stl/presion_brazo.stl"
+  },
+  "presion_rueda_5": {
+   "label": "Rueda de presión (TPU)",
+   "step": 5,
+   "stl": "stl/presion_rueda_tpu.stl"
+  },
+  "presion_leva_5": {
+   "label": "Leva de levante",
+   "step": 5,
+   "stl": "stl/presion_leva.stl"
+  },
+  "presion_muelle_5": {
+   "label": "Muelle de la unidad de presión",
+   "step": 5,
+   "stl": null
+  },
+  "eje_levante": {
+   "label": "Eje de levante Ø8",
+   "step": 5,
+   "stl": null
+  },
+  "presion_palanca": {
+   "label": "Palanca de levante",
+   "step": 5,
+   "stl": "stl/presion_palanca.stl"
+  },
+  "soporte_motor_y": {
+   "label": "Soporte del motor Y",
+   "step": 5,
+   "stl": "stl/soporte_motor_y.stl"
+  },
+  "motor_y": {
+   "label": "Motor NEMA17 del eje Y",
+   "step": 5,
+   "stl": null
+  },
+  "polea_80t_y": {
+   "label": "Polea GT2 80T del rodillo",
+   "step": 5,
+   "stl": null
+  },
+  "polea_20t_y": {
+   "label": "Polea GT2 20T del motor Y",
+   "step": 5,
+   "stl": null
+  },
+  "correa_y_0": {
+   "label": "Correa GT2 6 mm del eje Y",
+   "step": 5,
+   "stl": null
+  },
+  "correa_y_1": {
+   "label": "Correa GT2 6 mm del eje Y",
+   "step": 5,
+   "stl": null
+  },
+  "guia_trasera": {
+   "label": "Guía trasera Ø25",
+   "step": 6,
+   "stl": null
+  },
+  "guia_delantera": {
+   "label": "Guía delantera Ø25",
+   "step": 6,
+   "stl": null
+  },
+  "mesa_entrada_0": {
+   "label": "Segmento de la mesa de entrada",
+   "step": 6,
+   "stl": "stl/mesa_entrada_segmento.stl"
+  },
+  "mesa_entrada_1": {
+   "label": "Segmento de la mesa de entrada",
+   "step": 6,
+   "stl": "stl/mesa_entrada_segmento.stl"
+  },
+  "mesa_entrada_2": {
+   "label": "Segmento de la mesa de entrada",
+   "step": 6,
+   "stl": "stl/mesa_entrada_segmento.stl"
+  },
+  "mesa_entrada_3": {
+   "label": "Segmento de la mesa de entrada",
+   "step": 6,
+   "stl": "stl/mesa_entrada_segmento.stl"
+  },
+  "mesa_salida_0": {
+   "label": "Segmento de la rampa de salida",
+   "step": 6,
+   "stl": "stl/mesa_salida_segmento.stl"
+  },
+  "mesa_salida_1": {
+   "label": "Segmento de la rampa de salida",
+   "step": 6,
+   "stl": "stl/mesa_salida_segmento.stl"
+  },
+  "mesa_salida_2": {
+   "label": "Segmento de la rampa de salida",
+   "step": 6,
+   "stl": "stl/mesa_salida_segmento.stl"
+  },
+  "mesa_salida_3": {
+   "label": "Segmento de la rampa de salida",
+   "step": 6,
+   "stl": "stl/mesa_salida_segmento.stl"
+  },
+  "eje_rollo_entrada": {
+   "label": "Eje del rollo Ø25",
+   "step": 6,
+   "stl": null
+  },
+  "rollo_entrada": {
+   "label": "Rollo de film DTF de 60 cm",
+   "step": 6,
+   "stl": null
+  },
+  "nucleo_entrada": {
+   "label": "Núcleo de cartón de 3\"",
+   "step": 6,
+   "stl": null
+  },
+  "mandril_entrada_+1": {
+   "label": "Mandril del rollo",
+   "step": 6,
+   "stl": "stl/rollo_mandril.stl"
+  },
+  "collarin_entrada_+1": {
+   "label": "Collarín del mandril (freno)",
+   "step": 6,
+   "stl": "stl/rollo_collarin.stl"
+  },
+  "mandril_entrada_-1": {
+   "label": "Mandril del rollo",
+   "step": 6,
+   "stl": "stl/rollo_mandril.stl"
+  },
+  "collarin_entrada_-1": {
+   "label": "Collarín del mandril (freno)",
+   "step": 6,
+   "stl": "stl/rollo_collarin.stl"
+  },
+  "collarin_placa_entrada_0": {
+   "label": "Collarín del eje en la placa",
+   "step": 6,
+   "stl": "stl/rollo_collarin.stl"
+  },
+  "collarin_placa_entrada_1": {
+   "label": "Collarín del eje en la placa",
+   "step": 6,
+   "stl": "stl/rollo_collarin.stl"
+  },
+  "servicio_base": {
+   "label": "Base de la estación de servicio",
+   "step": 4,
+   "stl": "stl/servicio_base.stl"
+  },
+  "servicio_tapa_0": {
+   "label": "Tapas de limpieza (capping)",
+   "step": 4,
+   "stl": null
+  },
+  "tinta_repisa": {
+   "label": "Repisa de las botellas, MDF 12 mm",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_escuadra_repisa_0": {
+   "label": "Escuadra de la repisa",
+   "step": 9,
+   "stl": "stl/tinta_escuadra_repisa.stl"
+  },
+  "tinta_escuadra_repisa_1": {
+   "label": "Escuadra de la repisa",
+   "step": 9,
+   "stl": "stl/tinta_escuadra_repisa.stl"
+  },
+  "tinta_pata_repisa_2": {
+   "label": "Pata de la repisa",
+   "step": 9,
+   "stl": "stl/tinta_pata_repisa.stl"
+  },
+  "tinta_caja_botellas": {
+   "label": "Caja de plástico (bandeja antiderrames)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_base_botellas": {
+   "label": "Base de las botellas",
+   "step": 9,
+   "stl": "stl/tinta_base_botellas.stl"
+  },
+  "tinta_botella_C": {
+   "label": "Botella de tinta de 1 L (C)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tapon_C": {
+   "label": "Tapón con salida de tubo y respiradero (C)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_botella_M": {
+   "label": "Botella de tinta de 1 L (M)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tapon_M": {
+   "label": "Tapón con salida de tubo y respiradero (M)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_botella_Y": {
+   "label": "Botella de tinta de 1 L (Y)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tapon_Y": {
+   "label": "Tapón con salida de tubo y respiradero (Y)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_botella_K": {
+   "label": "Botella de tinta de 1 L (K)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tapon_K": {
+   "label": "Tapón con salida de tubo y respiradero (K)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_agitador": {
+   "label": "Agitador magnético",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_botella_W": {
+   "label": "Botella de tinta de 1 L (W)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tapon_W": {
+   "label": "Tapón con salida de tubo y respiradero (W)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_soporte_bombas": {
+   "label": "Soporte de las bombas",
+   "step": 9,
+   "stl": "stl/tinta_soporte_bombas.stl"
+  },
+  "tinta_bomba_C": {
+   "label": "Bomba peristáltica 12 V (C)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_bomba_M": {
+   "label": "Bomba peristáltica 12 V (M)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_bomba_Y": {
+   "label": "Bomba peristáltica 12 V (Y)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_bomba_K": {
+   "label": "Bomba peristáltica 12 V (K)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_bomba_W": {
+   "label": "Bomba peristáltica 12 V (W)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_caja_driver": {
+   "label": "Caja del driver de las bombas",
+   "step": 9,
+   "stl": "stl/tinta_caja_driver.stl"
+  },
+  "tinta_soporte_subdepositos": {
+   "label": "Soporte de los subdepósitos",
+   "step": 9,
+   "stl": "stl/tinta_soporte_subdepositos.stl"
+  },
+  "tinta_subdeposito_C": {
+   "label": "Subdepósito con flotador (C)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_flotador_C": {
+   "label": "Tapa con sensor de nivel (C)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_subdeposito_M": {
+   "label": "Subdepósito con flotador (M)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_flotador_M": {
+   "label": "Tapa con sensor de nivel (M)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_subdeposito_Y": {
+   "label": "Subdepósito con flotador (Y)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_flotador_Y": {
+   "label": "Tapa con sensor de nivel (Y)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_subdeposito_K": {
+   "label": "Subdepósito con flotador (K)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_flotador_K": {
+   "label": "Tapa con sensor de nivel (K)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_subdeposito_W": {
+   "label": "Subdepósito con flotador (W)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_flotador_W": {
+   "label": "Tapa con sensor de nivel (W)",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_botella_C": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_botella_M": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_botella_Y": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_botella_K": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_botella_W": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_aspiracion": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_bomba_C": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_bomba_M": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_bomba_Y": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_bomba_K": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_bomba_W": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_sub_C": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_sub_M": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_sub_Y": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_sub_K": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubo_sub_W": {
+   "label": "Tubo de tinta",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_tubos_carro": {
+   "label": "Mazo de tubos hacia el carro",
+   "step": 9,
+   "stl": null
+  },
+  "tinta_clip_tubos_0": {
+   "label": "Clip de tubos",
+   "step": 9,
+   "stl": "stl/tinta_clip_tubos.stl"
+  },
+  "tinta_clip_tubos_1": {
+   "label": "Clip de tubos",
+   "step": 9,
+   "stl": "stl/tinta_clip_tubos.stl"
+  },
+  "electronica_bandeja": {
+   "label": "Bandeja de electrónica, MDF 10 mm",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_caja": {
+   "label": "Caja de la electrónica",
+   "step": 7,
+   "stl": "stl/electronica_caja.stl"
+  },
+  "electronica_placa_skr": {
+   "label": "BTT SKR Mini E3 V3.0",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_raspberry_pi": {
+   "label": "Raspberry Pi 3",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_pico_encoder": {
+   "label": "Raspberry Pi Pico (encoders)",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_conversor_5v": {
+   "label": "Convertidor 24 V a 5 V",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_conversor_12v": {
+   "label": "Convertidor 24 V a 12 V",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_fuente_24v": {
+   "label": "Fuente de 24 V",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_ventilador_0": {
+   "label": "Ventilador 4010 de la caja",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_ventilador_1": {
+   "label": "Ventilador 4010 de la caja",
+   "step": 7,
+   "stl": null
+  },
+  "electronica_brida_fuente_0": {
+   "label": "Brida de la fuente",
+   "step": 7,
+   "stl": "stl/electronica_brida_fuente.stl"
+  },
+  "electronica_brida_fuente_1": {
+   "label": "Brida de la fuente",
+   "step": 7,
+   "stl": "stl/electronica_brida_fuente.stl"
+  },
+  "panel_iec": {
+   "label": "Panel de la entrada de red",
+   "step": 7,
+   "stl": "stl/panel_iec.stl"
+  },
+  "panel_iec_conector": {
+   "label": "Conector IEC con interruptor y fusible",
+   "step": 7,
+   "stl": null
+  },
+  "panel_seta": {
+   "label": "Panel de la seta de emergencia",
+   "step": 7,
+   "stl": "stl/panel_seta.stl"
+  },
+  "panel_seta_pulsador": {
+   "label": "Seta de emergencia",
+   "step": 7,
+   "stl": null
+  },
+  "canaleta_trasera_bandeja": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_larguero_izq": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_larguero_der": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_larguero_der_delante": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_larguero_tras": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_larguero_del": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_vertical_cadena": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_vertical_encoder_y": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_vertical_motor_y": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "canaleta_vertical_pantalla": {
+   "label": "Canaleta de cables con tapa",
+   "step": 8,
+   "stl": "stl/canaleta_tramo_200.stl"
+  },
+  "pantalla_carcasa": {
+   "label": "Carcasa de la pantalla",
+   "step": 7,
+   "stl": "stl/pantalla_carcasa.stl"
+  },
+  "pantalla_soporte": {
+   "label": "Pletina de la pantalla",
+   "step": 7,
+   "stl": "stl/pantalla_soporte.stl"
+  },
+  "pantalla_tactil": {
+   "label": "Pantalla táctil de 7\" (KlipperScreen)",
+   "step": 7,
+   "stl": null
+  },
+  "film": {
+   "label": "Film DTF",
+   "step": 6,
+   "stl": null
+  }
+ }
+}

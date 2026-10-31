@@ -16,7 +16,7 @@ CAP_DROP = 5                       # tapas bajadas: 5 mm por debajo de las boqui
 
 
 def home_head_xs():
-    first = P.CARRIAGE_HOME_X - (P.HEAD_COUNT - 1) * P.HEAD_PITCH_X / 2
+    first = P.CARRIAGE_HOME_X - (P.HEAD_SLOTS - 1) * P.HEAD_PITCH_X / 2
     return [first + i * P.HEAD_PITCH_X for i in range(P.HEAD_COUNT)]
 
 

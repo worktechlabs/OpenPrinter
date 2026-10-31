@@ -7,6 +7,9 @@
   dos ventiladores 4010 en la tapa.
 - Panel trasero con la entrada de red IEC (interruptor y fusible) y panel
   delantero con la seta de emergencia.
+- Pantalla táctil de 7" (KlipperScreen por HDMI + USB a la Raspberry Pi) en la
+  esquina delantera derecha, inclinada hacia atrás, en una carcasa impresa
+  atornillada a la cara interior de la placa derecha.
 - Canaletas impresas con tapa: una a lo largo del borde trasero de la bandeja y
   otras por encima de los largueros laterales y por la cara interior de las
   placas, hasta la bandeja de la cadena portacables (carro, motor X, tinta), el
@@ -16,7 +19,7 @@
 import cadquery as cq
 
 import params as P
-from lib import ALU, MOTOR, PLATEN, PRINTED, PRINTED_ALT, box, rod_y, rod_z
+from lib import ALU, MOTOR, PLATEN, PRINTED, PRINTED_ALT, box, rod_x, rod_y, rod_z
 
 XL, XR = P.BEAM_X0, P.BEAM_X1
 Y0F, Y1F = P.FRAME_Y
@@ -55,12 +58,59 @@ DUCTS = [
     ("vertical_cadena", XL, XL + DH, -185, -185 + DW - 3, Z_RAIL_TOP + DH, P.RAIL_Z[0] + 32),
     ("vertical_encoder_y", XL, XL + DH - 3, -92, -82, Z_RAIL_TOP + DH, -60),
     ("vertical_motor_y", XR - DH, XR, -108, -92, Z_RAIL_TOP + DH, -140),
+    ("vertical_pantalla", XR - DH, XR, 266, 266 + DW - 3, Z_RAIL_TOP + DH, -2),
 ]
+
+# Pantalla: carcasa en coordenadas locales (Y hacia la cara, Z hacia arriba) que
+# luego se inclina SCREEN_TILT grados alrededor del borde inferior trasero.
+SW, SH, SD = P.SCREEN_SIZE
+CASE = (SW + 12, SD + 6, SH + 12)              # X, Y, Z
+CASE_X1 = XR - 9                               # deja sitio al soporte
+CASE_X0 = CASE_X1 - CASE[0]
+PIVOT = (Y1F, 10)                              # (Y, Z) del borde inferior trasero
+FLANGE = (255, Y1F, 0, 118)                    # pletina en la placa: Y0, Y1, Z0, Z1
 
 
 def plate_holes():
-    """Pasos de cable en las placas laterales: motor Y y encoder Y (y, z, d)."""
-    return [(-100, -150, 14), (-87, -60, 8)]
+    """Pasos de cable (motor Y y encoder Y) y M5 del soporte de la pantalla (y, z, d)."""
+    return [(-100, -150, 14), (-87, -60, 8)] + [(y, z, P.M5_CLEAR) for y, z in screen_screws()]
+
+
+def screen_screws():
+    y0, y1, z0, z1 = FLANGE
+    return [(y0 + 12, z0 + 12), (y1 - 12, z0 + 12), (y0 + 12, z1 - 12)]
+
+
+def _tilt(shape):
+    """Pasa de coordenadas locales de la pantalla a las de la máquina."""
+    py, pz = PIVOT
+    return shape.rotate((0, 0, 0), (1, 0, 0), P.SCREEN_TILT).translate((0, py, pz))
+
+
+def screen_case():
+    """Carcasa impresa: bandeja con marco delantero; la pantalla entra por detrás."""
+    w, d, h = CASE
+    body = box(CASE_X0, CASE_X1, 0, d, 0, h)
+    body = body.cut(box(CASE_X0 + 3, CASE_X1 - 3, -1, d - 3, 3, h - 3))           # alojamiento
+    body = body.cut(box(CASE_X0 + 9, CASE_X1 - 9, d - 4, d + 1, 9, h - 9))         # ventana
+    # Brazo trasero que llega a la pletina de la placa
+    arm = box(CASE_X1 - 30, XR - 6, -60, 0, 15, h - 15)
+    return _tilt(body.union(arm))
+
+
+def screen_bracket():
+    """Pletina impresa en la cara interior de la placa derecha; el brazo de la
+    carcasa se atornilla a ella con 2 M4."""
+    y0, y1, z0, z1 = FLANGE
+    body = box(XR - 6, XR, y0, y1, z0, z1)
+    for y, z in screen_screws():
+        body = body.cut(rod_x(XR - 7, XR + 1, y, z, P.M5_CLEAR))
+    return body
+
+
+def screen():
+    w, d, h = CASE
+    return _tilt(box(CASE_X0 + 4, CASE_X1 - 4, 3, d - 3, 4, h - 4))
 
 
 def tray():
@@ -154,6 +204,8 @@ def printed_parts():
         "panel_iec": iec_panel(),
         "panel_seta": estop_panel(),
         "canaleta_tramo_200": duct(0, 200, 0, DW, 0, DH),
+        "pantalla_carcasa": screen_case(),
+        "pantalla_soporte": screen_bracket(),
     }
 
 
@@ -173,3 +225,6 @@ def add(assy):
              color=cq.Color(0.85, 0.1, 0.1, 1))
     for name, *dims in DUCTS:
         assy.add(duct(*dims), name=f"canaleta_{name}", color=PRINTED_ALT)
+    assy.add(screen_case(), name="pantalla_carcasa", color=PRINTED)
+    assy.add(screen_bracket(), name="pantalla_soporte", color=PRINTED)
+    assy.add(screen(), name="pantalla_tactil", color=MOTOR)

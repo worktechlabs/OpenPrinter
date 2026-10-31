@@ -74,7 +74,6 @@ def side_plate_sketch():
         sk = sk.push([(y, z)]).circle(d / 2, mode="s").reset()
 
     sk = _roll_slot(sk, P.UNWIND_ROLL, Y0, -1)
-    sk = _roll_slot(sk, P.TAKEUP_ROLL, Y1, +1)
     return sk
 
 
