@@ -70,16 +70,16 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 | `final_x_bandera` | 1 | 1 | 1 |
 | `final_x_soporte` | 1 | 3 | 3 |
 | `encoder_y_soporte` | 1 | 7 | 7 |
-| `cadena_bandeja` | 2 | 81 | 162 |
+| `cadena_bandeja` | 2 | 58 | 116 |
 | `cadena_brazo` | 1 | 18 | 18 |
-| **Total** | | | **213 g** |
+| **Total** | | | **167 g** |
 
 ## Resumen
 
 | Concepto | € aprox. |
 |---|---:|
 | Material comprado | 133 |
-| Filamento (~0.2 kg a 20 €/kg) | 4 |
-| **Total fase 1** | **137** |
+| Filamento (~0.2 kg a 20 €/kg) | 3 |
+| **Total fase 1** | **136** |
 
 Las placas, la Raspberry Pi, los motores y las correas se cuentan a 0 € porque se reutilizan de impresoras 3D. No incluye cabezales ni tintas.

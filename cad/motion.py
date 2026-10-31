@@ -117,25 +117,32 @@ def y_encoder_parts():
 
 # --- Cadena portacables ------------------------------------------------------
 
-TRAY_Z0 = P.RAIL_Z[0] - 8
-CHAIN_Z0 = TRAY_Z0 + 4
+# La altura se calcula desde el brazo del carro hacia abajo: el tramo superior
+# de la cadena pasa justo bajo el brazo, y la bandeja queda a la altura que
+# pida el radio de curvatura.
+CHAIN_TOP = TOP + 2                          # cara superior del tramo superior
+CHAIN_ZC = CHAIN_TOP - P.CHAIN_R - P.CHAIN_H / 2
+CHAIN_Z0 = CHAIN_ZC - P.CHAIN_R - P.CHAIN_H / 2
+TRAY_Z0 = CHAIN_Z0 - 4
+TRAY_TOP = max(TRAY_Z0 + 18, P.RAIL_Z[1] + 10)
 
 
 def tray_segment(x0, x1):
-    flange = box(x0, x1, YB - 3, YB, TRAY_Z0, P.RAIL_Z[1] + 10)
+    flange = box(x0, x1, YB - 3, YB, TRAY_Z0, TRAY_TOP)
     shelf = box(x0, x1, P.CHAIN_Y[0] - 7, YB, TRAY_Z0, TRAY_Z0 + 4)
     lip = box(x0, x1, P.CHAIN_Y[0] - 7, P.CHAIN_Y[0] - 3, TRAY_Z0, TRAY_Z0 + 24)
     body = flange.union(shelf).union(lip)
     for fx in (0.25, 0.75):
-        for z in P.RAIL_Z:
-            body = body.cut(rod_y(YB - 4, YB + 1, x0 + fx * (x1 - x0), z, 5.5))
+        for z in P.RAIL_Z:      # M5 a las ranuras traseras de la viga que caen en el ala
+            if TRAY_Z0 + 5 < z < TRAY_TOP - 5:
+                body = body.cut(rod_y(YB - 4, YB + 1, x0 + fx * (x1 - x0), z, 5.5))
     return body
 
 
 def chain(cx):
     """Cadena en la posición del carro cx: tramo inferior, curva y tramo superior."""
     r_in, r_out = P.CHAIN_R - P.CHAIN_H / 2, P.CHAIN_R + P.CHAIN_H / 2
-    zc = CHAIN_Z0 + P.CHAIN_H / 2 + P.CHAIN_R
+    zc = CHAIN_ZC
     # Tramo recto total fijo: con el carro en X_MIN la curva queda justo en el carro
     straight = P.CHAIN_FIX_X - P.CARRIAGE_X_MIN
     xb = (P.CHAIN_FIX_X + cx - straight) / 2
@@ -151,8 +158,7 @@ def chain(cx):
 
 
 def chain_arm(cx=0.0):
-    zc = CHAIN_Z0 + P.CHAIN_H / 2 + P.CHAIN_R
-    z_top_chain = zc + P.CHAIN_R + P.CHAIN_H / 2
+    z_top_chain = CHAIN_TOP
     y_clamp = P.BELT_FRONT_Y - 9
     riser = box(cx - 15, cx + 15, y_clamp, PY0, TOP, z_top_chain + 9)
     arm = box(cx - 15, cx + 15, P.CHAIN_Y[0] - 3, y_clamp, z_top_chain + 1, z_top_chain + 9)
