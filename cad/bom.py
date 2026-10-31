@@ -157,6 +157,8 @@ def items_fase1():
         ("Motores", "Motor NEMA17", "40 mm", 2, 0, "X e Y; del inventario (Creality 42-40, 42HD4041)"),
         ("Sensores", "Cinta de encoder 180 LPI", f"{_round_up(strip_len, 100)} mm", 1, 15,
          "recambio de plóter de gran formato, o de impresoras rotas"),
+        ("Sensores", "Resistencias 10 kΩ y 20 kΩ", "divisor 5 V a 3,3 V", 2, 0.1,
+         "canales A y B del encoder X hacia el Pico, si el sensor es de 5 V"),
         ("Sensores", "Sensor de encoder de cuadratura", "tipo H9730/H9740, 180 LPI", 1, 6,
          "o sacado de una impresora rota"),
         ("Sensores", "Placa AS5047P + imán diametral", "imán 6 x 2,5 mm", 1, 15, "encoder Y"),

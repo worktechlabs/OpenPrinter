@@ -4,6 +4,7 @@ Control;Raspberry Pi 3 o superior;con tarjeta microSD de 16 GB;1;0;ya disponible
 Control;Raspberry Pi Pico;RP2040;1;5;monitor del encoder X
 Motores;Motor NEMA17;40 mm;2;0;X e Y; del inventario (Creality 42-40, 42HD4041)
 Sensores;Cinta de encoder 180 LPI;1200 mm;1;15;recambio de plóter de gran formato, o de impresoras rotas
+Sensores;Resistencias 10 kΩ y 20 kΩ;divisor 5 V a 3,3 V;2;0.1;canales A y B del encoder X hacia el Pico, si el sensor es de 5 V
 Sensores;Sensor de encoder de cuadratura;tipo H9730/H9740, 180 LPI;1;6;o sacado de una impresora rota
 Sensores;Placa AS5047P + imán diametral;imán 6 x 2,5 mm;1;15;encoder Y
 Sensores;Sensor óptico de horquilla;tipo TCST2103, módulo;1;2;final de carrera X

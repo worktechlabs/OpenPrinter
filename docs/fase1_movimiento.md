@@ -218,6 +218,9 @@ cantidades exactas están en [compra_fase1.md](compra_fase1.md).
 
 ## Pruebas de la fase 1
 
+El Pico con [`firmware/pico_encoder`](../firmware/README.md#monitor-de-encoders-raspberry-pi-pico)
+registra los encoders y `registro.py` calcula los resultados de las pruebas 1 y 2.
+
 1. **Movimiento X**: 1000 pasadas a 0,6 m/s. El Pico registra la velocidad en
    la zona central; se busca un rizado por debajo del 1 % y que la posición de
    cada inversión se repita en ±1 cuenta.

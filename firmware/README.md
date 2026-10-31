@@ -1,7 +1,7 @@
 # Firmware y configuración (fase 1)
 
 Configuración de Klipper para mover la máquina, controlar el vacío y rellenar
-la tinta, y menú de la pantalla táctil. **Sin probar todavía en la máquina**:
+la tinta, menú de la pantalla táctil y monitor de encoders en el Pico. **Sin probar todavía en la máquina**:
 revisa los pines con tu placa antes de conectar motores.
 
 | Archivo | Qué hace |
@@ -10,6 +10,8 @@ revisa los pines con tu placa antes de conectar motores.
 | [`klipper/macros.cfg`](klipper/macros.cfg) | Vacío, carro, film, inicio y fin de trabajo, pausa y pruebas de la fase 1 |
 | [`klipper/tinta.cfg`](klipper/tinta.cfg) | Bombas y flotadores: relleno automático de los subdepósitos con avisos |
 | [`klipper/KlipperScreen.conf`](klipper/KlipperScreen.conf) | Menú "OpenPrinter" en la pantalla táctil |
+| [`pico_encoder/main.py`](pico_encoder/main.py) | Pico con MicroPython: cuenta el encoder X con el PIO y lee el AS5047P del eje Y |
+| [`pico_encoder/registro.py`](pico_encoder/registro.py) | En la Raspberry Pi: registra los encoders en CSV y analiza las pruebas 1 y 2 |
 
 ## Ejes en Klipper
 
@@ -115,9 +117,72 @@ Klipper.
    [fase1_movimiento.md](../docs/fase1_movimiento.md#pruebas-de-la-fase-1), con
    `PRUEBA_PASADAS` y `PRUEBA_AVANCE`.
 
+## Monitor de encoders (Raspberry Pi Pico)
+
+Klipper no lee encoders de cuadratura, así que en la fase 1 los lee un Pico
+aparte y los manda por USB a la Raspberry Pi. Sirve para medir las pruebas de
+movimiento; en la fase 3 el mismo Pico dará la posición para disparar el
+cabezal.
+
+- **Encoder X**: un state machine del PIO cuenta los flancos del canal A (x2).
+  Son 14,17 cuentas por mm (0,07 mm), y no pierde ninguna aunque Python vaya
+  lento.
+- **Encoder Y**: el AS5047P se lee por SPI y se suman las vueltas del rodillo:
+  5,8 µm de film por cuenta.
+- **Salida**: líneas `t_us,x_cuentas,y_cuentas`, a 500 muestras por segundo
+  por defecto.
+
+La lógica del contador está comprobada en un simulador con avances, retrocesos
+y temblores en un flanco. Falta probarla en un Pico real.
+
+### Instalación
+
+1. Graba MicroPython en el Pico: mantén BOOTSEL al enchufarlo y copia el `.uf2`
+   de micropython.org.
+2. Copia el programa: `mpremote cp firmware/pico_encoder/main.py :main.py` (o
+   con Thonny).
+3. En la Raspberry Pi: `sudo apt install python3-serial` y copia
+   `registro.py`.
+
+### Conexiones del Pico
+
+| Pico | Va a |
+|---|---|
+| GP2 | Encoder X, canal A |
+| GP3 | Encoder X, canal B |
+| GP18 (SCK) | AS5047P CLK |
+| GP19 (MOSI) | AS5047P MOSI |
+| GP16 (MISO) | AS5047P MISO |
+| GP17 | AS5047P CSn |
+| 3V3 (OUT) | AS5047P VDD y VDD3V3 (puenteados, modo 3,3 V) |
+| GND | Masa de los dos sensores |
+| USB | Raspberry Pi |
+
+- **Sensor del encoder X a 5 V** (la mayoría de los H9730): sus salidas no
+  pueden ir directas al Pico. Pon un divisor en cada canal (10 kΩ en serie y
+  20 kΩ a GND) o un 74LVC245. Si tu sensor funciona a 3,3 V, conéctalo directo.
+- **Cables**: los dos encoders, con cable apantallado y la malla a GND solo en
+  el lado del Pico.
+
+### Pruebas
+
+Con el Pico conectado, lanza el registro y, mientras corre, la macro de Klipper:
+
+```
+python3 registro.py pasadas --segundos 120        # y en Klipper: PRUEBA_PASADAS N=100 VEL=600
+python3 registro.py avance --ordenado 635          # y en Klipper: PRUEBA_AVANCE N=100 PASO=6.35
+python3 registro.py analizar pasadas_*.csv --prueba-csv pasadas
+```
+
+- **Pasadas**: da la velocidad media en la mitad central del recorrido, en
+  cada sentido, con su rizado (objetivo por debajo del 1 %). También da la
+  dispersión de los puntos de inversión (objetivo ±1 cuenta).
+- **Avance**: compara el avance medido por el AS5047P con el ordenado
+  (objetivo por debajo del 0,05 %) y dice por cuánto multiplicar
+  `rotation_distance`.
+
 ## Pendiente
 
-- **Firmware del Pico** para leer el encoder X (PIO) y el AS5047P (SPI) y
-  registrar velocidad y avance en las pruebas. Klipper no lee encoders de
-  cuadratura, así que va aparte.
 - **Disparo del cabezal** (fase 3) y RIP (fase 2).
+- Pasar el monitor de encoders a C (Pico SDK) cuando haga falta dar la
+  posición en tiempo real al disparo del cabezal.

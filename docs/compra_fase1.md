@@ -25,6 +25,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
 | Cinta de encoder 180 LPI | 1200 mm | 1 | 15 | recambio de plóter de gran formato, o de impresoras rotas |
+| Resistencias 10 kΩ y 20 kΩ | divisor 5 V a 3,3 V | 2 | 0 | canales A y B del encoder X hacia el Pico, si el sensor es de 5 V |
 | Sensor de encoder de cuadratura | tipo H9730/H9740, 180 LPI | 1 | 6 | o sacado de una impresora rota |
 | Placa AS5047P + imán diametral | imán 6 x 2,5 mm | 1 | 15 | encoder Y |
 | Sensor óptico de horquilla | tipo TCST2103, módulo | 1 | 2 | final de carrera X |

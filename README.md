@@ -276,7 +276,8 @@ cad/
 ├── web.py        modelo 3D de la web
 └── render.py     vistas rápidas de trabajo
 firmware/
-└── klipper/      printer.cfg, macros, tinta y menú de KlipperScreen
+├── klipper/      printer.cfg, macros, tinta y menú de KlipperScreen
+└── pico_encoder/ monitor de encoders (MicroPython) y registro de pruebas
 docs/
 ├── index.html    página de presentación con visor 3D
 ├── montaje.html  montaje interactivo en 3D; montaje.md, la guía en texto
