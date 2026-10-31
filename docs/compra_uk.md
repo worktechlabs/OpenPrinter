@@ -136,6 +136,18 @@ más corta.
 | Sensor de encoder 180 LPI | [Buscar H9730](https://www.aliexpress.com/w/wholesale-H9730-encoder-sensor-180-lpi.html) | Misma resolución que la cinta (180 LPI) |
 | Polea GT2 80T eje 12, rodamientos, insertos, tuercas en T, tornillería | Búsqueda directa | Suele salir a la mitad que en Amazon |
 
+## Cabezal (cuando la máquina esté montada)
+
+No se compra hasta tener la máquina montada y decidida la placa (kit cerrado o
+driver abierto): sin placa no imprime, y una vez montado no se puede devolver.
+Análisis completo en [cabezales.md](cabezales.md).
+
+| Pieza | Cant. | Dónde | Precio (31/10/2026) | Nota |
+|---|---:|---|---:|---|
+| Cabezal Epson XP600 (F1080-A1 / FA09121), original | 1 | [Digiprint Supplies](https://www.digiprint-supplies.com/en/epson-xp600-dx11-printhead-f1080-a1-fa09121-fa09xxx) | 218 € | Holograma de Epson. Envío desde la UE: sumar IVA de importación |
+| Cabezal XP600 (alternativa en Reino Unido) | 1 | [DTF Warehouse](https://dtfwarehouse.co.uk/products/xp600-print-head) | £249.99 + IVA (£300) | Sin aduanas, pero ~£60 más caro. La ficha no dice si es original ni su referencia: preguntar antes |
+| Cables de datos XP600, 29 pines | 2 | La misma tienda | 2–5 € | Siempre nuevos con un cabezal nuevo. Medir la longitud en el carro |
+
 ## Orden de compra recomendado
 
 1. **Ya:** perfiles cortados a medida y MDF, para montar el chasis.
@@ -143,6 +155,8 @@ más corta.
    encoder. La cinta de encoder, en eBay UK.
 3. **Al montar:** rodamientos, poleas, ventiladores, tornillería y el resto,
    donde salga mejor de precio.
+4. **Con todo montado y la placa elegida:** el cabezal XP600 y sus cables
+   (ver arriba).
 
 ## Resumen orientativo
 

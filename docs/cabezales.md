@@ -61,9 +61,19 @@ es la vía rápida.
 ## Qué buscar para el XP600
 
 - **Nombre y referencias**: *Epson XP600 printhead*, cabezal **F1080-A1**.
-  - También aparece como **FA09050** (número de pieza de Epson) y a veces como
-    **DX11**.
-  - Búsquedas útiles: `XP600 printhead F1080-A1` y `Epson FA09050`.
+  - Los números de pieza de Epson son de la serie **FA09xxx** (por ejemplo
+    **FA09121**). También se le llama **DX11**.
+  - Búsquedas útiles: `XP600 printhead F1080-A1` y `Epson FA09121`.
+  - Ejemplo de referencia (octubre de 2026): [Digiprint Supplies](https://www.digiprint-supplies.com/en/epson-xp600-dx11-printhead-f1080-a1-fa09121-fa09xxx), 218 € el
+    original con holograma, sin devolución una vez montado. Si se compra desde
+    Reino Unido, hay que sumar el IVA de importación.
+- **Datos del vendedor** (pendientes de comprobar con un cabezal real):
+  - Medidas totales: 84,9 × 57,2 × 42,6 mm, bastante más que la maqueta de
+    `HEAD_SIZE`. Hay que medir el cabezal antes de imprimir la bandeja.
+  - Frecuencia de disparo: 11,52 kHz en modo multigota (46 kHz con gota única).
+  - Gotas de 4,5 a 40 pl, viscosidad de tinta de 3 a 5 mPa·s.
+  - Cable de datos de 29 pines. El vendedor recomienda cables nuevos con cada
+    cabezal nuevo.
 - **Original nuevo**: busca "original" o "genuine" y "new". Evita "refurbished",
   "rebuilt" y "compatible".
 - **Bloqueado o desbloqueado**: solo importa con placas chinas. "First locked"
