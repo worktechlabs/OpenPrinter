@@ -105,10 +105,17 @@ Genera en `out/`:
 
 ## Chasis (0.2)
 
-- Dos placas laterales de aluminio de 10 mm (5083 o 6082), corte láser o agua.
-  Llevan todos los agujeros de alineación: viga X, rodamiento del rodillo de
-  arrastre (6001), guía trasera y ranuras abiertas para los ejes de los rollos
-  (inclinadas para que el eje caiga a su asiento).
+- Dos placas laterales con todos los agujeros de alineación: viga X, rodillo
+  de arrastre, guías, eje de levante y ranuras abiertas para los ejes de los
+  rollos (inclinadas para que el eje caiga a su asiento). Material según
+  `SIDE_PLATE_MATERIAL`:
+  - **MDF de 19 mm** (primera máquina, low cost): se cortan con la plantilla
+    A4 de `docs/plantillas/placa_lateral_A4.pdf`. El rodamiento 6001 del
+    rodillo va en un alojamiento impreso (`rodillo_alojamiento_6001`) por la
+    cara interior, sujeto con 3 tornillos M4 pasantes. Los perfiles se
+    atornillan con M8 x 35 y arandela ancha para no clavar el MDF.
+  - **Aluminio de 10 mm** (5083 o 6082, corte láser o agua): el rodamiento va
+    encajado en la placa.
 - Bastidor inferior de 4040: largueros laterales atornillados a las placas,
   largueros delantero/trasero y travesaño central unidos con escuadras.
 - Entre placas, atornillados a la testa (M8): viga X 4080, tirante superior

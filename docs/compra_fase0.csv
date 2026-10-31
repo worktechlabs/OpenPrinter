@@ -5,7 +5,7 @@ Estructura;Perfil 4040 ranura 8;1060 mm, travesaño central;1;12.7;unión con es
 Estructura;Perfil 4040 ranura 8;1140 mm, travesaño de mesa;2;13.7;roscar M8 en ambas testas
 Estructura;Perfil 4040 ranura 8;1140 mm, tirante superior trasero;1;13.7;roscar M8 en ambas testas
 Estructura;Perfil 4080 ranura 8;1140 mm, viga x;1;27.4;roscar M8 x2 en cada testa; corte a escuadra ±0,1
-Estructura;Placa lateral aluminio 5083/6082;10 mm, 690 x 430 mm;2;70;corte láser o agua con placa_lateral.dxf
+Estructura;Placa lateral de MDF;19 mm, 690 x 430 mm;2;8;cortar con la plantilla docs/plantillas/placa_lateral_A4.pdf
 Estructura;Escuadra interior serie 40;40 x 40 mm con tornillería;8;1.5;
 Estructura;Pata niveladora;M8, base Ø40;4;2.5;
 Movimiento X;Guía lineal MGN12;1000 mm;2;30;comprar con los patines
@@ -13,16 +13,17 @@ Movimiento X;Patín MGN12H;;4;8;incluido a veces con la guía
 Movimiento X;Correa GT2 10 mm;2500 mm (abierta);1;8;fibra de vidrio o acero; para la fase 1 vale una de 6 mm reutilizada
 Movimiento X;Polea GT2 20T, 10 mm;eje 5 mm;1;3;o de 6 mm reutilizada
 Movimiento X;Polea loca GT2 20T lisa, 10 mm;eje 5 mm;1;3;o de 6 mm reutilizada
-Arrastre Y;Eje acero calibrado Ø12 h6;1200 mm;1;12;eje del rodillo de arrastre
+Arrastre Y;Eje acero calibrado Ø12 h6;1250 mm;1;12;eje del rodillo de arrastre
 Arrastre Y;Rodillo Ø30;640 mm;1;25;barra de aluminio taladrada a Ø12, o tubo Ø30 con tapones; recubrir con lija adhesiva o goma
-Arrastre Y;Rodamiento 6001-2RS;12 x 28 x 8;2;1.5;en las placas laterales
+Arrastre Y;Rodamiento 6001-2RS;12 x 28 x 8;2;1.5;en alojamientos impresos (MDF)
+Arrastre Y;Tornillo M4 x 35 + tuerca + arandela;;6;0.15;alojamientos del rodamiento
 Arrastre Y;Eje acero Ø8;1250 mm;1;6;eje de levante
 Arrastre Y;Rodamiento 625ZZ;5 x 16 x 5;6;0.6;ruedas de presión
 Arrastre Y;Muelle de compresión;Ø6 x 12 mm, hilo 0,6-0,8;6;0.3;ajustar la fuerza probando
 Arrastre Y;Polea GT2 80T, 6 mm;eje 12 mm;1;8;en el rodillo
 Arrastre Y;Polea GT2 20T, 6 mm;eje 5 mm;1;2;en el motor Y
 Arrastre Y;Correa GT2 6 mm cerrada;~250 mm;1;3;cálculo 245 mm; los colisos del soporte dan ±4 mm
-Rollos y guías;Tubo aluminio Ø25;1200 mm;2;10;ejes de los rollos
+Rollos y guías;Tubo aluminio Ø25;1250 mm;2;10;ejes de los rollos
 Rollos y guías;Barra aluminio Ø25;1140 mm;2;12;guías delantera y trasera; roscar M6 en las testas
 Rollos y guías;Rodamiento 6005-2RS;25 x 47 x 12;4;3;mandriles
 Rollos y guías;Fieltro adhesivo;3 mm;1;3;freno del rollo de entrada

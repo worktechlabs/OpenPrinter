@@ -31,7 +31,10 @@ BEAM_END = 60               # soportes extremos de la viga (motor / tensor)
 # Perfil y placas
 PROFILE = 40                # perfil 4040
 BEAM_SECTION = (40, 80)     # viga X 4080: Y, Z
-SIDE_PLATE_T = 10           # placa lateral de aluminio (corte láser/agua)
+SIDE_PLATE_MATERIAL = "mdf"     # "mdf" (fase 1, low cost) o "aluminio"
+SIDE_PLATE_T = 19 if SIDE_PLATE_MATERIAL == "mdf" else 10
+GRIT_HOUSING = (56, 12, 22)     # alojamiento impreso del 6001 en MDF: Ø, espesor, radio tornillos
+GRIT_SHAFT_CLEAR = 16           # paso del eje del rodillo por el MDF
 PLATE_FILLET = 10
 M8_CLEAR = 8.5
 M6_CLEAR = 6.5

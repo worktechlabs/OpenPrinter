@@ -33,6 +33,7 @@ PRINTED_QTY = {
     "presion_palanca": 1, "soporte_motor_y": 1,
     "rollo_mandril": 4, "rollo_collarin": 8,
     "mesa_entrada_segmento": rolls.ENTRY_SEGMENTS, "servicio_base": 1,
+    "rodillo_alojamiento_6001": 2,
 }
 PRINTED_QTY_F1 = {
     "encoder_soporte_cinta_izq": 1, "encoder_soporte_cinta_der": 1, "encoder_soporte_sensor": 1,
@@ -75,9 +76,13 @@ def items():
         rows.append(("Estructura", f"Perfil {sec} ranura 8", f"{length:.0f} mm, {name.lower()}",
                      qty, round(price, 1), notes))
     rows += [
-        ("Estructura", "Placa lateral aluminio 5083/6082",
-         f"{P.SIDE_PLATE_T} mm, {P.FRAME_Y[1] - P.FRAME_Y[0]} x {P.FRAME_Z[1] - P.FRAME_Z[0]} mm",
-         2, 70, "corte láser o agua con placa_lateral.dxf"),
+        (("Estructura", "Placa lateral de MDF",
+          f"{P.SIDE_PLATE_T} mm, {P.FRAME_Y[1] - P.FRAME_Y[0]} x {P.FRAME_Z[1] - P.FRAME_Z[0]} mm",
+          2, 8, "cortar con la plantilla docs/plantillas/placa_lateral_A4.pdf")
+         if P.SIDE_PLATE_MATERIAL == "mdf" else
+         ("Estructura", "Placa lateral aluminio 5083/6082",
+          f"{P.SIDE_PLATE_T} mm, {P.FRAME_Y[1] - P.FRAME_Y[0]} x {P.FRAME_Z[1] - P.FRAME_Z[0]} mm",
+          2, 70, "corte láser o agua con placa_lateral.dxf")),
         ("Estructura", "Escuadra interior serie 40", "40 x 40 mm con tornillería", n_br, 1.5, ""),
         ("Estructura", "Pata niveladora", "M8, base Ø40", 4, 2.5, ""),
         ("Movimiento X", "Guía lineal MGN12", f"{P.RAIL_LENGTH} mm", 2, 30, "comprar con los patines"),
@@ -90,7 +95,9 @@ def items():
          "eje del rodillo de arrastre"),
         ("Arrastre Y", "Rodillo Ø30", f"{P.PLATEN_X[1] - P.PLATEN_X[0]:.0f} mm",
          1, 25, "barra de aluminio taladrada a Ø12, o tubo Ø30 con tapones; recubrir con lija adhesiva o goma"),
-        ("Arrastre Y", "Rodamiento 6001-2RS", "12 x 28 x 8", 2, 1.5, "en las placas laterales"),
+        ("Arrastre Y", "Rodamiento 6001-2RS", "12 x 28 x 8", 2, 1.5,
+         "en alojamientos impresos (MDF)" if P.SIDE_PLATE_MATERIAL == "mdf" else "en las placas laterales"),
+        ("Arrastre Y", "Tornillo M4 x 35 + tuerca + arandela", "", 6, 0.15, "alojamientos del rodamiento"),
         ("Arrastre Y", "Eje acero Ø8", f"{_round_up(lift_shaft)} mm", 1, 6, "eje de levante"),
         ("Arrastre Y", "Rodamiento 625ZZ", "5 x 16 x 5", n_pinch, 0.6, "ruedas de presión"),
         ("Arrastre Y", "Muelle de compresión", "Ø6 x 12 mm, hilo 0,6-0,8", n_pinch, 0.3, "ajustar la fuerza probando"),
@@ -155,8 +162,8 @@ def items_fase1():
         ("Alimentación", "Convertidor 24 V a 5 V", "5 A", 1, 8, "Raspberry Pi y Pico"),
         ("Alimentación", "Seta de emergencia NC", "22 mm, con caja", 1, 8, "corta los 24 V de los motores"),
         ("Alimentación", "Conector IEC con interruptor y fusible", "", 1, 5, ""),
-        ("Montaje", "Placa de montaje de la electrónica", f"aluminio 3 mm, {x1 - x0} x {y1 - y0} mm",
-         1, 15, "o tablero de PVC espumado"),
+        ("Montaje", "Placa de montaje de la electrónica", f"MDF 10 mm, {x1 - x0} x {y1 - y0} mm",
+         1, 3, "de un recorte del tablero de las placas"),
         ("Montaje", "Separadores M3 de nylon", "6 mm", 16, 0.1, ""),
         ("Montaje", "Tuerca en T M5 + tornillo M5", "", 3 + 2 * 4, 0.3, "placa de electrónica y bandeja"),
         ("Montaje", "Inserto térmico M3 + tornillo M3", "", 12, 0.15, "soportes de sensores y brazo"),

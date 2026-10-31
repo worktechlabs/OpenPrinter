@@ -53,7 +53,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Placa de montaje de la electrónica | aluminio 3 mm, 480 x 160 mm | 1 | 15 | o tablero de PVC espumado |
+| Placa de montaje de la electrónica | MDF 10 mm, 480 x 160 mm | 1 | 3 | de un recorte del tablero de las placas |
 | Separadores M3 de nylon | 6 mm | 16 | 2 |  |
 | Tuerca en T M5 + tornillo M5 |  | 11 | 3 | placa de electrónica y bandeja |
 | Inserto térmico M3 + tornillo M3 |  | 12 | 2 | soportes de sensores y brazo |
@@ -78,8 +78,8 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 145 |
+| Material comprado | 133 |
 | Filamento (~0.2 kg a 20 €/kg) | 4 |
-| **Total fase 1** | **149** |
+| **Total fase 1** | **137** |
 
 Las placas, la Raspberry Pi, los motores y las correas se cuentan a 0 € porque se reutilizan de impresoras 3D. No incluye cabezales ni tintas.

@@ -147,8 +147,38 @@ def _belt_runs():
     return runs
 
 
+def housing_screws():
+    """Tornillos M4 del alojamiento del rodamiento, en coordenadas (Y, Z) de la placa."""
+    r = P.GRIT_HOUSING[2]
+    return [(GY + r * math.cos(math.radians(a)), GZ + r * math.sin(math.radians(a)))
+            for a in (90, 210, 330)]
+
+
+def bearing_housing(side=-1):
+    """Alojamiento impreso del rodamiento 6001 en la cara interior de una placa de MDF."""
+    d, t, _ = P.GRIT_HOUSING
+    bo, bw = P.GRIT_BEARING_OD, 8
+    x_face = XL if side < 0 else XR
+    body = rod_x(0, t, GY, GZ, d)
+    body = body.cut(rod_x(t - bw, t + 1, GY, GZ, bo))                      # rodamiento
+    body = body.cut(rod_x(-1, t + 1, GY, GZ, P.GRIT_SHAFT_D + 4))         # paso del eje
+    for y, z in housing_screws():
+        body = body.cut(rod_x(-1, t + 1, y, z, 4.5))
+    if side > 0:
+        body = body.mirror("YZ")
+    return body.translate((x_face, 0, 0))
+
+
+def bearing_positions():
+    """X inicial de cada rodamiento del rodillo (izquierdo, derecho)."""
+    if P.SIDE_PLATE_MATERIAL == "mdf":
+        t = P.GRIT_HOUSING[1]
+        return (XL + t - 8, XR - t)
+    return (XL - T + 1, XR + 1)
+
+
 def printed_parts():
-    return {
+    parts = {
         "presion_soporte": pinch_bracket(),
         "presion_brazo": pinch_arm(),
         "presion_rueda_tpu": pinch_wheel(),
@@ -156,6 +186,9 @@ def printed_parts():
         "presion_palanca": lift_lever(),
         "soporte_motor_y": motor_mount(),
     }
+    if P.SIDE_PLATE_MATERIAL == "mdf":
+        parts["rodillo_alojamiento_6001"] = bearing_housing()
+    return parts
 
 
 def add(assy):
@@ -165,10 +198,14 @@ def add(assy):
     assy.add(rod_x(*P.PLATEN_X, GY, GZ, P.GRIT_ROLLER_D)
              .cut(rod_x(P.PLATEN_X[0] - 1, P.PLATEN_X[1] + 1, GY, GZ, P.GRIT_SHAFT_D)),
              name="rodillo_arrastre", color=STEEL)
-    for i, x0 in enumerate((XL - T + 1, XR + 1)):
+    for i, x0 in enumerate(bearing_positions()):
         bearing = (rod_x(x0, x0 + 8, GY, GZ, P.GRIT_BEARING_OD)
                    .cut(rod_x(x0 - 1, x0 + 9, GY, GZ, P.GRIT_SHAFT_D)))
         assy.add(bearing, name=f"rodamiento_arrastre_{i}", color=STEEL)
+
+    if P.SIDE_PLATE_MATERIAL == "mdf":
+        for i, side in enumerate((-1, 1)):
+            assy.add(bearing_housing(side), name=f"alojamiento_rodamiento_{i}", color=PRINTED)
 
     # Unidades de presión y eje de levante
     for i, x in enumerate(pinch_xs()):

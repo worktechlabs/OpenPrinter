@@ -16,7 +16,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 | Perfil 4040 ranura 8 | 1140 mm, travesaño de mesa | 2 | 27 | roscar M8 en ambas testas |
 | Perfil 4040 ranura 8 | 1140 mm, tirante superior trasero | 1 | 14 | roscar M8 en ambas testas |
 | Perfil 4080 ranura 8 | 1140 mm, viga x | 1 | 27 | roscar M8 x2 en cada testa; corte a escuadra ±0,1 |
-| Placa lateral aluminio 5083/6082 | 10 mm, 690 x 430 mm | 2 | 140 | corte láser o agua con placa_lateral.dxf |
+| Placa lateral de MDF | 19 mm, 690 x 430 mm | 2 | 16 | cortar con la plantilla docs/plantillas/placa_lateral_A4.pdf |
 | Escuadra interior serie 40 | 40 x 40 mm con tornillería | 8 | 12 |  |
 | Pata niveladora | M8, base Ø40 | 4 | 10 |  |
 
@@ -34,9 +34,10 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Eje acero calibrado Ø12 h6 | 1200 mm | 1 | 12 | eje del rodillo de arrastre |
+| Eje acero calibrado Ø12 h6 | 1250 mm | 1 | 12 | eje del rodillo de arrastre |
 | Rodillo Ø30 | 640 mm | 1 | 25 | barra de aluminio taladrada a Ø12, o tubo Ø30 con tapones; recubrir con lija adhesiva o goma |
-| Rodamiento 6001-2RS | 12 x 28 x 8 | 2 | 3 | en las placas laterales |
+| Rodamiento 6001-2RS | 12 x 28 x 8 | 2 | 3 | en alojamientos impresos (MDF) |
+| Tornillo M4 x 35 + tuerca + arandela |  | 6 | 1 | alojamientos del rodamiento |
 | Eje acero Ø8 | 1250 mm | 1 | 6 | eje de levante |
 | Rodamiento 625ZZ | 5 x 16 x 5 | 6 | 4 | ruedas de presión |
 | Muelle de compresión | Ø6 x 12 mm, hilo 0,6-0,8 | 6 | 2 | ajustar la fuerza probando |
@@ -48,7 +49,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Tubo aluminio Ø25 | 1200 mm | 2 | 20 | ejes de los rollos |
+| Tubo aluminio Ø25 | 1250 mm | 2 | 20 | ejes de los rollos |
 | Barra aluminio Ø25 | 1140 mm | 2 | 24 | guías delantera y trasera; roscar M6 en las testas |
 | Rodamiento 6005-2RS | 25 x 47 x 12 | 4 | 12 | mandriles |
 | Fieltro adhesivo | 3 mm | 1 | 3 | freno del rollo de entrada |
@@ -96,18 +97,19 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 | `presion_leva` | 6 | 1 | 7 |
 | `presion_palanca` | 1 | 5 | 5 |
 | `soporte_motor_y` | 1 | 57 | 57 |
+| `rodillo_alojamiento_6001` | 2 | 18 | 35 |
 | `rollo_mandril` | 4 | 102 | 408 |
 | `rollo_collarin` | 8 | 10 | 82 |
 | `mesa_entrada_segmento` | 4 | 36 | 142 |
 | `servicio_base` | 1 | 109 | 109 |
-| **Total** | | | **2058 g** |
+| **Total** | | | **2094 g** |
 
 ## Resumen
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 631 |
-| Filamento (~2.1 kg a 20 €/kg) | 41 |
-| **Total fase 0** | **672** |
+| Material comprado | 508 |
+| Filamento (~2.1 kg a 20 €/kg) | 42 |
+| **Total fase 0** | **550** |
 
 No incluye motores, electrónica (fase 1), cabezales, tintas ni herramientas.

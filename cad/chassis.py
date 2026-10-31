@@ -58,8 +58,13 @@ def side_plate_sketch():
 
     sk = (sk.push([(P.REAR_GUIDE_Y, -P.REAR_GUIDE_D / 2)])
           .circle(P.M6_CLEAR / 2, mode="s").reset())
-    sk = (sk.push([(P.GRIT_ROLLER_Y, -P.GRIT_ROLLER_D / 2)])
-          .circle(P.GRIT_BEARING_OD / 2, mode="s").reset())
+    grit = (P.GRIT_ROLLER_Y, -P.GRIT_ROLLER_D / 2)
+    if P.SIDE_PLATE_MATERIAL == "mdf":
+        # En MDF el rodamiento va en un alojamiento impreso por dentro (3 x M4)
+        sk = sk.push([grit]).circle(P.GRIT_SHAFT_CLEAR / 2, mode="s").reset()
+        sk = sk.push(yfeed.housing_screws()).circle(4.5 / 2, mode="s").reset()
+    else:
+        sk = sk.push([grit]).circle(P.GRIT_BEARING_OD / 2, mode="s").reset()
 
     # Eje de levante de la presión y soporte del motor Y (en ambas placas: el
     # motor se puede montar a cualquier lado)
@@ -147,4 +152,5 @@ def export(out):
     print("\nLista de corte")
     for name, sec, length, qty, notes in rows:
         print(f"  {qty} x {sec} {length:7.1f} mm  {name} ({notes})")
-    print(f"  2 x placa aluminio {P.SIDE_PLATE_T} mm, {Y1 - Y0} x {Z1 - Z0} mm (placa_lateral.dxf)")
+    print(f"  2 x placa {P.SIDE_PLATE_MATERIAL} {P.SIDE_PLATE_T} mm, {Y1 - Y0} x {Z1 - Z0} mm "
+          "(placa_lateral.dxf)")

@@ -126,8 +126,8 @@ gramos de filamento. Son estimaciones orientativas:
 
 | Fase | Lista | Aprox. |
 |---|---|---:|
-| 0 · mecánica | [MD](docs/compra_fase0.md) · [CSV](docs/compra_fase0.csv) | ~670 € |
-| 1 · movimiento | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~150 € |
+| 0 · mecánica | [MD](docs/compra_fase0.md) · [CSV](docs/compra_fase0.csv) | ~550 € |
+| 1 · movimiento | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~135 € |
 
 La fase 1 cuenta a 0 € la placa de control, la Raspberry Pi, los motores y las
 correas, porque se reutilizan de impresoras 3D. Ninguna incluye cabezales ni
@@ -138,11 +138,30 @@ tintas.
 - **Dos cabezales Epson XP600**: uno para CMYK y otro dedicado al blanco, con
   todos sus canales en blanco para que la capa base cubra bien. Con
   `HEAD_COUNT = 1` se obtiene una versión más barata de un solo cabezal.
-- **Tanques de tinta**: rack por fuera de la placa izquierda (volumen
-  reservado). Se rellena desde fuera, el nivel queda a la vista y la tinta por
-  debajo de las boquillas, como necesita la presión negativa. Los tubos entran
-  por un agujero de la placa y suben al carro por la cadena portacables. El
-  rack, la agitación y la recirculación del blanco se diseñan en la fase 4.
+- **Tanques de tinta**: en un compartimento cerrado pegado a la placa izquierda
+  (volumen reservado), que formará parte de la cubierta, con tapa para rellenar
+  y ventana para ver el nivel. Así quedan protegidos del polvo y la luz, y la
+  tinta queda justo por debajo de las boquillas, como necesita la presión
+  negativa. Los tubos entran por un agujero de la placa y suben al carro por la
+  cadena portacables. El rack, la agitación y la recirculación del blanco se
+  diseñan en la fase 4.
+- **Rollos de film**: van dentro del chasis, entre las dos placas y bajo la
+  mesa. Con la cubierta (fase 6) quedan cerrados; el film DTF es sensible a la
+  humedad, así que conviene un sobre de gel de sílice dentro y guardar el rollo
+  en su bolsa cuando no se usa.
+
+## Fabricación low cost (primera máquina)
+
+- **Placas laterales de MDF de 19 mm** en lugar de aluminio. La plantilla a
+  tamaño real está en
+  [`docs/plantillas/placa_lateral_A4.pdf`](docs/plantillas/placa_lateral_A4.pdf):
+  se imprime en A4 al 100 %, se empalma, se pega sobre el MDF y se cortan las
+  dos placas juntas con caladora. Los rodamientos del rodillo van en
+  alojamientos impresos atornillados por dentro, no en el MDF.
+- **Material de impresora 3D reutilizado**: placa de control, Raspberry Pi,
+  motores, correas y poleas.
+- Cuando el diseño esté validado, las placas pasan a aluminio cambiando
+  `SIDE_PLATE_MATERIAL = "aluminio"` en `params.py`.
 
 ## Medidas principales (film de 600 mm)
 
@@ -152,7 +171,7 @@ tintas.
 | Recorrido del carro | 820 mm |
 | Dimensiones exteriores | ~1160 × 690 × 455 mm (sobremesa) |
 | Guías | 2 × MGN12, 1000 mm |
-| Placas laterales | 2 × aluminio de 10 mm, 690 × 430 mm |
+| Placas laterales | 2 × MDF de 19 mm, 690 × 430 mm (aluminio de 10 mm en la versión final) |
 
 ## Cómo generar el modelo
 
@@ -162,7 +181,8 @@ Requiere Python 3.11.
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\python cad\layout.py      # STEP, GLB, DXF, STL, lista de corte
-.venv\Scripts\python cad\bom.py         # lista de compra (docs/)
+.venv\Scripts\python cad\bom.py         # listas de compra (docs/)
+.venv\Scripts\python cad\plantillas.py  # plantillas de corte A4 (docs/plantillas/)
 .venv\Scripts\python cad\render_pv.py   # renders de presentación (docs/img/)
 .venv\Scripts\python cad\web.py         # modelo 3D de la web (docs/model/)
 .venv\Scripts\python cad\render.py      # vistas rápidas de trabajo (out/)
