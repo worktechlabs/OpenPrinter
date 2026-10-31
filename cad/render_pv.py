@@ -43,7 +43,7 @@ VIEWS = {
                            only=("tinta_perfil", "tinta_bandeja", "tinta_deposito", "tinta_agitador")),
     "electronica": dict(direction=(-0.8, 1.3, 1.1), zoom=1.05,
                         only=("electronica_caja", "electronica_fuente", "electronica_brida",
-                              "electronica_ventilador", "canaleta_trasera")),
+                              "electronica_ventilador")),
     "electronica_interior": dict(direction=(-0.6, 1.2, 1.4), zoom=1.1,
                                  only=("electronica_placa_skr", "electronica_raspberry", "electronica_pico",
                                        "electronica_conversor", "electronica_fuente", "electronica_brida")),
