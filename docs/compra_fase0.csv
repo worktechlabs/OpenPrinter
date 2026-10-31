@@ -1,0 +1,44 @@
+categoria;articulo;especificacion;cantidad;precio_unitario_eur;notas
+Estructura;Perfil 4040 ranura 8;690 mm, larguero lateral;2;8.3;tuercas en T para placa y patas
+Estructura;Perfil 4040 ranura 8;1060 mm, larguero delantero/trasero;2;12.7;unión con escuadras
+Estructura;Perfil 4040 ranura 8;1060 mm, travesaño central;1;12.7;unión con escuadras
+Estructura;Perfil 4040 ranura 8;1140 mm, travesaño de mesa;2;13.7;roscar M8 en ambas testas
+Estructura;Perfil 4040 ranura 8;1140 mm, tirante superior trasero;1;13.7;roscar M8 en ambas testas
+Estructura;Perfil 4080 ranura 8;1140 mm, viga x;1;27.4;roscar M8 x2 en cada testa; corte a escuadra ±0,1
+Estructura;Placa lateral aluminio 5083/6082;10 mm, 690 x 430 mm;2;70;corte láser o agua con placa_lateral.dxf
+Estructura;Escuadra interior serie 40;40 x 40 mm con tornillería;8;1.5;
+Estructura;Pata niveladora;M8, base Ø40;4;2.5;
+Movimiento X;Guía lineal MGN12;1000 mm;2;30;comprar con los patines
+Movimiento X;Patín MGN12H;;4;8;incluido a veces con la guía
+Movimiento X;Correa GT2 10 mm;2500 mm (abierta);1;8;fibra de vidrio o acero
+Movimiento X;Polea GT2 20T, 10 mm;eje 5 mm;1;3;
+Movimiento X;Polea loca GT2 20T lisa, 10 mm;eje 5 mm;1;3;
+Arrastre Y;Eje acero calibrado Ø12 h6;1200 mm;1;12;eje del rodillo de arrastre
+Arrastre Y;Rodillo Ø30;640 mm;1;25;barra de aluminio taladrada a Ø12, o tubo Ø30 con tapones; recubrir con lija adhesiva o goma
+Arrastre Y;Rodamiento 6001-2RS;12 x 28 x 8;2;1.5;en las placas laterales
+Arrastre Y;Eje acero Ø8;1250 mm;1;6;eje de levante
+Arrastre Y;Rodamiento 625ZZ;5 x 16 x 5;6;0.6;ruedas de presión
+Arrastre Y;Muelle de compresión;Ø6 x 12 mm, hilo 0,6-0,8;6;0.3;ajustar la fuerza probando
+Arrastre Y;Polea GT2 80T, 6 mm;eje 12 mm;1;8;en el rodillo
+Arrastre Y;Polea GT2 20T, 6 mm;eje 5 mm;1;2;en el motor Y
+Arrastre Y;Correa GT2 6 mm cerrada;~250 mm;1;3;cálculo 245 mm; los colisos del soporte dan ±4 mm
+Rollos y guías;Tubo aluminio Ø25;1200 mm;2;10;ejes de los rollos
+Rollos y guías;Barra aluminio Ø25;1140 mm;2;12;guías delantera y trasera; roscar M6 en las testas
+Rollos y guías;Rodamiento 6005-2RS;25 x 47 x 12;4;3;mandriles
+Rollos y guías;Fieltro adhesivo;3 mm;1;3;freno del rollo de entrada
+Mesa de vacío;Placa aluminio perforada;3 mm, 640 x 225 mm;1;45;corte láser con mesa_placa.dxf
+Mesa de vacío;Ventilador 80 mm 12 V;alta presión estática;4;6;
+Mesa de vacío;Cinta de espuma;3 x 10 mm, 5 m;1;5;juntas de cámaras y placa
+Motores (fase 1);Motor NEMA17;48 mm, 1,5-2 A;2;13;X e Y; en la fase 0 se mueve a mano
+Tornillería;Tuerca en T M8 ranura 8;;26;0.25;
+Tornillería;Tornillo M8;16 y 20 mm;36;0.2;10 de ellos a la testa de los perfiles entre placas
+Tornillería;Tuerca en T M5 ranura 8;;30;0.2;
+Tornillería;Tornillo M5;10-16 mm;41;0.1;incluye ejes de ruedas y polea loca
+Tornillería;Tuerca en T M3 ranura 8;;40;0.15;fijación de guías MGN12
+Tornillería;Tornillo M3;8-25 mm;76;0.05;guías, patines, motores, cabezales, pasadores
+Tornillería;Tornillo M3 avellanado;8 mm;24;0.05;placa de la mesa
+Tornillería;Inserto térmico M3;;26;0.1;
+Tornillería;Inserto térmico M4 + tornillo M4;16 mm;4;0.3;ajuste de altura de la bandeja
+Tornillería;Tornillo M4 + tuerca;20-35 mm;25;0.1;collarines, tensor X, ventiladores
+Tornillería;Tornillo M6;16 mm;4;0.2;guías de film
+Tornillería;Prisionero M3;6 mm;7;0.1;levas y palanca

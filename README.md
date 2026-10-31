@@ -4,6 +4,12 @@ Impresora **DTF (Direct To Film)** de código y hardware abiertos, diseñada des
 cero para construirse con herramientas de *maker*: impresora 3D, perfil de
 aluminio 4040 y placas cortadas por un servicio de láser o agua.
 
+![OpenPrinter, fase 0](docs/img/general.png)
+
+**[Web del proyecto con visor 3D interactivo](https://worktechlabs.github.io/OpenPrinter/)** ·
+**[Lista de compra de la fase 0](docs/compra_fase0.md)** ·
+**[Plan de diseño](PLAN.md)**
+
 *Open source DTF (Direct To Film) printer, designed from scratch to be built
 with maker tools. English summary at the end.*
 
@@ -95,6 +101,28 @@ diseño, está en [PLAN.md](PLAN.md).
 | 0.7 | Rollos, mandriles, freno y guías | Primera versión |
 | 0.8 | Estación de servicio (base y volúmenes reservados) | Primera versión |
 
+## Cómo es
+
+| | |
+|---|---|
+| ![Sección lateral](docs/img/lateral.png) | ![Vista trasera](docs/img/general_trasera.png) |
+| **Sección lateral**: rollo de entrada, guía y mesa de entrada, rodillo con presión, mesa de vacío, guía delantera y rollo de recogida | **Vista trasera**: viga 4080 con guías MGN12, motor X y correa |
+| ![Carro](docs/img/carro.png) | ![Mesa de vacío](docs/img/mesa.png) |
+| **Carro impreso** con dos XP600 (maqueta) y ajuste de altura | **Mesa de vacío**: placa perforada sobre 4 cámaras con ventilador |
+| ![Unidad de presión](docs/img/presion.png) | ![Motor Y](docs/img/motor_y.png) |
+| **Unidad de presión** con leva de levante | **Motor Y** con reducción 4:1 |
+
+El modelo 3D completo está en [`docs/model/openprinter.glb`](docs/model/openprinter.glb)
+(GitHub lo muestra en 3D al abrirlo) y en la [web del proyecto](https://worktechlabs.github.io/OpenPrinter/).
+
+## Lista de compra
+
+La [lista de compra de la fase 0](docs/compra_fase0.md) se calcula a partir del
+modelo: perfiles con sus longitudes, placas, guías, correas, rodamientos, ejes,
+tornillería y gramos de filamento. Una primera estimación orientativa ronda los
+**700 €** de material y filamento, sin cabezales ni electrónica. También está en
+[CSV](docs/compra_fase0.csv).
+
 ## Medidas principales (film de 600 mm)
 
 | | |
@@ -112,8 +140,11 @@ Requiere Python 3.11.
 ```
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
-.venv\Scripts\python cad\layout.py
-.venv\Scripts\python cad\render.py
+.venv\Scripts\python cad\layout.py      # STEP, GLB, DXF, STL, lista de corte
+.venv\Scripts\python cad\bom.py         # lista de compra (docs/)
+.venv\Scripts\python cad\render_pv.py   # renders de presentación (docs/img/)
+.venv\Scripts\python cad\web.py         # modelo 3D de la web (docs/model/)
+.venv\Scripts\python cad\render.py      # vistas rápidas de trabajo (out/)
 ```
 
 En Linux o macOS se usa `.venv/bin/` en lugar de `.venv\Scripts\`.
@@ -143,7 +174,15 @@ cad/
 ├── yfeed.py      arrastre Y (0.6)
 ├── rolls.py      rollos y guías (0.7)
 ├── service.py    estación de servicio (0.8)
-└── render.py     vistas PNG
+├── bom.py        lista de compra
+├── render_pv.py  renders de presentación
+├── web.py        modelo 3D de la web
+└── render.py     vistas rápidas de trabajo
+docs/
+├── index.html    web del proyecto (GitHub Pages)
+├── compra_fase0.md / .csv
+├── img/          renders
+└── model/        openprinter.glb
 ```
 
 ## Seguridad

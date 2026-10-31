@@ -36,7 +36,9 @@ def media_path(assy):
     rolls.add(assy)
     service.add(assy)
     fw = P.FILM_WIDTH
-    assy.add(strip_yz(rolls.film_path(), -fw / 2, fw / 2), name="film", color=FILM)
+    # Elevado 0,3 mm para que no coincida con la cara de la mesa en los renders
+    film = strip_yz(rolls.film_path(), -fw / 2, fw / 2).translate((0, 0, 0.3))
+    assy.add(film, name="film", color=FILM)
 
     # Electrónica bajo la mesa
     assy.add(box(-280, 200, -60, 100, P.FRAME_Z[0] + P.PROFILE + 20,
