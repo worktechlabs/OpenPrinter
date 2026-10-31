@@ -13,11 +13,35 @@ Las cantidades salen de las listas generadas desde el modelo
 
 | Pieza | Problema en Amazon | Alternativa en Reino Unido |
 |---|---|---|
-| Perfiles de 1060–1140 mm (4040, 4080 o V-slot) | Solo hay barras de hasta 1000 mm, y caras (4040 1000 mm x2: £80) | Proveedores que cortan a medida: **KJN** (perfil 40 de ranura 8) u **Ooznest** (V-slot, ruedas y excéntricas) |
+| Perfiles de 1060–1140 mm (4040, 4080 o V-slot) | Solo hay barras de hasta 1000 mm, y caras (4040 1000 mm x2: £80) | Proveedor que corte a medida (ver "Perfiles" abajo) |
 | Ejes de acero Ø12 y Ø8 de ~1,2 m | £49 el de Ø12 y £52 dos de Ø8 | Barra calibrada (*bright mild steel*, EN1A) cortada a medida en un almacén de metal (p. ej. Metals4U): unas pocas libras |
 | Tubo de aluminio Ø25 de ~1,2 m (ejes de rollos y guías) | Solo tramos cortos | Almacén de metal o tienda de bricolaje |
 | MDF de 19 mm | — | B&Q, Wickes o almacén de madera (lo cortas tú) |
 | Cinta de encoder 180 LPI y AS5047P | No aparecen en Amazon UK | eBay o AliExpress; la cinta y el sensor también se sacan de impresoras rotas |
+
+## Decisión: guías MGN12 sobre perfil de la serie 40
+
+Se descartan las ruedas en V para el carro. En DTF cualquier holgura del carro
+se ve como bandas, y el POM se desgasta y se aplana si la máquina está parada.
+Las MGN12 cuestan poco en Amazon UK, así que la diferencia es de unas £35. El
+V-slot 2020 y sus escuadras del inventario se usarán en el compartimento de
+tinta y en la estructura de la cubierta.
+
+## Perfiles (fuera de Amazon)
+
+Hacen falta unos 8 m de 4040 (2 × 690, 3 × 1060 y 3 × 1140 mm, ver
+`out/lista_corte.csv`) y 1 × 1140 mm de 4080. Precio de referencia: Matara UK
+vende 40 × 40 a £12,19/m sin IVA, así que el 4040 rondaría las £100 más el
+4080, el corte y el envío. Ese perfil es de **ranura 6**; también vale, pero
+entonces la tornillería pasa a M5 con tuercas en T de ranura 6 en lugar de M8 de
+ranura 8. Pide presupuesto de corte a medida a:
+
+- [Matara UK](https://matara.com/product/aluminium-extrusion-profiles/aluminium-profile/pg20-aluminium-profile/pg20-40x40-8-slots/)
+- [Benchdogs](https://benchdogs.co.uk/products/becnhdogs-workststion-extrusion.oembed) (4040 y 8040 cortados a medida)
+- Ally Extrusions (eBay)
+
+Lo más crítico: los 4 perfiles de 1140 mm que van entre placas deben medir lo
+mismo y estar cortados a escuadra (±0,1 mm).
 
 ## Estructura
 
@@ -27,16 +51,19 @@ Las cantidades salen de las listas generadas desde el modelo
 | Tuercas en T M8, serie 40 | ~30 | [TA-VIGOR M8 con muelle](https://www.amazon.co.uk/dp/B0FHHM3DDB) | £8.13 |
 | Tuercas en T M5, serie 40 | ~30 | [TA-VIGOR M5 con muelle](https://www.amazon.co.uk/dp/B0FHHQHTV8) | £7.29 |
 
-## Movimiento X (si se usan guías lineales)
+## Movimiento X
 
 | Pieza | Cant. necesaria | Producto | Precio |
 |---|---:|---|---:|
-| Guía MGN12 1000 mm + patín MGN12H | 2 guías, 4 patines | [CNCMANS MGN12 1000 mm con MGN12H](https://www.amazon.co.uk/dp/B0C8MKJP59) | £18.33 c/u |
+| Guía MGN12 1000 mm + patín MGN12H | 2 | [CNCMANS MGN12 1000 mm con MGN12H](https://www.amazon.co.uk/dp/B0C8MKJP59) | £18.33 c/u |
+| Patines MGN12H extra | 2 | [2 guías MGN12 de 100 mm con 2 patines](https://www.amazon.co.uk/dp/B0D752N1YF) | £19.89 |
 | Correa GT2 10 mm + poleas 20T y locas | 1 kit | [5 m GT2 10 mm + 6 poleas 20T + 4 locas](https://www.amazon.co.uk/dp/B0C54ZXM88) | £22.99 |
 
-Con ruedas en V no hacen falta las guías: ver la pregunta del perfil más abajo.
-Cada guía de ese enlace trae **un** patín; el diseño lleva dos por guía, así que
-habría que comprar 2 patines sueltos o adaptar el carro a uno por guía.
+Cada guía larga trae un patín y el diseño lleva dos por guía. El juego de guías
+cortas con 2 patines sale más barato que comprar los patines sueltos. Para
+pasar un patín de una guía a otra, pon las dos guías en línea, testa contra
+testa, y deslízalo sin sacarlo al aire: si se sale de la guía se le caen las
+bolas.
 
 ## Arrastre Y y rollos
 
@@ -69,6 +96,7 @@ M3/M4/M5/M8.
 
 ## Resumen orientativo
 
-Con guías MGN12, lo encontrado en Amazon UK suma unas **£260**, sin perfiles,
-ejes, tubos ni MDF (la fuente ya la tienes). Con ruedas en V se ahorran unas
-£75 de guías y patines.
+Lo encontrado en Amazon UK suma unas **£280** con las guías y los patines
+extra, sin perfiles, ejes, tubos ni MDF (la fuente ya la tienes). Con los
+perfiles cortados a medida (~£130) y el resto de metal y MDF (~£30), la fase 0
+completa ronda las **£450**.

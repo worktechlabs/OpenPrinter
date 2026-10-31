@@ -10,11 +10,11 @@ de compra lo cuentan a 0 €.
 | Motor NEMA17 de 40 mm (Creality 42-40, Golden Motor 42HD4041-01) | varios | Motores X, Y y recogida; al Creality hay que quitarle el extrusor |
 | Fuente de 24 V de impresora 3D | 1 | Fuente principal: motores, placa y ventiladores de 24 V |
 | Fuente de 12 V | 1 | Reserva (ventiladores de 12 V si salen más baratos) |
-| Perfil V-slot 2020 | por medir | Piezas secundarias; longitudes por confirmar |
+| Perfil V-slot 2020 | por medir | Compartimento de tinta y estructura de la cubierta |
 | Kit de escuadras 2020 con tuercas | 10 juegos | Uniones de perfiles 2020 |
 | Rodamientos 608ZZ (8 × 22 × 7) | ~20 | Poleas locas y apoyos del eje de levante (Ø8) |
 | Ventiladores 4010 de 12 V | 6 | Refrigeración de la electrónica |
-| Ruedas en V (POM) | por contar | Carro, si la viga X es V-slot |
+| Ruedas en V (POM) | por contar | Reserva: el carro va con guías MGN12 (más precisas) |
 | Correas GT2 de 6 mm y poleas de 20 dientes | varias | Eje Y (correa cerrada aparte) y X en la fase 1 |
 
 ## Pendiente de confirmar
