@@ -204,6 +204,17 @@ orden de compra recomendado.
 - Cuando el diseño esté validado, las placas pasan a aluminio cambiando
   `SIDE_PLATE_MATERIAL = "aluminio"` en `params.py`.
 
+## Firmware
+
+[firmware/](firmware/README.md) tiene la configuración de Klipper de la fase 1:
+- la placa SKR Mini E3 V3.0 y la Raspberry Pi como segunda MCU;
+- macros de vacío, film, trabajos y pruebas;
+- el relleno automático de tinta con avisos de botella vacía;
+- el menú de la pantalla táctil.
+
+También explica cómo instalarlo, el cableado y el primer arranque. Aún no se ha
+probado en la máquina.
+
 ## Medidas principales (film de 600 mm)
 
 | | |
@@ -264,12 +275,16 @@ cad/
 ├── render_pv.py  renders de presentación
 ├── web.py        modelo 3D de la web
 └── render.py     vistas rápidas de trabajo
+firmware/
+└── klipper/      printer.cfg, macros, tinta y menú de KlipperScreen
 docs/
 ├── index.html    página de presentación con visor 3D
+├── montaje.html  montaje interactivo en 3D; montaje.md, la guía en texto
 ├── compra_fase0.md / .csv, compra_fase1.md / .csv
 ├── fase1_movimiento.md   arquitectura de la fase 1
-├── img/          renders
-└── model/        openprinter.glb
+├── img/          renders y esquemas de montaje
+├── stl/          STL de cada pieza impresa
+└── model/        openprinter.glb, STL completos y montaje.json
 ```
 
 ## Seguridad

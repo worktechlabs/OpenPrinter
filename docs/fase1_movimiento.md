@@ -109,8 +109,11 @@ rodillo, no el motor.
 
 ## Señales en la placa de control
 
-Necesidades mínimas: 3 drivers, 3 entradas digitales, 1 analógica y salidas
-para los ventiladores. La placa elegida es la **BTT SKR Mini E3 V3.0** del
+La configuración de Klipper que usa estas señales está en
+[firmware/](../firmware/README.md).
+
+Necesidades mínimas: 2 drivers, 3 entradas digitales y salidas para los
+ventiladores. La placa elegida es la **BTT SKR Mini E3 V3.0** del
 inventario (ver [inventario.md](inventario.md)): 4 drivers TMC2209 en UART, y
 las salidas de calentador sirven como interruptores de 24 V para los
 ventiladores de vacío.

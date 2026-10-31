@@ -197,6 +197,8 @@ def items_fase1():
         ("Tinta", "Agitador magnético mini + imán", "", 1, 12, "bajo la botella de blanco"),
         ("Tinta", "Tubo de tinta 3 x 2 mm", "10 m", 1, 10, "botella, bomba, subdepósito y carro"),
         ("Tinta", "Racores y uniones para tubo de 3 mm", "", 1, 5, ""),
+        ("Tinta", "Resistencias 10 kΩ + diodos 1N4007", "", len(P.INK_COLORS), 0.2,
+         "pull-up de los flotadores y diodo de cada bomba (firmware/README.md)"),
     ]
 
 

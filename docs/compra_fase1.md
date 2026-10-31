@@ -81,6 +81,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 | Agitador magnético mini + imán |  | 1 | 12 | bajo la botella de blanco |
 | Tubo de tinta 3 x 2 mm | 10 m | 1 | 10 | botella, bomba, subdepósito y carro |
 | Racores y uniones para tubo de 3 mm |  | 1 | 5 |  |
+| Resistencias 10 kΩ + diodos 1N4007 |  | 5 | 1 | pull-up de los flotadores y diodo de cada bomba (firmware/README.md) |
 
 ## Piezas impresas
 
@@ -116,8 +117,8 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 286 |
+| Material comprado | 287 |
 | Filamento (~1.9 kg a 20 €/kg) | 38 |
-| **Total fase 1** | **324** |
+| **Total fase 1** | **325** |
 
 Las placas, la Raspberry Pi, los motores y las correas se cuentan a 0 € porque se reutilizan de impresoras 3D. No incluye cabezales ni tintas.
