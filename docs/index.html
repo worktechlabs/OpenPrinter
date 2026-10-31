@@ -80,6 +80,7 @@
   }
   @media (prefers-color-scheme: dark) { .viewer { background: linear-gradient(#262c34, #15191e); } }
   model-viewer { width: 100%; height: min(70vh, 620px); --poster-color: transparent; }
+  @media (max-width: 600px) { model-viewer { height: 340px; } }
   .viewer-note { padding: 10px 16px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
 
   section { padding: 56px 0 8px; }
@@ -163,7 +164,7 @@
   <div class="viewer" id="modelo">
     <model-viewer src="model/openprinter.glb" alt="Modelo 3D de OpenPrinter"
       camera-controls touch-action="pan-y" interaction-prompt="auto"
-      camera-orbit="-35deg 62deg auto" field-of-view="30deg"
+      camera-orbit="215deg 58deg auto" field-of-view="30deg"
       shadow-intensity="0.6" exposure="1.05" environment-image="neutral"
       poster="img/general.png" loading="eager">
     </model-viewer>
