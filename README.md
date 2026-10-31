@@ -112,6 +112,10 @@ diseño, está en [PLAN.md](PLAN.md).
 | **Carro impreso** con dos XP600 (maqueta) y ajuste de altura | **Mesa de vacío**: placa perforada sobre 4 cámaras con ventilador |
 | ![Unidad de presión](docs/img/presion.png) | ![Motor Y](docs/img/motor_y.png) |
 | **Unidad de presión** con leva de levante | **Motor Y** con reducción 4:1 |
+| ![Compartimento de tinta](docs/img/general_izquierda.png) | ![Depósitos](docs/img/tinta_interior.png) |
+| **Compartimento de tinta** por fuera de la placa izquierda | **Depósitos** C, M, Y, K y blanco sobre agitador |
+| ![Electrónica](docs/img/electronica.png) | ![Canaletas](docs/img/cableado.png) |
+| **Caja de electrónica y fuente** bajo la mesa | **Canaletas**, paneles de red y emergencia y cadena portacables |
 
 El modelo 3D completo está en [`docs/model/openprinter.glb`](docs/model/openprinter.glb)
 (GitHub lo muestra en 3D al abrirlo). En `docs/index.html` hay además una página de
@@ -127,24 +131,35 @@ gramos de filamento. Son estimaciones orientativas:
 | Fase | Lista | Aprox. |
 |---|---|---:|
 | 0 · mecánica | [MD](docs/compra_fase0.md) · [CSV](docs/compra_fase0.csv) | ~550 € |
-| 1 · movimiento | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~100 € |
+| 1 · movimiento, tinta y electrónica | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~160 € |
 
-La fase 1 cuenta a 0 € la placa de control, la Raspberry Pi, los motores y las
-correas, porque se reutilizan de impresoras 3D. Ninguna incluye cabezales ni
-tintas.
+La fase 1 cuenta a 0 € la placa de control, la Raspberry Pi, los motores, la
+fuente, las correas y el V-slot 2020, porque se reutilizan de impresoras 3D.
+Ninguna incluye cabezales ni tintas.
+
+**Comprar en Reino Unido**: [compra_uk.md](docs/compra_uk.md) tiene enlaces de
+Amazon UK, eBay UK y AliExpress, proveedores de perfil cortado a medida y el
+orden de compra recomendado.
 
 ## Cabezales y tinta
 
 - **Dos cabezales Epson XP600**: uno para CMYK y otro dedicado al blanco, con
   todos sus canales en blanco para que la capa base cubra bien. Con
   `HEAD_COUNT = 1` se obtiene una versión más barata de un solo cabezal.
-- **Tanques de tinta**: en un compartimento cerrado pegado a la placa izquierda
-  (volumen reservado), que formará parte de la cubierta, con tapa para rellenar
-  y ventana para ver el nivel. Así quedan protegidos del polvo y la luz, y la
-  tinta queda justo por debajo de las boquillas, como necesita la presión
-  negativa. Los tubos entran por un agujero de la placa y suben al carro por la
-  cadena portacables. El rack, la agitación y la recirculación del blanco se
-  diseñan en la fase 4.
+- **Tanques de tinta**: en un compartimento cerrado por fuera de la placa
+  izquierda, con marco de V-slot 2020, paneles de MDF, frontal de metacrilato
+  para ver los niveles y tapa para rellenar. Dentro, 4 depósitos de 250 ml
+  (C, M, Y, K) y el del blanco sobre un agitador magnético. El nivel medio de
+  tinta queda unos 40 mm por debajo de las boquillas. Los tubos suben pegados a
+  la placa con clips y entran por detrás hasta la cadena portacables, que los
+  lleva al carro. La regulación fina de presión y la recirculación del blanco
+  son de la fase 4.
+- **Electrónica y cables**: bajo la mesa de vacío, en una bandeja de MDF de lado
+  a lado. A la izquierda va una caja impresa con la placa de control, la
+  Raspberry Pi y los convertidores; a la derecha, la fuente de 24 V. Los cables
+  van ocultos en canaletas impresas, por la cadena portacables y por las
+  ranuras de los perfiles. Detrás está la entrada de red con fusible y delante
+  la seta de emergencia.
 - **Rollos de film**: van dentro del chasis, entre las dos placas y bajo la
   mesa. Con la cubierta (fase 6) quedan cerrados; el film DTF es sensible a la
   humedad, así que conviene un sobre de gel de sílice dentro y guardar el rollo
@@ -169,7 +184,7 @@ tintas.
 |---|---|
 | Ancho imprimible | 580 mm |
 | Recorrido del carro | 820 mm |
-| Dimensiones exteriores | ~1160 × 690 × 455 mm (sobremesa) |
+| Dimensiones exteriores | ~1380 × 725 × 480 mm (sobremesa, con compartimento de tinta y motor Y) |
 | Guías | 2 × MGN12, 1000 mm |
 | Placas laterales | 2 × MDF de 19 mm, 690 × 430 mm (aluminio de 10 mm en la versión final) |
 
@@ -215,7 +230,9 @@ cad/
 ├── yfeed.py      arrastre Y (0.6)
 ├── rolls.py      rollos y guías (0.7)
 ├── service.py    estación de servicio y reserva de tinta (0.8)
-├── motion.py     encoders, final de carrera, cadena y electrónica (fase 1)
+├── motion.py     encoders, final de carrera y cadena portacables (fase 1)
+├── wiring.py     electrónica, fuente, paneles y canaletas (fase 1)
+├── ink.py        compartimento de tinta (fase 1, depósitos de la fase 4)
 ├── bom.py        lista de compra
 ├── render_pv.py  renders de presentación
 ├── web.py        modelo 3D de la web

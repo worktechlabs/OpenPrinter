@@ -98,7 +98,7 @@ Y_BELT_W = 6
 
 # Fase 1: sensores y cableado
 ENC_STRIP_Y = -104          # cinta del encoder X (cara delantera de la viga, entre guías)
-ENC_STRIP_Z = (75, 85)      # 10 mm de alto, entre los patines superior e inferior
+ENC_STRIP_Z = (74, 86)      # 12 mm (cinta de 15 mm recortada), entre los patines
 ENC_STRIP_X = (-545, 545)
 ENC_SENSOR_Z = (72, 90)
 GRIT_SHAFT_OUT_L = 13       # el eje del rodillo sale por fuera de la placa izquierda (encoder Y)
@@ -106,13 +106,28 @@ CHAIN_W, CHAIN_H = 27, 15   # cadena portacables exterior (interior 10 x 20)
 CHAIN_R = 18                # radio de curvatura (cadenas 10 x 20 comerciales: R18)
 CHAIN_FIX_X = 5             # anclaje fijo, centro del recorrido
 CHAIN_Y = (-187, -160)
-CHAIN_TRAY_X = (-470, 40)
-ELEC_PLATE = (-280, 200, -60, 100)   # placa de montaje de la electrónica X0, X1, Y0, Y1
+CHAIN_TRAY_X = (-560, 40)     # llega a la placa izquierda: canaleta y tubos de tinta
+ELEC_PLATE = (-545, 555, -60, 100)   # bandeja inferior: apoya en los largueros laterales y el central
 
-# Tinta (fase 4): rack de tanques por fuera de la placa izquierda, nivel por
-# debajo de las boquillas. C, M, Y, K y blanco con agitación/recirculación.
-INK_RACK = (120, (0, 230), (-240, -40))   # fondo en X, rango Y, rango Z
-INK_TUBE_HOLE = (-185, 90, 20)             # paso de tubos en las placas (Y, Z, Ø)
+# Tinta: compartimento cerrado por fuera de la placa izquierda (marco de V-slot
+# 2020 del inventario, paneles de MDF 6 mm y frontal de metacrilato). El nivel
+# medio de tinta queda unos 40 mm por debajo de las boquillas.
+INK_BOX_DEPTH = 120                 # hacia fuera de la placa (X)
+INK_BOX_Y = (-40, 210)            # deja libres las cabezas M8 de los travesaños de mesa
+INK_BOX_Z = (-125, 55)
+INK_PANEL_T = 6
+INK_TANK = (70, 40, 120)            # depósito de color: X, Y, Z (~250 ml útiles)
+INK_TANK_WHITE = (70, 55, 100)      # depósito de blanco, sobre agitador magnético
+INK_STIRRER_H = 25
+INK_COLORS = ("C", "M", "Y", "K", "W")
+INK_TUBE_HOLE = (-185, 102, 20)     # paso de tubos en las placas, sobre la bandeja de la cadena (Y, Z, Ø)
+
+# Electrónica: placa de MDF sobre el travesaño central, bajo la mesa
+ELEC_PLATE_T = 10
+PSU_SIZE = (215, 115, 50)           # fuente de 24 V del inventario (medir la real)
+SKR_SIZE = (101.5, 72)              # BTT SKR Mini E3 V3.0
+PI_SIZE = (85, 56)                  # Raspberry Pi 3
+CABLE_DUCT = (20, 15)               # canaleta impresa: ancho, alto
 
 REAR_GUIDE_D = 25
 REAR_GUIDE_Y = -200

@@ -76,7 +76,9 @@ OpenPrinter/
 │   ├── yfeed.py       arrastre Y (fase 0.6): rodillo, presión, levante, motor Y
 │   ├── rolls.py       rollos y guías (fase 0.7)
 │   ├── service.py     estación de servicio y reserva de tinta (fase 0.8)
-│   ├── motion.py      sensores, cadena y electrónica (fase 1)
+│   ├── motion.py      sensores y cadena portacables (fase 1)
+│   ├── wiring.py      electrónica, fuente, paneles y canaletas (fase 1)
+│   ├── ink.py         compartimento de tinta (fase 1)
 │   ├── bom.py         listas de compra
 │   ├── render_pv.py   renders de presentación
 │   ├── web.py         modelo 3D de la web

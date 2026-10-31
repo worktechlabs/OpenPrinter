@@ -9,14 +9,13 @@
   por fuera de la placa izquierda.
 - Cadena portacables X: bandeja impresa detrás de la viga, anclaje fijo en el
   centro del recorrido y brazo impreso sobre la pinza de correa del carro.
-- Electrónica: placa de montaje sobre el travesaño central, bajo la mesa.
 """
 import cadquery as cq
 
 import params as P
 import xaxis
 import yfeed
-from lib import (ALU, BELT, MOTOR, PLATEN, PRINTED, PRINTED_ALT, RUBBER, STEEL, box, rod_x,
+from lib import (BELT, MOTOR, PRINTED, PRINTED_ALT, RUBBER, STEEL, box, rod_x,
                  rod_y, rod_z)
 
 YF, YB = P.BEAM_Y_FRONT, P.BEAM_Y_BACK
@@ -168,25 +167,6 @@ def chain_arm(cx=0.0):
     return body
 
 
-# --- Electrónica ------------------------------------------------------------
-
-def electronics():
-    x0, x1, y0, y1 = P.ELEC_PLATE
-    z = P.FRAME_Z[0] + P.PROFILE            # cara superior del travesaño central
-    plate = box(x0, x1, y0, y1, z, z + 3)
-    for x in (x0 + 40, (x0 + x1) / 2, x1 - 40):
-        plate = plate.cut(rod_z(z - 1, z + 4, x, 0, 5.5))
-    zt = z + 3
-    parts = {
-        "fuente_24v": (box(-270, -55, -40, 75, zt, zt + 30), ALU),
-        "placa_control": (box(-40, 120, -45, 55, zt + 6, zt + 28), PRINTED_ALT),
-        "raspberry_pi": (box(135, 191, -45, 40, zt + 6, zt + 26), PRINTED_ALT),
-        "pico_encoder": (box(177, 198, 45, 96, zt + 6, zt + 10), PRINTED_ALT),
-        "conversor_5v": (box(135, 172, 50, 80, zt, zt + 15), MOTOR),
-    }
-    return plate, parts
-
-
 def plate_holes():
     """Agujeros en las placas laterales: soporte del encoder Y (en ambas)."""
     return [(GY + dy, GZ, 3.4) for dy in (-22, 22)]
@@ -228,7 +208,3 @@ def add(assy, cx):
     assy.add(chain(cx), name="cadena_portacables", color=BELT)
     assy.add(chain_arm(cx), name="cadena_brazo", color=PRINTED)
 
-    plate, parts = electronics()
-    assy.add(plate, name="electronica_placa", color=PLATEN)
-    for name, (shape, color) in parts.items():
-        assy.add(shape, name=f"electronica_{name}", color=color)

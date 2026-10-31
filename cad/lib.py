@@ -20,12 +20,12 @@ PRINTED_ALT = cq.Color(0.20, 0.70, 0.45, 1)   # piezas impresas, segundo color
 MOTOR = cq.Color(0.12, 0.12, 0.14, 1)
 BELT = cq.Color(0.10, 0.10, 0.10, 1)
 
-# Ranura del perfil serie 40, ranura 8 (simplificada)
-SLOT_OPEN = 8.2       # boca de la ranura
-SLOT_LIP = 4.0        # espesor del labio
-SLOT_INNER = 16.0     # ancho de la cámara interior
-SLOT_DEPTH = 12.0     # profundidad total
-CORE_BORE = 6.8       # taladro central (roscar M8)
+# Ranura simplificada por serie de perfil: boca, labio, cámara, profundidad y
+# taladro central. Serie 40 ranura 8 (roscar M8); serie 20 ranura 6 (roscar M5).
+SLOTS = {
+    40: dict(open=8.2, lip=4.0, inner=16.0, depth=12.0, bore=6.8),
+    20: dict(open=6.2, lip=1.8, inner=11.0, depth=6.0, bore=4.2),
+}
 
 
 def box(x0, x1, y0, y1, z0, z1):
@@ -62,22 +62,24 @@ def strip_yz(points, x0, x1, t=0.8):
     return solid
 
 
-def _profile_section(nu, nv):
-    """Sección de perfil 40·nu x 40·nv centrada en el origen (plano local uv)."""
-    w, h = 40 * nu, 40 * nv
+def _profile_section(nu, nv, pitch=40):
+    """Sección de perfil pitch·nu x pitch·nv centrada en el origen (plano local uv)."""
+    sl = SLOTS[pitch]
+    half = pitch / 2
+    w, h = pitch * nu, pitch * nv
     sec = cq.Sketch().rect(w, h)
     slots = []
     for i in range(nu):
-        u = -w / 2 + 20 + 40 * i
+        u = -w / 2 + half + pitch * i
         for sign in (-1, 1):
             slots.append((u, sign * h / 2, False))
     for j in range(nv):
-        v = -h / 2 + 20 + 40 * j
+        v = -h / 2 + half + pitch * j
         for sign in (-1, 1):
             slots.append((sign * w / 2, v, True))
     for u, v, vertical in slots:
         # boca + cámara, orientadas hacia el exterior de la cara
-        for width, d0, d1 in ((SLOT_OPEN, 0, SLOT_LIP), (SLOT_INNER, SLOT_LIP, SLOT_DEPTH)):
+        for width, d0, d1 in ((sl["open"], 0, sl["lip"]), (sl["inner"], sl["lip"], sl["depth"])):
             depth = d1 - d0
             mid = (d0 + d1) / 2
             if vertical:
@@ -86,23 +88,23 @@ def _profile_section(nu, nv):
             else:
                 cv = v - math.copysign(mid, v)
                 sec = sec.push([(u, cv)]).rect(width, depth, mode="s").reset()
-    centers = [(-w / 2 + 20 + 40 * i, -h / 2 + 20 + 40 * j)
+    centers = [(-w / 2 + half + pitch * i, -h / 2 + half + pitch * j)
                for i in range(nu) for j in range(nv)]
-    return sec.push(centers).circle(CORE_BORE / 2, mode="s").reset()
+    return sec.push(centers).circle(sl["bore"] / 2, mode="s").reset()
 
 
-def profile(axis, length, start, center, size=(1, 1)):
-    """Perfil de aluminio serie 40.
+def profile(axis, length, start, center, size=(1, 1), pitch=40):
+    """Perfil de aluminio de la serie 40 (por defecto) o 20 (pitch=20).
 
     axis: "x", "y" o "z" (dirección del perfil)
     start: coordenada inicial a lo largo del eje
     center: centro de la sección en las otras dos coordenadas, en orden
             (y, z) para "x", (x, z) para "y", (x, y) para "z"
-    size: múltiplos de 40 de la sección, en el mismo orden que center
+    size: múltiplos de pitch de la sección, en el mismo orden que center
     """
     a, b = center
     nu, nv = size
-    sec = _profile_section(nu, nv)
+    sec = _profile_section(nu, nv, pitch)
     if axis == "x":
         wp = cq.Workplane("YZ").placeSketch(sec).extrude(length)
         return wp.translate((start, a, b))

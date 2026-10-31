@@ -53,10 +53,27 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Placa de montaje de la electrónica | MDF 10 mm, 480 x 160 mm | 1 | 3 | de un recorte del tablero de las placas |
+| Bandeja inferior de electrónica | MDF 10 mm, 1100 x 160 mm | 1 | 4 | apoya en los largueros laterales y el central |
+| Convertidor 24 V a 12 V | 3 A | 1 | 4 | ventiladores 4010 de la caja de electrónica |
+| Tapa de ranura 8 mm | 2 m | 1 | 6 | cables de sensores por las ranuras de la viga |
+| Bridas y portabridas adhesivos |  | 1 | 4 |  |
 | Separadores M3 de nylon | 6 mm | 16 | 2 |  |
 | Tuerca en T M5 + tornillo M5 |  | 11 | 3 | placa de electrónica y bandeja |
 | Inserto térmico M3 + tornillo M3 |  | 12 | 2 | soportes de sensores y brazo |
+
+## Compartimento de tinta
+
+| Artículo | Especificación | Cant. | € aprox. | Notas |
+|---|---|---:|---:|---|
+| Perfil 2020 V-slot | 180 mm, montante del compartimento de tinta | 4 | 0 | del inventario (V-slot 2020) |
+| Perfil 2020 V-slot | 210 mm, larguero del compartimento de tinta | 4 | 0 | del inventario (V-slot 2020) |
+| Perfil 2020 V-slot | 80 mm, travesaño del compartimento de tinta | 4 | 0 | del inventario (V-slot 2020) |
+| Escuadras 2020 + tuercas en T M5 |  | 16 | 0 | del inventario |
+| MDF 6 mm | paneles delantero, trasero y tapa | 1 | 4 |  |
+| Metacrilato 3 mm | 262 x 180 mm | 1 | 8 | panel exterior para ver los niveles |
+| Depósito de tinta tipo CISS | 250 ml | 5 | 15 | fase 4; el de blanco, más ancho |
+| Agitador magnético mini + imán |  | 1 | 12 | fase 4, bajo el blanco |
+| Tubo de tinta 3 x 2 mm | 5 m | 1 | 6 | fase 4 |
 
 ## Piezas impresas
 
@@ -70,16 +87,23 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 | `final_x_bandera` | 1 | 1 | 1 |
 | `final_x_soporte` | 1 | 3 | 3 |
 | `encoder_y_soporte` | 1 | 7 | 7 |
-| `cadena_bandeja` | 2 | 58 | 116 |
+| `cadena_bandeja` | 2 | 68 | 136 |
 | `cadena_brazo` | 1 | 18 | 18 |
-| **Total** | | | **167 g** |
+| `tinta_bandeja` | 1 | 76 | 76 |
+| `tinta_clip_tubos` | 2 | 2 | 5 |
+| `electronica_caja` | 1 | 109 | 109 |
+| `electronica_brida_fuente` | 2 | 9 | 18 |
+| `panel_iec` | 1 | 21 | 21 |
+| `panel_seta` | 1 | 25 | 25 |
+| `canaleta_tramo_200` | 12 | 46 | 549 |
+| **Total** | | | **990 g** |
 
 ## Resumen
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 98 |
-| Filamento (~0.2 kg a 20 €/kg) | 3 |
-| **Total fase 1** | **101** |
+| Material comprado | 158 |
+| Filamento (~1.0 kg a 20 €/kg) | 20 |
+| **Total fase 1** | **178** |
 
 Las placas, la Raspberry Pi, los motores y las correas se cuentan a 0 € porque se reutilizan de impresoras 3D. No incluye cabezales ni tintas.

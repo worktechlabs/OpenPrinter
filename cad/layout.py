@@ -10,14 +10,16 @@ import cadquery as cq
 
 import carriage
 import chassis
+import ink
 import motion
 import params as P
 import platen
 import rolls
 import service
+import wiring
 import xaxis
 import yfeed
-from lib import ENVELOPE, FILM, RESERVED, box, strip_yz
+from lib import ENVELOPE, FILM, box, strip_yz
 
 OUT = Path(__file__).resolve().parent.parent / "out"
 
@@ -37,6 +39,8 @@ def media_path(assy):
     yfeed.add(assy)
     rolls.add(assy)
     service.add(assy)
+    ink.add(assy)
+    wiring.add(assy)
     fw = P.FILM_WIDTH
     # Elevado 0,3 mm para que no coincida con la cara de la mesa en los renders
     film = strip_yz(rolls.film_path(), -fw / 2, fw / 2).translate((0, 0, 0.3))
@@ -56,7 +60,8 @@ def export_printed(folder):
     folder.mkdir(exist_ok=True)
     parts = {**xaxis.printed_parts(), **carriage.printed_parts(),
              **platen.printed_parts(), **yfeed.printed_parts(),
-             **rolls.printed_parts(), **service.printed_parts(), **motion.printed_parts()}
+             **rolls.printed_parts(), **service.printed_parts(), **motion.printed_parts(),
+             **ink.printed_parts(), **wiring.printed_parts()}
     for name, part in parts.items():
         cq.exporters.export(part, str(folder / f"{name}.stl"), tolerance=0.05, angularTolerance=0.1)
         bb = part.val().BoundingBox()

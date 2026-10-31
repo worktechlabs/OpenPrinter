@@ -12,11 +12,13 @@ import cadquery as cq
 
 import carriage
 import chassis
+import ink
 import motion
 import params as P
 import platen
 import rolls
 import service
+import wiring
 import xaxis
 import yfeed
 
@@ -39,6 +41,9 @@ PRINTED_QTY_F1 = {
     "encoder_soporte_cinta_izq": 1, "encoder_soporte_cinta_der": 1, "encoder_soporte_sensor": 1,
     "final_x_bandera": 1, "final_x_soporte": 1, "encoder_y_soporte": 1,
     "cadena_bandeja": 2, "cadena_brazo": 1,
+    "tinta_bandeja": 1, "tinta_clip_tubos": len(ink.CLIP_POINTS),
+    "electronica_caja": 1, "electronica_brida_fuente": 2, "panel_iec": 1, "panel_seta": 1,
+    "canaleta_tramo_200": math.ceil(wiring.duct_length() / 200),
 }
 REUSED = "reutilizable de impresora 3D"
 
@@ -162,11 +167,27 @@ def items_fase1():
         ("Alimentación", "Convertidor 24 V a 5 V", "5 A", 1, 8, "Raspberry Pi y Pico"),
         ("Alimentación", "Seta de emergencia NC", "22 mm, con caja", 1, 8, "corta los 24 V de los motores"),
         ("Alimentación", "Conector IEC con interruptor y fusible", "", 1, 5, ""),
-        ("Montaje", "Placa de montaje de la electrónica", f"MDF 10 mm, {x1 - x0} x {y1 - y0} mm",
-         1, 3, "de un recorte del tablero de las placas"),
+        ("Montaje", "Bandeja inferior de electrónica", f"MDF 10 mm, {x1 - x0} x {y1 - y0} mm",
+         1, 4, "apoya en los largueros laterales y el central"),
+        ("Montaje", "Convertidor 24 V a 12 V", "3 A", 1, 4, "ventiladores 4010 de la caja de electrónica"),
+        ("Montaje", "Tapa de ranura 8 mm", "2 m", 1, 6, "cables de sensores por las ranuras de la viga"),
+        ("Montaje", "Bridas y portabridas adhesivos", "", 1, 4, ""),
         ("Montaje", "Separadores M3 de nylon", "6 mm", 16, 0.1, ""),
         ("Montaje", "Tuerca en T M5 + tornillo M5", "", 3 + 2 * 4, 0.3, "placa de electrónica y bandeja"),
         ("Montaje", "Inserto térmico M3 + tornillo M3", "", 12, 0.15, "soportes de sensores y brazo"),
+    ] + [
+        ("Compartimento de tinta", f"Perfil {sec}", f"{length:.0f} mm, {name.lower()}", qty, 0,
+         "del inventario (V-slot 2020)")
+        for name, sec, length, qty in ink.cut_list()
+    ] + [
+        ("Compartimento de tinta", "Escuadras 2020 + tuercas en T M5", "", 16, 0, "del inventario"),
+        ("Compartimento de tinta", "MDF 6 mm", "paneles delantero, trasero y tapa", 1, 4, ""),
+        ("Compartimento de tinta", "Metacrilato 3 mm", f"{P.INK_BOX_Y[1] - P.INK_BOX_Y[0] + 12} x "
+         f"{P.INK_BOX_Z[1] - P.INK_BOX_Z[0]} mm", 1, 8, "panel exterior para ver los niveles"),
+        ("Compartimento de tinta", "Depósito de tinta tipo CISS", "250 ml", len(P.INK_COLORS), 3,
+         "fase 4; el de blanco, más ancho"),
+        ("Compartimento de tinta", "Agitador magnético mini + imán", "", 1, 12, "fase 4, bajo el blanco"),
+        ("Compartimento de tinta", "Tubo de tinta 3 x 2 mm", "5 m", 1, 6, "fase 4"),
     ]
 
 
@@ -176,7 +197,8 @@ def printed_mass(phase=0):
                  **yfeed.printed_parts(), **rolls.printed_parts(), **service.printed_parts()}
         qtys = PRINTED_QTY
     else:
-        parts, qtys = motion.printed_parts(), PRINTED_QTY_F1
+        parts = {**motion.printed_parts(), **ink.printed_parts(), **wiring.printed_parts()}
+        qtys = PRINTED_QTY_F1
     out = []
     for name, part in parts.items():
         qty = qtys[name]

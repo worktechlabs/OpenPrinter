@@ -152,21 +152,48 @@ comprobando el esquema oficial de la placa.
 - **Cadena portacables X**: en una bandeja impresa detrás de la viga. Va
   anclada en el centro del recorrido y sube hasta un brazo impreso que sale de
   la pinza de correa del carro, por encima de la viga.
-- **Electrónica**: en una placa de montaje bajo la mesa de vacío, atornillada
-  al travesaño central, con la fuente, la Octopus, la Raspberry Pi y el
-  convertidor de 5 V.
+- **Electrónica** (`cad/wiring.py`): bandeja de MDF de 10 mm de lado a lado
+  bajo la mesa de vacío, apoyada en los dos largueros laterales y en el
+  travesaño central.
+  - A la izquierda, una **caja impresa** con la SKR Mini E3 V3.0, la Raspberry
+    Pi 3, el Pico y los convertidores a 5 V y 12 V, con dos ventiladores 4010 en
+    la tapa y rejilla en el frente.
+  - A la derecha, la **fuente de 24 V**, sujeta con dos bridas impresas. Sus
+    medidas están en `PSU_SIZE` (215 × 115 × 50 mm de referencia): mide la tuya.
+- **Paneles**: entrada de red IEC C14 con interruptor y fusible en el larguero
+  trasero, y seta de emergencia en el larguero delantero.
+- **Cables ocultos**:
+  - Canaleta impresa con tapa por el borde trasero de la bandeja, sobre los
+    largueros laterales y por la cara interior de las placas.
+  - Por la izquierda suben hasta la bandeja de la cadena portacables (carro,
+    motor X, tubos de tinta) y hasta el encoder Y; por la derecha, hasta el
+    motor Y. Las placas llevan sus pasos de cable.
+  - Los cables sueltos de sensores (final de carrera, palanca de presión) van
+    por las ranuras de los perfiles con tapa de ranura.
+- **Compartimento de tinta** (`cad/ink.py`): por fuera de la placa izquierda,
+  con marco de V-slot 2020 del inventario, paneles de MDF de 6 mm, frontal de
+  metacrilato y tapa abatible. Dentro, una bandeja impresa con 4 depósitos de
+  250 ml (C, M, Y, K) y el del blanco sobre un agitador magnético. Los tubos
+  salen por la tapa, suben pegados a la placa con clips impresos y entran por
+  detrás hasta la bandeja de la cadena. El nivel medio de tinta queda unos
+  40 mm por debajo de las boquillas.
 
 | | |
 |---|---|
 | ![Carro por detrás](img/carro_trasera.png) | ![Cadena portacables](img/cadena.png) |
 | Sensor del encoder X entre los patines y bandera del final de carrera | Cadena portacables en su bandeja detrás de la viga |
 | ![Encoder Y](img/encoder_y.png) | ![Electrónica](img/electronica.png) |
-| Encoder Y: AS5047P frente al imán en la punta del eje del rodillo | Placa de electrónica: fuente, placa de control, Raspberry Pi, Pico y 5 V |
+| Encoder Y: AS5047P frente al imán en la punta del eje del rodillo | Caja de electrónica y fuente de 24 V sobre la bandeja inferior |
+| ![Dentro de la caja](img/electronica_interior.png) | ![Canaletas](img/cableado.png) |
+| SKR Mini E3 V3.0, Raspberry Pi 3, Pico y convertidores | Canaletas, paneles de red y emergencia, cadena y compartimento de tinta |
+| ![Compartimento de tinta](img/tinta.png) | ![Depósitos](img/tinta_interior.png) |
+| Compartimento de tinta cerrado | Depósitos C, M, Y, K y blanco sobre el agitador |
 
-Piezas impresas de esta fase (STL en `out/stl/`): soportes de la cinta del
-encoder (2), soporte del sensor del encoder, bandera y soporte del final de
-carrera, soporte del encoder Y, bandeja de la cadena (2) y brazo de la cadena.
-Unos 200 g de filamento en total.
+Piezas impresas de esta fase (STL en `out/stl/`): soportes del encoder X, final
+de carrera, soporte del encoder Y, bandeja y brazo de la cadena, caja de
+electrónica, bridas de la fuente, paneles IEC y de emergencia, canaletas,
+bandeja de la tinta y clips de los tubos. Algo menos de 1 kg de filamento; las
+cantidades exactas están en [compra_fase1.md](compra_fase1.md).
 
 ## Pruebas de la fase 1
 

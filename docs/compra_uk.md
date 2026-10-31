@@ -1,4 +1,4 @@
-# Compra en Amazon UK (fases 0 y 1)
+# Compra en Reino Unido: Amazon, eBay y AliExpress (fases 0 y 1)
 
 Búsqueda hecha en amazon.co.uk el 31/10/2026. Los precios cambian a diario y
 son los que mostraba la página ese día; compruébalos antes de comprar. No
@@ -93,6 +93,42 @@ bolas.
 Pendientes de buscar: sensor óptico de horquilla, TCRT5000, seta de emergencia,
 conector IEC con fusible, insertos térmicos y surtido de tornillería
 M3/M4/M5/M8.
+
+## Opciones en eBay UK
+
+Búsqueda del 31/10/2026. En eBay muchos anuncios muestran el precio de la
+variante más corta: elige la longitud en el anuncio antes de comparar.
+
+| Pieza | Producto | Precio | Nota |
+|---|---|---:|---|
+| **Cinta de encoder 180 LPI** | [180 LPI, 4200 × 15 mm](https://www.ebay.co.uk/itm/277741169799) | £11.99 | Sobra para varias máquinas. **Recórtala a 12 mm de ancho** (las líneas van de lado a lado, así que se puede): entre los patines hay 13 mm |
+| Cinta de encoder 180 LPI (alternativa) | [180 LPI, 5000 × 15 mm](https://www.ebay.co.uk/itm/196506685389) | £28.80 | |
+| Perfil 4040 ranura 8 cortado a medida | [4040 T-slot, 100–6000 mm](https://www.ebay.co.uk/itm/404798095657) | desde £47.50 | Vendedor con pocas valoraciones: pide antes confirmación de corte a escuadra |
+| Perfil 4040 ranura 8 (hasta 1100 mm) | [4040 T-slot, 100–1100 mm](https://www.ebay.co.uk/itm/303522567590) | desde £3.50 | Vale para los largueros de 690 y 1060 mm, no para los de 1140 |
+| Perfil 4040 compatible Item | [4040 negro anodizado](https://www.ebay.co.uk/itm/303727531954) | desde £3.60 | Comprobar la longitud máxima |
+| Perfil 4080 ranura 8 | [4080 T-slot + accesorios](https://www.ebay.co.uk/itm/305167168603) | desde £4.00 | Comprobar que corte 1140 mm |
+| Barra de acero calibrada Ø12 y Ø8 (EN1A) | [Bright mild steel 4–40 mm, cortada](https://www.ebay.co.uk/itm/271621202226) | desde £4.54 | **Solo hasta 1000 mm**: para los ejes de 1,2 m hace falta un almacén de metal (Metals4U o similar) |
+
+## Opciones en AliExpress
+
+Más barato y tarda 1–3 semanas. AliExpress cobra el IVA en el precio final
+para Reino Unido. Los precios que muestra la búsqueda son los de la variante
+más corta.
+
+| Pieza | Dónde mirar | Nota |
+|---|---|---|
+| Guías MGN12 1000 mm + patín | [MGN12 1000 mm + 2 patines](https://www.aliexpress.com/item/1005002762351926.html) · [MGN12 + MGN12H, 800–1100 mm](https://www.aliexpress.com/item/1005004553699955.html) | Elige 1000 mm y patín H, ya montado en la guía |
+| AS5047P + imán | [Buscar AS5047P](https://www.aliexpress.com/w/wholesale-AS5047P-encoder.html) | Que traiga el imán diametral de 6 mm |
+| Sensor de encoder 180 LPI | [Buscar H9730](https://www.aliexpress.com/w/wholesale-H9730-encoder-sensor-180-lpi.html) | Misma resolución que la cinta (180 LPI) |
+| Polea GT2 80T eje 12, rodamientos, insertos, tuercas en T, tornillería | Búsqueda directa | Suele salir a la mitad que en Amazon |
+
+## Orden de compra recomendado
+
+1. **Ya:** perfiles cortados a medida y MDF, para montar el chasis.
+2. **Ya, desde AliExpress:** guías y patines MGN12, AS5047P, sensor de
+   encoder. La cinta de encoder, en eBay UK.
+3. **Al montar:** rodamientos, poleas, ventiladores, tornillería y el resto,
+   donde salga mejor de precio.
 
 ## Resumen orientativo
 
