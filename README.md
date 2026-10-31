@@ -90,8 +90,8 @@ diseño, está en [PLAN.md](PLAN.md).
 | 0.2 | Chasis (placas laterales, bastidor 4040) | Hecho, falta validar con proveedor |
 | 0.3 | Viga X (guías MGN12, motor, tensor, correa) | Primera versión |
 | 0.4 | Carro impreso con ajuste de altura | Primera versión, faltan cotas reales del XP600 |
-| 0.5 | Mesa de vacío | Pendiente |
-| 0.6 | Arrastre Y (rodillo y rodillos de presión) | Pendiente |
+| 0.5 | Mesa de vacío (4 zonas con ventilador) | Primera versión |
+| 0.6 | Arrastre Y (rodillo, presión con levante, motor 4:1) | Primera versión |
 | 0.7 | Rollos de entrada y recogida | Pendiente |
 | 0.8 | Estación de servicio (volumen reservado) | Pendiente |
 
@@ -124,6 +124,7 @@ Se genera en `out/` (no se versiona):
 |---|---|
 | `layout.step`, `layout.glb` | Ensamblaje completo, para FreeCAD, Fusion, etc. |
 | `placa_lateral.dxf` | Placa lateral, lista para cortar |
+| `mesa_placa.dxf` | Placa perforada de la mesa de vacío |
 | `lista_corte.csv` | Perfiles con longitudes y mecanizados |
 | `stl/*.stl` | Piezas impresas |
 | `layout_*.png` | Vistas rápidas |
@@ -138,6 +139,8 @@ cad/
 ├── chassis.py    chasis (0.2)
 ├── xaxis.py      viga X (0.3)
 ├── carriage.py   carro (0.4)
+├── platen.py     mesa de vacío (0.5)
+├── yfeed.py      arrastre Y (0.6)
 └── render.py     vistas PNG
 ```
 

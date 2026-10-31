@@ -24,7 +24,15 @@ VIEWS = {
                                              "viga", "escuadra", "pata")),
     "carro": dict(elev=20, azim=115, only=("carro", "patin", "cabezal")),
     "carro_trasera": dict(elev=30, azim=-70, only=("carro", "patin", "cabezal")),
-    "motor_x": dict(elev=35, azim=-60, only=("soporte_motor", "motor_x", "polea_motor")),
+    "motor_x": dict(elev=35, azim=-60, only=("soporte_motor_x", "motor_x", "polea_motor")),
+    "mesa": dict(elev=35, azim=120, only=("mesa_placa", "mesa_camara", "ventilador")),
+    "mesa_camara": dict(elev=55, azim=110, only=("mesa_camara_1",)),
+    "presion": dict(elev=15, azim=30, only=tuple(f"presion_{p}_2" for p in
+                                                  ("soporte", "brazo", "rueda", "leva", "muelle"))),
+    "presion_lateral": dict(elev=0, azim=0, only=tuple(f"presion_{p}_2" for p in
+                                                        ("brazo", "rueda", "leva", "muelle"))),
+    "motor_y": dict(elev=20, azim=30, only=("soporte_motor_y", "motor_y", "polea_80t", "polea_20t",
+                                            "correa_y", "presion_palanca")),
 }
 
 

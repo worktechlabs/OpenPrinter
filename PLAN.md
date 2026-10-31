@@ -35,8 +35,8 @@ piezas impresas en 3D y, más adelante, electrónica abierta (Raspberry Pi + MCU
 | 0.2 | Chasis | Bastidor 4040, placas laterales, patas niveladoras | Hecho (pendiente validar con proveedor de corte) |
 | 0.3 | Viga X | Viga 4080, 2 guías MGN12, soporte de motor y tensor impresos, correa GT2 | Primera versión, en revisión |
 | 0.4 | Carro | Placa, bandeja de cabezales con ajuste de altura y pinza de correa, impresos | Primera versión, en revisión |
-| 0.5 | Mesa (platen) | Placa perforada, cámara de vacío por segmentos imprimibles | Pendiente |
-| 0.6 | Arrastre Y | Rodillo de arrastre, rodillos de presión con palanca de levante | Pendiente |
+| 0.5 | Mesa (platen) | Placa perforada de aluminio, 4 cámaras de vacío impresas con ventilador | Primera versión, en revisión |
+| 0.6 | Arrastre Y | Rodillo, 6 unidades de presión impresas con levante por levas, motor Y 4:1 | Primera versión, en revisión |
 | 0.7 | Rollos | Eje desbobinador con freno, eje de recogida, guías de film | Pendiente |
 | 0.8 | Estación de servicio | Solo volumen reservado (capping, limpiador, purga) | Pendiente |
 
@@ -66,6 +66,8 @@ OpenPrinter/
 │   ├── chassis.py     chasis (fase 0.2): placas, bastidor, DXF y lista de corte
 │   ├── xaxis.py       viga X (fase 0.3): guías, motor, tensor, correa
 │   ├── carriage.py    carro (fase 0.4): placa, bandeja de cabezales, pinza
+│   ├── platen.py      mesa de vacío (fase 0.5): placa perforada, cámaras
+│   ├── yfeed.py       arrastre Y (fase 0.6): rodillo, presión, levante, motor Y
 │   ├── render.py      vistas PNG rápidas
 │   └── ...            un módulo por bloque a medida que se detallen
 └── out/               STEP / STL / vistas generadas (no se versiona)
@@ -84,6 +86,7 @@ Genera en `out/`:
 
 - `layout.step` / `layout.glb`: ensamblaje completo (FreeCAD, Fusion, etc.)
 - `placa_lateral.dxf`: contorno y agujeros de las placas laterales, para corte
+- `mesa_placa.dxf`: placa superior perforada de la mesa de vacío, para corte
 - `lista_corte.csv`: perfiles a cortar con longitudes y mecanizados
 - `stl/*.stl`: piezas impresas, listas para el laminador
 - `layout_*.png`: vistas rápidas
@@ -137,6 +140,49 @@ Todo impreso (PETG o ASA en fase 0; PA-CF o aluminio si hace falta más rigidez)
   se debe imprimir en definitiva; sí sirve como prototipo de ajuste.
 - El volumen reservado sobre los cabezales es para dampers, tubos de tinta y la
   cadena portacables.
+
+## Mesa de vacío (0.5)
+
+- Placa superior de aluminio de 3 mm, 640 × 225 mm, con unos 800 agujeros de
+  2 mm a paso de 12,5 mm (DXF). Va atornillada con M3 avellanados a insertos.
+- Debajo, 4 cámaras impresas iguales de 160 × 225 × 37 mm (`mesa_camara.stl`,
+  imprimir 4). Tienen pilares que sostienen la placa para que no se hunda.
+- Cada cámara lleva su ventilador de 80 mm debajo, entre los dos travesaños.
+  Son 4 zonas independientes: con film más estrecho se apagan las de los lados.
+- Las cámaras se atornillan a los travesaños de mesa (M5 con tuerca en T). Las
+  juntas se sellan con cinta de espuma.
+
+## Arrastre Y (0.6)
+
+- **Rodillo**: tubo de Ø30 mm sobre eje de Ø12 que gira en rodamientos 6001
+  alojados en las placas. La superficie lleva recubrimiento abrasivo (grit) o
+  goma fina; hay que probar cuál agarra mejor el PET sin marcarlo.
+- **Presión**: 6 unidades impresas colgadas de la ranura inferior de la viga
+  (M5). Cada una tiene:
+  - un soporte con dos mejillas;
+  - un brazo basculante sobre un pasador M3;
+  - una rueda de TPU sobre un rodamiento 625 (eje M5);
+  - un muelle de compresión de Ø6 bajo la cola del brazo, que hace bajar la
+    rueda contra el rodillo.
+- **Levante**: un eje de Ø8 atraviesa todas las unidades y las dos placas, con
+  una leva excéntrica impresa por unidad. Con la palanca exterior, las levas
+  empujan la cola de los brazos y las ruedas suben unos 2 mm para meter el film.
+- **Motor Y**: NEMA17 en un soporte impreso por fuera de la placa derecha, con
+  reducción 4:1 por correa GT2 de 6 mm (20T a 80T). Teóricamente da unos
+  7 µm por micropaso (1/16); la precisión real la dará un encoder en el rodillo
+  (fase 1). Los colisos del soporte sirven para tensar la correa.
+- Las dos placas laterales llevan los agujeros del motor Y y del eje de
+  levante. El motor se puede montar a cualquier lado.
+
+| Pieza impresa | Cantidad | Material |
+|---|---|---|
+| `mesa_camara` | 4 | PETG |
+| `presion_soporte` | 6 | PETG/ASA |
+| `presion_brazo` | 6 | PETG/ASA |
+| `presion_rueda_tpu` | 6 | TPU 95A |
+| `presion_leva` | 6 | PETG |
+| `presion_palanca` | 1 | PETG |
+| `soporte_motor_y` | 1 | PETG/ASA |
 
 ## Licencias
 

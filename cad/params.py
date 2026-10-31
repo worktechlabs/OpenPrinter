@@ -35,6 +35,7 @@ SIDE_PLATE_T = 10           # placa lateral de aluminio (corte láser/agua)
 PLATE_FILLET = 10
 M8_CLEAR = 8.5
 M6_CLEAR = 6.5
+M5_CLEAR = 5.5
 GRIT_BEARING_OD = 28        # rodamiento 6001 (12x28x8)
 ROLL_SHAFT_D = 25           # ejes de los rollos
 ROLL_SLOT_RISE = 8          # grados de subida de la ranura del eje hacia el borde
@@ -73,6 +74,24 @@ PLATEN_Y = (-105, 120)      # mesa de impresión
 PLATEN_DEPTH = 40           # cámara de vacío bajo la mesa
 PLATEN_MARGIN_X = 20        # sobrante de mesa a cada lado del film
 PLATEN_RAIL_Y = (-60, 80)   # travesaños 4040 que sostienen la mesa
+PLATEN_TOP_T = 3            # placa superior de aluminio perforada
+PLATEN_SEGMENTS = 4         # cámaras impresas, una zona de vacío por ventilador
+PLATEN_HOLE_D = 2.0         # agujeros de succión
+PLATEN_HOLE_PITCH = 12.5
+PLATEN_FAN = 80             # ventilador por segmento
+
+# Arrastre Y
+GRIT_SHAFT_D = 12           # eje del rodillo (rodamientos 6001 en las placas)
+PINCH_COUNT = 6             # unidades de presión a lo largo del film
+PINCH_WHEEL_D = 22          # rueda de TPU sobre rodamiento 625
+PINCH_WHEEL_W = 8
+PINCH_PIVOT = (-140, 20)    # eje de giro del brazo (Y, Z)
+LIFT_SHAFT = (-161, 34)     # eje de levante con levas (Y, Z), Ø8
+LIFT_SHAFT_D = 8
+CAM_D, CAM_ECC = 16, 4      # leva excéntrica: diámetro y excentricidad
+Y_PULLEY_PD = (12.73, 50.93)   # GT2 20T en motor, 80T en rodillo (4:1)
+Y_MOTOR_DZ = 70             # motor Y por debajo del rodillo
+Y_BELT_W = 6
 
 REAR_GUIDE_D = 25
 REAR_GUIDE_Y = -200

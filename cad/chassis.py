@@ -13,6 +13,7 @@ import math
 import cadquery as cq
 
 import params as P
+import yfeed
 from lib import ALU, BEAM, PLATE, RUBBER, STEEL, corner_bracket, leveling_foot, profile
 
 Y0, Y1 = P.FRAME_Y
@@ -56,6 +57,11 @@ def side_plate_sketch():
           .circle(P.M6_CLEAR / 2, mode="s").reset())
     sk = (sk.push([(P.GRIT_ROLLER_Y, -P.GRIT_ROLLER_D / 2)])
           .circle(P.GRIT_BEARING_OD / 2, mode="s").reset())
+
+    # Eje de levante de la presión y soporte del motor Y (en ambas placas: el
+    # motor se puede montar a cualquier lado)
+    for y, z, d in yfeed.plate_holes():
+        sk = sk.push([(y, z)]).circle(d / 2, mode="s").reset()
 
     sk = _roll_slot(sk, P.UNWIND_ROLL, Y0, -1)
     sk = _roll_slot(sk, P.TAKEUP_ROLL, Y1, +1)
