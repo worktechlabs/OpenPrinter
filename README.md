@@ -6,7 +6,7 @@ aluminio 4040 y placas cortadas por un servicio de láser o agua.
 
 ![OpenPrinter, fase 0](docs/img/general.png)
 
-**[Web del proyecto con visor 3D interactivo](https://worktechlabs.github.io/OpenPrinter/)** ·
+**[Modelo 3D interactivo](docs/model/openprinter.glb)** ·
 **[Lista de compra de la fase 0](docs/compra_fase0.md)** ·
 **[Plan de diseño](PLAN.md)**
 
@@ -113,7 +113,9 @@ diseño, está en [PLAN.md](PLAN.md).
 | **Unidad de presión** con leva de levante | **Motor Y** con reducción 4:1 |
 
 El modelo 3D completo está en [`docs/model/openprinter.glb`](docs/model/openprinter.glb)
-(GitHub lo muestra en 3D al abrirlo) y en la [web del proyecto](https://worktechlabs.github.io/OpenPrinter/).
+(GitHub lo muestra en 3D al abrirlo). En `docs/index.html` hay además una página de
+presentación con visor 3D; para verla, sírvela en local desde la carpeta `docs/`
+(por ejemplo `python -m http.server`) y abre `http://localhost:8000`.
 
 ## Lista de compra
 
@@ -179,7 +181,7 @@ cad/
 ├── web.py        modelo 3D de la web
 └── render.py     vistas rápidas de trabajo
 docs/
-├── index.html    web del proyecto (GitHub Pages)
+├── index.html    página de presentación con visor 3D
 ├── compra_fase0.md / .csv
 ├── img/          renders
 └── model/        openprinter.glb
