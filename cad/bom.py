@@ -142,10 +142,10 @@ def items_fase1():
     strip_len = P.ENC_STRIP_X[1] - P.ENC_STRIP_X[0] + 60
     chain_len = (P.CHAIN_FIX_X - P.CARRIAGE_X_MIN) + math.pi * P.CHAIN_R + 60
     return [
-        ("Control", "Placa de impresora 3D compatible con Klipper", "3+ drivers, SPI libre", 1, 0, REUSED),
+        ("Control", "BTT SKR Mini E3 V3.0", "4 x TMC2209, Klipper", 1, 0, "del inventario"),
         ("Control", "Raspberry Pi 3 o superior", "con tarjeta microSD de 16 GB", 1, 0, "ya disponible"),
         ("Control", "Raspberry Pi Pico", "RP2040", 1, 5, "monitor del encoder X"),
-        ("Motores", "Motor NEMA17", "48 mm, 1,5-2 A", 2, 0, f"X e Y; {REUSED}"),
+        ("Motores", "Motor NEMA17", "40 mm", 2, 0, "X e Y; del inventario (Creality 42-40, 42HD4041)"),
         ("Motores", "Motor NEMA17", "40 mm", 1, 0, f"recogida (fase 1.5); {REUSED}"),
         ("Sensores", "Cinta de encoder 180 LPI", f"{_round_up(strip_len, 100)} mm", 1, 15,
          "recambio de plóter de gran formato, o de impresoras rotas"),
@@ -158,7 +158,7 @@ def items_fase1():
         ("Cableado", "Cadena portacables", f"10 x 20 mm, {_round_up(chain_len, 100)} mm", 1, 8, ""),
         ("Cableado", "Cable apantallado 4 hilos", "2 m", 2, 2, "encoders"),
         ("Cableado", "Alargadores de motor y conectores JST", "", 1, 10, ""),
-        ("Alimentación", "Fuente 24 V 350 W", "Mean Well LRS-350-24 o similar", 1, 35, ""),
+        ("Alimentación", "Fuente 24 V", "de impresora 3D, 200 W o más", 1, 0, "del inventario"),
         ("Alimentación", "Convertidor 24 V a 5 V", "5 A", 1, 8, "Raspberry Pi y Pico"),
         ("Alimentación", "Seta de emergencia NC", "22 mm, con caja", 1, 8, "corta los 24 V de los motores"),
         ("Alimentación", "Conector IEC con interruptor y fusible", "", 1, 5, ""),

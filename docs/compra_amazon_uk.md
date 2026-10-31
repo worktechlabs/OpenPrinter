@@ -2,8 +2,9 @@
 
 Búsqueda hecha en amazon.co.uk el 31/10/2026. Los precios cambian a diario y
 son los que mostraba la página ese día; compruébalos antes de comprar. No
-incluye lo que ya tienes de impresoras 3D (placa de control, Raspberry Pi,
-motores, correas de 6 mm, poleas de 20 dientes, ruedas en V).
+incluye lo que ya tienes de impresoras 3D: placa SKR Mini E3 V3.0, Raspberry
+Pi 3, motores NEMA17, fuente de 24 V, correas de 6 mm, poleas de 20 dientes,
+ruedas en V y rodamientos 608 (ver [inventario.md](inventario.md)).
 
 Las cantidades salen de las listas generadas desde el modelo
 ([fase 0](compra_fase0.md), [fase 1](compra_fase1.md)).
@@ -58,7 +59,6 @@ habría que comprar 2 patines sueltos o adaptar el carro a uno por guía.
 
 | Pieza | Cant. necesaria | Producto | Precio |
 |---|---:|---|---:|
-| Fuente 24 V 350 W | 1 | [Mean Well LRS-350-24](https://www.amazon.co.uk/dp/B07SQLJG5L) | £42.16 |
 | Convertidor 24 V → 5 V 5 A | 1 | [Step-down 12/24 V a 5 V 5 A](https://www.amazon.co.uk/dp/B09X1XJYB6) | £10.99 |
 | Raspberry Pi Pico | 1 | [Raspberry Pi Pico](https://www.amazon.co.uk/dp/B0B5H2LNL2) | £5.42 |
 | Cadena portacables 10×20, 1 m | 1 | [Cadena 10×20 mm 1 m](https://www.amazon.co.uk/dp/B0DY5BWNW3) | £14.78 |
@@ -69,6 +69,6 @@ M3/M4/M5/M8.
 
 ## Resumen orientativo
 
-Con guías MGN12, lo encontrado en Amazon UK suma unas **£300**, sin perfiles,
-ejes, tubos ni MDF. Con ruedas en V (las que tienes) se ahorran unas £75 de
-guías y patines.
+Con guías MGN12, lo encontrado en Amazon UK suma unas **£260**, sin perfiles,
+ejes, tubos ni MDF (la fuente ya la tienes). Con ruedas en V se ahorran unas
+£75 de guías y patines.

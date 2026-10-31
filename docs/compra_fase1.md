@@ -10,7 +10,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Placa de impresora 3D compatible con Klipper | 3+ drivers, SPI libre | 1 | 0 | reutilizable de impresora 3D |
+| BTT SKR Mini E3 V3.0 | 4 x TMC2209, Klipper | 1 | 0 | del inventario |
 | Raspberry Pi 3 o superior | con tarjeta microSD de 16 GB | 1 | 0 | ya disponible |
 | Raspberry Pi Pico | RP2040 | 1 | 5 | monitor del encoder X |
 
@@ -18,7 +18,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Motor NEMA17 | 48 mm, 1,5-2 A | 2 | 0 | X e Y; reutilizable de impresora 3D |
+| Motor NEMA17 | 40 mm | 2 | 0 | X e Y; del inventario (Creality 42-40, 42HD4041) |
 | Motor NEMA17 | 40 mm | 1 | 0 | recogida (fase 1.5); reutilizable de impresora 3D |
 
 ## Sensores
@@ -44,7 +44,7 @@ Generada por `cad/bom.py` a partir del modelo (film de 600 mm). Si cambias `para
 
 | Artículo | Especificación | Cant. | € aprox. | Notas |
 |---|---|---:|---:|---|
-| Fuente 24 V 350 W | Mean Well LRS-350-24 o similar | 1 | 35 |  |
+| Fuente 24 V | de impresora 3D, 200 W o más | 1 | 0 | del inventario |
 | Convertidor 24 V a 5 V | 5 A | 1 | 8 | Raspberry Pi y Pico |
 | Seta de emergencia NC | 22 mm, con caja | 1 | 8 | corta los 24 V de los motores |
 | Conector IEC con interruptor y fusible |  | 1 | 5 |  |
@@ -78,8 +78,8 @@ Masa estimada con PETG al ~60% del sólido. STL en `out/stl/`.
 
 | Concepto | € aprox. |
 |---|---:|
-| Material comprado | 133 |
+| Material comprado | 98 |
 | Filamento (~0.2 kg a 20 €/kg) | 3 |
-| **Total fase 1** | **136** |
+| **Total fase 1** | **101** |
 
 Las placas, la Raspberry Pi, los motores y las correas se cuentan a 0 € porque se reutilizan de impresoras 3D. No incluye cabezales ni tintas.

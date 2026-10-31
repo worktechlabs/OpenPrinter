@@ -13,7 +13,7 @@ avances de film con error por debajo del 0,05 %, registrados desde la Raspberry 
 ```mermaid
 flowchart LR
     PI["Raspberry Pi 3+<br/>interfaz, cola de trabajos,<br/>Klipper (host), RIP"]
-    CTRL["Placa de control<br/>placa de impresora 3D + Klipper"]
+    CTRL["Placa de control<br/>BTT SKR Mini E3 V3.0 + Klipper"]
     MON["Monitor de encoder<br/>Raspberry Pi Pico (RP2040)"]
     HEAD["Placa de disparo del cabezal<br/>(fase 3)"]
 
@@ -26,7 +26,7 @@ flowchart LR
     HOME[Final de carrera X] --> CTRL
     PINCH[Interruptor de palanca de presión] --> CTRL
     FILMS[Sensor de film] --> CTRL
-    ENCY["Encoder Y AS5047P<br/>en el rodillo"] -- SPI --> CTRL
+    ENCY["Encoder Y AS5047P<br/>en el rodillo"] -- SPI --> MON
     ENCX["Encoder X<br/>cinta 180 LPI + sensor óptico"] --> MON
     ENCX -.-> HEAD
     PI -. datos de pasada .-> HEAD
@@ -64,17 +64,17 @@ con lo que suele haber en un taller con impresoras 3D:
 | Bloque | Elección | Por qué |
 |---|---|---|
 | Host | Raspberry Pi 3 o superior | Klipper, interfaz web y, más adelante, el RIP |
-| Placa de control | Placa de impresora 3D con Klipper (de referencia: BTT Octopus) | La Octopus tiene 8 drivers y 6 salidas de ventilador, y deja margen para tinta y curado; con otra placa basta con repartir las señales |
+| Placa de control | BTT SKR Mini E3 V3.0 con Klipper (del inventario) | 4 drivers TMC2209: X, Y, recogida y uno libre; si más adelante faltan salidas, una Octopus da 8 drivers |
 | Drivers | TMC2209 en UART, 24 V | Silenciosos y con corriente configurable; si el eje X se queda corto, TMC5160 |
-| Motor X | NEMA17 de 48 mm | Ver cálculo abajo |
-| Motor Y | NEMA17 de 48 mm | Con la reducción 4:1 le sobra par |
-| Motor de recogida | NEMA17 de 40 mm (fase 1.5) | Controlado por un brazo de tensión (*dancer*) |
+| Motor X | NEMA17 de 40 mm (del inventario) | Ver cálculo abajo; uno de 48 mm da más margen |
+| Motor Y | NEMA17 de 40 mm (del inventario) | Con la reducción 4:1 le sobra par |
+| Motor de recogida | NEMA17 de 40 mm (fase 1.5, del inventario) | Controlado por un brazo de tensión (*dancer*) |
 | Encoder X | Cinta de 180 LPI + sensor óptico de cuadratura (tipo H9730) | Estándar en impresoras de inyección; se pueden sacar de impresoras rotas |
-| Encoder Y | AS5047P magnético en el extremo del eje del rodillo | 14 bits: 5,8 µm de film por cuenta; Klipper lo lee por SPI |
+| Encoder Y | AS5047P magnético en el extremo del eje del rodillo | 14 bits: 5,8 µm de film por cuenta; lo lee el Pico por SPI |
 | Final de carrera X | Sensor óptico de horquilla + bandera en el carro | Sin contacto y repetible; marca el *home* junto a la estación de servicio |
 | Sensor de film | Reflexivo (TCRT5000) bajo la mesa de entrada | Detecta fin de rollo |
 | Palanca de presión | Microinterruptor | Impide mover el eje Y con las ruedas levantadas |
-| Alimentación | Fuente de 24 V y 350 W (Mean Well LRS-350-24) | Motores, ventiladores de 24 V y placa |
+| Alimentación | Fuente de 24 V de impresora 3D (del inventario) | Motores, ventiladores de 24 V y placa; con 200 W o más basta |
 | 5 V | Convertidor 24 → 5 V de 5 A | Raspberry Pi y Pico |
 | Seguridad | Seta de emergencia NC que corta los 24 V de los motores | Para el carro al instante |
 
@@ -90,8 +90,10 @@ así que hay margen para acelerar más suave o subir la velocidad.
 
 **Motor X.** El carro con cabezales, dampers y tinta pesa unos 1,2 kg. Para
 acelerar a 10 m/s² hacen falta 12 N; con la polea de 20 dientes (radio
-6,4 mm) son 0,08 N·m. A 0,6 m/s la polea gira a 900 rpm. Un NEMA17 de 48 mm a
-24 V da unos 0,2 N·m a esas vueltas: margen de 2,5 veces.
+6,4 mm) son 0,08 N·m. A 0,6 m/s la polea gira a 900 rpm. Un NEMA17 de 40 mm
+a 24 V da unos 0,12–0,15 N·m a esas vueltas: margen de 1,5 a 1,9 veces, justo
+pero suficiente. Si en las pruebas pierde pasos, se baja la aceleración a
+6 m/s² (necesita 30 mm de los 60 de margen) o se cambia por uno de 48 mm.
 
 **Resolución X.** 180 líneas por pulgada con decodificación ×4 dan
 720 cuentas por pulgada: **35 µm por cuenta**. La placa de disparo interpola
@@ -104,24 +106,37 @@ rodillo, no el motor.
 
 ## Señales en la placa de control
 
-Necesidades mínimas: 3 drivers, 3 entradas digitales, 1 analógica, SPI y
-5 salidas de ventilador (o MOSFET externos). La tabla usa la Octopus como
-referencia; con otra placa se reparte igual.
+Necesidades mínimas: 3 drivers, 3 entradas digitales, 1 analógica y salidas
+para los ventiladores. La placa elegida es la **BTT SKR Mini E3 V3.0** del
+inventario (ver [inventario.md](inventario.md)): 4 drivers TMC2209 en UART, y
+las salidas de calentador sirven como interruptores de 24 V para los
+ventiladores de vacío.
 
-| Señal | Tipo | Conector Octopus |
+| Señal | Tipo | Conector SKR Mini E3 V3.0 |
 |---|---|---|
-| Motor X | paso/dirección + UART | MOTOR0 |
-| Motor Y | paso/dirección + UART | MOTOR1 |
-| Motor de recogida | paso/dirección + UART | MOTOR2 |
-| Final de carrera X | entrada digital | DIAG0 |
-| Interruptor de palanca de presión | entrada digital | DIAG1 |
-| Sensor de film | entrada digital | DIAG2 |
-| Brazo de tensión de recogida | entrada analógica | T0 |
-| Encoder Y (AS5047P) | SPI | SPI3 en EXP2 |
-| Ventiladores de vacío 1–4 | PWM 24 V | FAN0–FAN3 |
-| Ventilador de la electrónica | 24 V | FAN4 |
+| Motor X | paso/dirección + UART | X |
+| Motor Y | paso/dirección + UART | Y |
+| Motor de recogida | paso/dirección + UART | Z |
+| (libre: bomba o agitador del blanco, fase 4) | paso/dirección + UART | E |
+| Final de carrera X | entrada digital | X-STOP |
+| Interruptor de palanca de presión | entrada digital | Y-STOP |
+| Sensor de film | entrada digital | E0-STOP (la entrada de fin de filamento) |
+| Brazo de tensión de recogida | entrada analógica | TH0 |
+| Ventiladores de vacío centrales (2) | 24 V conmutado | HE0 |
+| Ventiladores de vacío laterales (2) | 24 V conmutado | HB |
+| Ventilador de la electrónica | PWM | FAN0 |
 
-La asignación definitiva se hará con el `printer.cfg` de Klipper.
+- Los ventiladores de vacío van en dos grupos: los dos centrales se encienden
+  con cualquier ancho de film y los dos laterales solo con film de 60 cm.
+- **El encoder Y (AS5047P) va al Raspberry Pi Pico por SPI**, junto con el
+  encoder X: así todas las medidas de posición están en el mismo
+  microcontrolador y la SKR no necesita SPI libre.
+- Los ventiladores 4010 del inventario son de 12 V. Para enfriar la
+  electrónica, aliméntalos desde la fuente de 12 V o con un convertidor
+  24 → 12 V; o usa uno de 24 V en FAN0.
+
+La asignación definitiva de pines se hará con el `printer.cfg` de Klipper,
+comprobando el esquema oficial de la placa.
 
 ## Cómo va colocado
 

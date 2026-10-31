@@ -127,7 +127,7 @@ gramos de filamento. Son estimaciones orientativas:
 | Fase | Lista | Aprox. |
 |---|---|---:|
 | 0 · mecánica | [MD](docs/compra_fase0.md) · [CSV](docs/compra_fase0.csv) | ~550 € |
-| 1 · movimiento | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~135 € |
+| 1 · movimiento | [MD](docs/compra_fase1.md) · [CSV](docs/compra_fase1.csv) | ~100 € |
 
 La fase 1 cuenta a 0 € la placa de control, la Raspberry Pi, los motores y las
 correas, porque se reutilizan de impresoras 3D. Ninguna incluye cabezales ni
@@ -158,8 +158,8 @@ tintas.
   se imprime en A4 al 100 %, se empalma, se pega sobre el MDF y se cortan las
   dos placas juntas con caladora. Los rodamientos del rodillo van en
   alojamientos impresos atornillados por dentro, no en el MDF.
-- **Material de impresora 3D reutilizado**: placa de control, Raspberry Pi,
-  motores, correas y poleas.
+- **Material de impresora 3D reutilizado** ([inventario](docs/inventario.md)): placa SKR Mini E3 V3.0, Raspberry Pi 3,
+  motores NEMA17, fuente de 24 V, correas y poleas.
 - Cuando el diseño esté validado, las placas pasan a aluminio cambiando
   `SIDE_PLATE_MATERIAL = "aluminio"` en `params.py`.
 
