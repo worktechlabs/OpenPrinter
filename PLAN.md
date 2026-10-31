@@ -1,0 +1,144 @@
+# OpenPrinter — Plan de diseño
+
+Impresora DTF (Direct To Film) open source, de rollo, ancho de film 600 mm
+(configurable a 330 mm), diseñada desde cero: chasis de perfil de aluminio 4040,
+piezas impresas en 3D y, más adelante, electrónica abierta (Raspberry Pi + MCU).
+
+## Principios
+
+- **Paramétrico**: todas las cotas salen de `cad/params.py`. Cambiar el ancho
+  de film regenera toda la máquina.
+- **Modular**: cada bloque (chasis, viga X, carro, mesa, arrastre, rollos,
+  estación de servicio) es un módulo independiente que se puede rediseñar sin
+  tocar los demás.
+- **Fabricable en casa**: piezas imprimibles en 3D (PETG/ASA/PA-CF) y perfil
+  4040 cortado a medida. Las placas que más adelante convenga hacer en aluminio
+  se exportan también en DXF.
+- **Iterativo**: primero volúmenes, después piezas reales, después detalle.
+
+## Convenciones
+
+- Unidades: mm.
+- **X**: recorrido del carro (ancho de la máquina). X = 0 en el centro del film.
+- **Y**: avance del film. El film entra por detrás (Y negativa) y sale por
+  delante (Y positiva). Y = 0 en la línea de impresión (centro de las boquillas).
+- **Z**: hacia arriba. Z = 0 en la superficie de la mesa (platen).
+- El lado derecho (X positiva) aloja la estación de servicio (*home* del carro).
+
+## Orden de diseño 3D
+
+### Fase 0 — Mecánica sin cubierta
+
+| # | Módulo | Contenido | Estado |
+|---|--------|-----------|--------|
+| 0.1 | Esqueleto de distribución | Volúmenes de todos los bloques, recorridos y holguras | Hecho |
+| 0.2 | Chasis | Bastidor 4040, placas laterales, patas niveladoras | Hecho (pendiente validar con proveedor de corte) |
+| 0.3 | Viga X | Viga 4080, 2 guías MGN12, soporte de motor y tensor impresos, correa GT2 | Primera versión, en revisión |
+| 0.4 | Carro | Placa, bandeja de cabezales con ajuste de altura y pinza de correa, impresos | Primera versión, en revisión |
+| 0.5 | Mesa (platen) | Placa perforada, cámara de vacío por segmentos imprimibles | Pendiente |
+| 0.6 | Arrastre Y | Rodillo de arrastre, rodillos de presión con palanca de levante | Pendiente |
+| 0.7 | Rollos | Eje desbobinador con freno, eje de recogida, guías de film | Pendiente |
+| 0.8 | Estación de servicio | Solo volumen reservado (capping, limpiador, purga) | Pendiente |
+
+**Hito fase 0**: chasis montado, el carro se desliza a lo largo de la viga y el
+film avanza del rollo de entrada al de recogida, todo movido a mano.
+
+### Más adelante (fuera de alcance por ahora)
+
+- Motores, transmisión, encoder y electrónica de movimiento.
+- Lista de componentes (BOM) y proveedores.
+- Driver del cabezal, sistema de tinta, estación de servicio funcional.
+- Agitador de polvo y túnel de curado.
+- Cubierta y cerramiento.
+
+En el esqueleto solo se **reservan volúmenes** para estos elementos, para que el
+diseño mecánico no los bloquee.
+
+## Estructura del repositorio
+
+```
+OpenPrinter/
+├── PLAN.md            este documento
+├── cad/
+│   ├── params.py      cotas globales
+│   ├── lib.py         utilidades: perfil serie 40, escuadras, patas, colores
+│   ├── layout.py      ensamblaje general (módulos detallados + volúmenes)
+│   ├── chassis.py     chasis (fase 0.2): placas, bastidor, DXF y lista de corte
+│   ├── xaxis.py       viga X (fase 0.3): guías, motor, tensor, correa
+│   ├── carriage.py    carro (fase 0.4): placa, bandeja de cabezales, pinza
+│   ├── render.py      vistas PNG rápidas
+│   └── ...            un módulo por bloque a medida que se detallen
+└── out/               STEP / STL / vistas generadas (no se versiona)
+```
+
+## Cómo generar el modelo
+
+```
+python -m venv .venv
+.venv\Scripts\pip install -r requirements.txt
+.venv\Scripts\python cad\layout.py
+.venv\Scripts\python cad\render.py
+```
+
+Genera en `out/`:
+
+- `layout.step` / `layout.glb`: ensamblaje completo (FreeCAD, Fusion, etc.)
+- `placa_lateral.dxf`: contorno y agujeros de las placas laterales, para corte
+- `lista_corte.csv`: perfiles a cortar con longitudes y mecanizados
+- `stl/*.stl`: piezas impresas, listas para el laminador
+- `layout_*.png`: vistas rápidas
+
+## Chasis (0.2)
+
+- Dos placas laterales de aluminio de 10 mm (5083 o 6082), corte láser o agua.
+  Llevan todos los agujeros de alineación: viga X, rodamiento del rodillo de
+  arrastre (6001), guía trasera y ranuras abiertas para los ejes de los rollos
+  (inclinadas para que el eje caiga a su asiento).
+- Bastidor inferior de 4040: largueros laterales atornillados a las placas,
+  largueros delantero/trasero y travesaño central unidos con escuadras.
+- Entre placas, atornillados a la testa (M8): viga X 4080, tirante superior
+  trasero y dos travesaños que sostienen la mesa.
+- Cuatro patas niveladoras M8 bajo los largueros laterales.
+- Los perfiles que van entre placas deben cortarse todos a la misma longitud
+  y a escuadra: de eso depende el paralelismo de las placas.
+
+## Viga X (0.3)
+
+- Dos guías MGN12 de 1000 mm en la cara delantera de la viga 4080, una sobre
+  cada ranura (M3 con tuercas en T). La separación vertical de 40 mm entre
+  guías absorbe el par del carro, que va en voladizo hacia delante.
+- Correa GT2 de 10 mm en un plano horizontal por encima de la viga, para no
+  estorbar al carro ni a las guías.
+- Motor NEMA17 a la izquierda, eje hacia abajo, sobre un soporte impreso
+  atornillado a la ranura superior de la viga (M5 con tuerca en T).
+- Polea loca a la derecha en un soporte impreso con colisos: se tensa en X con
+  un tornillo M4.
+
+## Carro (0.4)
+
+Todo impreso (PETG o ASA en fase 0; PA-CF o aluminio si hace falta más rigidez):
+
+| Pieza | Tamaño aprox. (mm) | Fijación |
+|---|---|---|
+| `carro_placa` | 200 × 10 × 115 | 16 × M3 a 4 patines MGN12H |
+| `carro_bandeja` | 180 × 127 × 60 | 4 × M4 en colisos verticales a insertos de la placa |
+| `carro_pinza_correa` | 60 × 15 × 23 | 2 × M3 a insertos de la placa |
+| `soporte_motor_x` | 56 × 69 × 31 | 2 × M5 a la viga, 4 × M3 al motor |
+| `soporte_tensor_x` | 54 × 69 × 31 | 2 × M5 a la viga |
+
+- **Ajuste de altura cabezal-film**: la bandeja sube y baja ±4 mm en los
+  colisos. Se fija con 4 M4; más adelante se puede añadir un tornillo de
+  reglaje o una leva.
+- **Cabezales**: dos XP600 separados 50 mm en X, colgando por ventanas en la
+  bandeja y apoyados en su pestaña.
+- **Pendiente de verificar con un cabezal XP600 real** (son cotas aproximadas):
+  tamaño del cuerpo, forma y posición de la pestaña y de sus tornillos, y
+  distancia de la cara de boquillas a la pestaña. Hasta entonces la bandeja no
+  se debe imprimir en definitiva; sí sirve como prototipo de ajuste.
+- El volumen reservado sobre los cabezales es para dampers, tubos de tinta y la
+  cadena portacables.
+
+## Licencias
+
+- Hardware (modelos CAD, planos, DXF, STL): CERN-OHL-S v2 (`LICENSE-HARDWARE`)
+- Software y firmware: GPL-3.0 (`LICENSE`)
