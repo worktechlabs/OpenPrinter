@@ -199,7 +199,7 @@ function fit(objs, cam) {
                   : camera.position.clone().sub(controls.target).normalize();
   if (!isFinite(dir.x) || dir.lengthSq() === 0) dir.set(-0.55, 0.55, 0.8).normalize();
   controls.target.copy(center);
-  camera.position.copy(center).addScaledVector(dir, size * 1.25);
+  camera.position.copy(center).addScaledVector(dir, size * 1.25 * Math.max(1, 1.4 / camera.aspect));
 }
 
 function partsOfStep(i) {
