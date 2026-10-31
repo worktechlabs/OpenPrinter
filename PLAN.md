@@ -37,8 +37,8 @@ piezas impresas en 3D y, más adelante, electrónica abierta (Raspberry Pi + MCU
 | 0.4 | Carro | Placa, bandeja de cabezales con ajuste de altura y pinza de correa, impresos | Primera versión, en revisión |
 | 0.5 | Mesa (platen) | Placa perforada de aluminio, 4 cámaras de vacío impresas con ventilador | Primera versión, en revisión |
 | 0.6 | Arrastre Y | Rodillo, 6 unidades de presión impresas con levante por levas, motor Y 4:1 | Primera versión, en revisión |
-| 0.7 | Rollos | Eje desbobinador con freno, eje de recogida, guías de film | Pendiente |
-| 0.8 | Estación de servicio | Solo volumen reservado (capping, limpiador, purga) | Pendiente |
+| 0.7 | Rollos | Ejes fijos, mandriles con rodamiento, collarines/freno, guías y mesa de entrada | Primera versión, en revisión |
+| 0.8 | Estación de servicio | Base impresa y volúmenes reservados (tapas, limpiador, bomba) | Primera versión, en revisión |
 
 **Hito fase 0**: chasis montado, el carro se desliza a lo largo de la viga y el
 film avanza del rollo de entrada al de recogida, todo movido a mano.
@@ -68,6 +68,8 @@ OpenPrinter/
 │   ├── carriage.py    carro (fase 0.4): placa, bandeja de cabezales, pinza
 │   ├── platen.py      mesa de vacío (fase 0.5): placa perforada, cámaras
 │   ├── yfeed.py       arrastre Y (fase 0.6): rodillo, presión, levante, motor Y
+│   ├── rolls.py       rollos y guías (fase 0.7)
+│   ├── service.py     estación de servicio (fase 0.8)
 │   ├── render.py      vistas PNG rápidas
 │   └── ...            un módulo por bloque a medida que se detallen
 └── out/               STEP / STL / vistas generadas (no se versiona)
@@ -183,6 +185,60 @@ Todo impreso (PETG o ASA en fase 0; PA-CF o aluminio si hace falta más rigidez)
 | `presion_leva` | 6 | PETG |
 | `presion_palanca` | 1 | PETG |
 | `soporte_motor_y` | 1 | PETG/ASA |
+
+## Rollos y guías (0.7)
+
+- **Ejes de los rollos**: tubo de aluminio de Ø25 que no gira. Se deja caer en
+  las ranuras inclinadas de las placas y no se puede salir en X gracias a dos
+  collarines impresos por fuera.
+- **Mandriles**: 2 por rollo, impresos. Entran 30 mm en el núcleo de cartón de
+  3" y giran sobre el eje con un rodamiento 6005 (25 × 47 × 12).
+- **Collarines**: uno junto a cada mandril fija su posición para el ancho de
+  film que uses. En el rollo de entrada ese collarín hace de freno, con un
+  fieltro contra el mandril, para dar tensión al film.
+- **Guías**: dos tubos de Ø25 entre placas, detrás y delante de la mesa,
+  atornillados con M6 a sus testas. El film pasa por encima con su cara superior
+  a la altura de la mesa.
+- **Mesa de entrada**: 4 segmentos impresos que se enganchan a presión en la
+  guía trasera y llevan el film hasta el rodillo de arrastre.
+- La recogida motorizada es de la fase 1; aquí solo se reserva el volumen del
+  motor, por dentro de la placa izquierda.
+
+## Estación de servicio (0.8)
+
+- Base impresa a la derecha del film, atornillada a los dos travesaños de mesa
+  (M5), justo bajo el carro aparcado en home (X = 405 mm).
+- Volúmenes reservados: dos tapas bajo los cabezales (5 mm por debajo de las
+  boquillas cuando están bajadas), el elevador de las tapas, el limpiador a la
+  izquierda de las tapas (el carro lo cruza al salir de home) y la bomba de
+  purga debajo de la base.
+- El mecanismo se diseña en la fase 4, junto con el sistema de tinta.
+
+## Piezas impresas de la fase 0
+
+| Pieza | Cantidad | Material |
+|---|---|---|
+| `carro_placa` | 1 | PETG/ASA |
+| `carro_bandeja` | 1 | PETG/ASA (prototipo hasta medir el XP600) |
+| `carro_pinza_correa` | 1 | PETG |
+| `soporte_motor_x` | 1 | PETG/ASA |
+| `soporte_tensor_x` | 1 | PETG/ASA |
+| `mesa_camara` | 4 | PETG |
+| `presion_soporte` | 6 | PETG/ASA |
+| `presion_brazo` | 6 | PETG/ASA |
+| `presion_rueda_tpu` | 6 | TPU 95A |
+| `presion_leva` | 6 | PETG |
+| `presion_palanca` | 1 | PETG |
+| `soporte_motor_y` | 1 | PETG/ASA |
+| `rollo_mandril` | 4 | PETG |
+| `rollo_collarin` | 8 | PETG |
+| `mesa_entrada_segmento` | 4 | PETG |
+| `servicio_base` | 1 | PETG |
+
+**Hito de diseño**: la fase 0 está modelada completa y sin choques en todo el
+recorrido del carro. El siguiente paso es validarla con piezas reales: medir un
+XP600, imprimir el carro y una unidad de presión, y pedir presupuesto de las
+placas.
 
 ## Licencias
 

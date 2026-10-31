@@ -8,7 +8,7 @@ Solo se tocan los valores de la sección "Entradas"; lo demás se deriva.
 # Film
 FILM_WIDTH = 600            # ancho del rollo (330 para versión A3)
 PRINT_WIDTH = 580           # ancho imprimible
-FILM_CORE_OD = 76           # núcleo de 3"
+FILM_CORE_OD = 86           # núcleo de cartón de 3" (interior 76,2)
 FILM_ROLL_OD_MAX = 130      # ~100 m de film de 75 µm
 
 # Cabezales (maqueta XP600: cotas aproximadas, verificar con un cabezal real)
@@ -97,6 +97,11 @@ REAR_GUIDE_D = 25
 REAR_GUIDE_Y = -200
 UNWIND_ROLL = (-280, -150)  # centro (Y, Z) del rollo de entrada
 TAKEUP_ROLL = (240, -150)   # centro (Y, Z) del rollo de recogida
+FRONT_GUIDE_Y = 135         # tubo de salida delante de la mesa (mismo Ø que la trasera)
+CORE_ID = 76.2              # interior del núcleo de 3"
+CHUCK_FLANGE_D = 100        # mandriles impresos con rodamiento 6005 (25x47x12)
+CHUCK_INSERT = 30           # longitud que entra en el núcleo
+CHUCK_BEARING = (47, 12)
 
 FRAME_Y = (-360, 330)       # extensión de las placas laterales
 FRAME_Z = (-260, 170)

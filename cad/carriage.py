@@ -128,6 +128,7 @@ def add(assy, cx):
         assy.add(h, name=f"cabezal_{i}", color=HEAD)
 
     # Reserva: dampers, placa del cabezal, tubos de tinta y cadena portacables
+    # (entre los nervios de la bandeja)
     top = P.HEAD_GAP + P.HEAD_SIZE[2]
-    assy.add(box(cx - SHELF_HALF_W, cx + SHELF_HALF_W, PY1 + FLANGE_T, P.SHELF_FRONT_Y,
+    assy.add(box(cx - SHELF_HALF_W + 6, cx + SHELF_HALF_W - 6, PY1 + FLANGE_T, P.SHELF_FRONT_Y,
                  top, P.CARRIAGE_TOP_Z), name="reserva_carro", color=RESERVED)

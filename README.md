@@ -71,7 +71,7 @@ el diseño.
 
 | Fase | Contenido | Estado |
 |---|---|---|
-| 0 | Mecánica sin cubierta: chasis, viga X, carro, mesa de vacío, arrastre, rollos | En diseño |
+| 0 | Mecánica sin cubierta: chasis, viga X, carro, mesa de vacío, arrastre, rollos | Diseño completo, falta validar con piezas reales |
 | 1 | Movimiento: motores, encoder, electrónica de control, firmware | Pendiente |
 | 2 | Software: RIP abierto, primera impresión en papel | Pendiente |
 | 3 | Cabezal XP600: estudio de la señal y placa driver abierta | Pendiente |
@@ -92,8 +92,8 @@ diseño, está en [PLAN.md](PLAN.md).
 | 0.4 | Carro impreso con ajuste de altura | Primera versión, faltan cotas reales del XP600 |
 | 0.5 | Mesa de vacío (4 zonas con ventilador) | Primera versión |
 | 0.6 | Arrastre Y (rodillo, presión con levante, motor 4:1) | Primera versión |
-| 0.7 | Rollos de entrada y recogida | Pendiente |
-| 0.8 | Estación de servicio (volumen reservado) | Pendiente |
+| 0.7 | Rollos, mandriles, freno y guías | Primera versión |
+| 0.8 | Estación de servicio (base y volúmenes reservados) | Primera versión |
 
 ## Medidas principales (film de 600 mm)
 
@@ -141,6 +141,8 @@ cad/
 ├── carriage.py   carro (0.4)
 ├── platen.py     mesa de vacío (0.5)
 ├── yfeed.py      arrastre Y (0.6)
+├── rolls.py      rollos y guías (0.7)
+├── service.py    estación de servicio (0.8)
 └── render.py     vistas PNG
 ```
 

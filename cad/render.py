@@ -18,7 +18,10 @@ VIEWS = {
     "iso": dict(elev=25, azim=120),
     "iso_trasera": dict(elev=25, azim=-60),
     # Sección lateral: vista desde +X sin la placa derecha ni lo que cuelga de ella
-    "lateral": dict(elev=0, azim=0, hide=("placa_der", "reserva_motor_y", "pata_2", "pata_3")),
+    "lateral": dict(elev=0, azim=0, hide=("placa_der", "pata_2", "pata_3", "soporte_motor_y", "motor_y",
+                                          "polea_80t_y", "polea_20t_y", "correa_y_0", "correa_y_1",
+                                          "presion_palanca", "collarin_placa_entrada_1",
+                                          "collarin_placa_recogida_1")),
     "frontal": dict(elev=0, azim=90),
     "chasis": dict(elev=22, azim=125, only=("placa_izq", "placa_der", "larguero", "travesano", "tirante",
                                              "viga", "escuadra", "pata")),
@@ -31,6 +34,10 @@ VIEWS = {
                                                   ("soporte", "brazo", "rueda", "leva", "muelle"))),
     "presion_lateral": dict(elev=0, azim=0, only=tuple(f"presion_{p}_2" for p in
                                                         ("brazo", "rueda", "leva", "muelle"))),
+    "general": dict(elev=28, azim=125, hide=("envolvente_carro",)),
+    "rollo_mandril": dict(elev=20, azim=150, only=("mandril_entrada_+1", "collarin_entrada_+1",
+                                                   "nucleo_entrada")),
+    "servicio": dict(elev=35, azim=110, only=("servicio", "reserva_servicio")),
     "motor_y": dict(elev=20, azim=30, only=("soporte_motor_y", "motor_y", "polea_80t", "polea_20t",
                                             "correa_y", "presion_palanca")),
 }
