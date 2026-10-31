@@ -8,6 +8,11 @@
     0,
     -1
    ],
+   "camera": [
+    -1.1,
+    1.6,
+    0.9
+   ],
    "text": "Corta los perfiles 4040 según la lista de corte. Une los largueros delantero, trasero y el travesaño central a los dos largueros laterales con escuadras. Antes de apretar, comprueba que las dos diagonales miden lo mismo (±1 mm). Enrosca las patas niveladoras en la ranura inferior de los largueros laterales.",
    "hardware": [
     "Escuadras 4040 con tornillo M8 x 16 y tuerca en T M8",
@@ -23,6 +28,11 @@
     0,
     0
    ],
+   "camera": [
+    -1.1,
+    1.6,
+    0.9
+   ],
    "text": "Corta y taladra las dos placas de MDF de 19 mm con la plantilla A4 a escala 1:1. Atorníllalas a los largueros laterales. Rosca M8 en las testas de los dos travesaños de la mesa y del tirante superior, y atorníllalos desde fuera de las placas. Mide la separación interior entre placas arriba y abajo: debe ser 1140 mm.",
    "hardware": [
     "M8 x 35 + arandela + tuerca en T M8 (3 por placa)",
@@ -37,6 +47,11 @@
     0,
     1,
     0
+   ],
+   "camera": [
+    -0.9,
+    1.5,
+    0.8
    ],
    "text": "Rosca 2 x M8 en cada testa de la viga 4080 y atorníllala entre las placas. Fija la guía MGN12 de arriba en la cara delantera con tornillos cada 25 mm, alineada con una regla. Coloca la de abajo paralela a la primera, midiendo con calibre a lo largo de todo el recorrido. Monta el soporte del motor X a la izquierda y el del tensor a la derecha. Pon la cinta del encoder en sus soportes, tensa y sin tocar la viga, y el soporte del sensor de final de carrera.",
    "hardware": [
@@ -55,6 +70,11 @@
     1,
     0
    ],
+   "camera": [
+    -0.9,
+    1.4,
+    0.7
+   ],
    "text": "Mete los patines MGN12H en las guías sin sacarlos de su tapón: si se salen, se pierden las bolas. Atornilla la placa del carro a los 4 patines y la bandeja de los cabezales con el ajuste de altura a media carrera. Cierra la correa GT2 de 10 mm en la pinza y ténsala. Monta el sensor del encoder y la bandera de home en el carro.",
    "hardware": [
     "M3 x 10 (16) para los patines",
@@ -70,6 +90,11 @@
     0,
     1
    ],
+   "camera": [
+    -0.8,
+    1.2,
+    1.4
+   ],
    "text": "Atornilla las 4 cámaras impresas a los travesaños de la mesa, cada una con su ventilador de 80 mm debajo. Encima va la placa de aluminio perforada: sella el borde con cinta de espuma para que el vacío no se escape. La estación de servicio va a la derecha, bajo la posición de home del carro.",
    "hardware": [
     "M4 + tuerca en T M4 para las cámaras",
@@ -84,6 +109,11 @@
     0,
     -1,
     0
+   ],
+   "camera": [
+    -1.2,
+    1.0,
+    0.6
    ],
    "text": "Atornilla los alojamientos de los rodamientos 6001 por dentro de las placas. Pasa el eje de 12 mm con el rodillo de arrastre. Fuera de la placa derecha van la polea de 80 dientes, el motor Y con su soporte y la correa de 6 mm. Monta el eje de levante de 8 mm con las 6 levas y las 6 unidades de presión. Termina con la palanca y el imán del encoder Y en la punta izquierda del eje; el sensor AS5047P queda a 1-2 mm del imán.",
    "hardware": [
@@ -101,6 +131,11 @@
     -1,
     0.3
    ],
+   "camera": [
+    1.2,
+    -1.5,
+    1.0
+   ],
    "text": "Atornilla las guías de 25 mm trasera y delantera con M6 en las testas. Engancha a presión los 4 segmentos de la mesa de entrada en la guía trasera y los 4 de la rampa de salida en la delantera. Mete los mandriles en el núcleo del rollo y fíjalos con los collarines. Deja caer el eje del rollo por las ranuras traseras de las placas. Recorrido del film: rollo, guía trasera, bajo las ruedas de presión, mesa de vacío y rampa de salida, por donde cae hacia delante.",
    "hardware": [
     "M6 x 30 (4)",
@@ -115,6 +150,11 @@
     0,
     0,
     1
+   ],
+   "camera": [
+    -0.8,
+    1.3,
+    1.1
    ],
    "text": "Atornilla la bandeja de MDF de 10 mm a los largueros laterales y al travesaño central. Encima van la caja impresa con la SKR, la Raspberry Pi, el Pico y los convertidores, y la fuente de 24 V sujeta con sus dos bridas. El panel de red va en el larguero trasero y la seta de emergencia en el delantero. La pantalla va en la esquina delantera derecha: su pletina se atornilla a la placa y el brazo de la carcasa a la pletina.",
    "hardware": [
@@ -132,6 +172,11 @@
     0,
     1
    ],
+   "camera": [
+    -1.0,
+    1.3,
+    1.0
+   ],
    "text": "Pega o atornilla las canaletas impresas sobre los largueros y por dentro de las placas. Monta la bandeja de la cadena portacables sobre la viga y el brazo en el carro. Por la cadena van los cables de los cabezales, el sensor del encoder y los tubos de tinta. Separa la potencia (motores, 24 V) de las señales (encoders, flat de los cabezales); el cable de los encoders, apantallado.",
    "hardware": [
     "Tornillo para madera 3 x 12 para las canaletas",
@@ -146,6 +191,11 @@
     0,
     -1,
     0
+   ],
+   "camera": [
+    1.3,
+    -1.4,
+    0.9
    ],
    "text": "Atornilla las dos escuadras de la repisa a la ranura trasera del larguero trasero; la pata apoya en la mesa de trabajo. Encima van la caja de plástico, la base impresa y las 5 botellas de 1 L, con el blanco sobre el agitador. Por fuera de la placa izquierda atornilla los soportes de las bombas y de los subdepósitos, y la caja del driver. Recorrido de cada color: botella, bomba, subdepósito, cadena portacables y carro. Para cebar, se rellenan los subdepósitos con las bombas y se aspira desde los dampers con jeringa.",
    "hardware": [

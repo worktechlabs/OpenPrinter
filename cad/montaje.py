@@ -246,9 +246,9 @@ def catalog(names):
 
 
 def write_json(names, path):
-    steps = [{"id": sid, "title": title, "explode": list(explode), "text": text, "hardware": hw,
-              "image": f"img/montaje_{i + 1:02d}.png"}
-             for i, (sid, title, _, explode, _, text, hw) in enumerate(STEPS)]
+    steps = [{"id": sid, "title": title, "explode": list(explode), "camera": list(cam), "text": text,
+              "hardware": hw, "image": f"img/montaje_{i + 1:02d}.png"}
+             for i, (sid, title, _, explode, cam, text, hw) in enumerate(STEPS)]
     data = {"steps": steps, "parts": catalog(names)}
     path.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
     print("Montaje:", path)

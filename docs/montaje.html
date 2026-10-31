@@ -188,13 +188,15 @@ function resize() {
 }
 new ResizeObserver(resize).observe(view);
 
-function fit(objs) {
+function fit(objs, cam) {
   const box = new THREE.Box3();
   objs.forEach((o) => { if (o.visible) box.expandByObject(o); });
   if (box.isEmpty()) return;
   const size = box.getSize(new THREE.Vector3()).length();
   const center = box.getCenter(new THREE.Vector3());
-  const dir = camera.position.clone().sub(controls.target).normalize();
+  // cam: dirección en coordenadas de la máquina (Z arriba); en la escena, Y arriba y -Y delante
+  const dir = cam ? new THREE.Vector3(cam[0], cam[2], -cam[1]).normalize()
+                  : camera.position.clone().sub(controls.target).normalize();
   if (!isFinite(dir.x) || dir.lengthSq() === 0) dir.set(-0.55, 0.55, 0.8).normalize();
   controls.target.copy(center);
   camera.position.copy(center).addScaledVector(dir, size * 1.25);
@@ -256,7 +258,7 @@ function setStep(i, refit = true) {
   $("next").disabled = step === data.steps.length - 1;
   listParts($("parts"), partsOfStep(step));
   paint();
-  if (refit) fit(Object.values(parts).map((p) => p.obj));
+  if (refit) fit(Object.values(parts).map((p) => p.obj), s.camera);
   animateStep();
   history.replaceState(null, "", `#paso-${step + 1}`);
 }
@@ -336,7 +338,7 @@ renderer.domElement.addEventListener("pointerleave", () => { $("tip").style.disp
 $("prev").onclick = () => setStep(step - 1);
 $("next").onclick = () => setStep(step + 1);
 $("bPlay").onclick = () => { if (!showAll) animateStep(); };
-$("bFit").onclick = () => fit(Object.values(parts).map((p) => p.obj));
+$("bFit").onclick = () => fit(Object.values(parts).map((p) => p.obj), showAll ? null : data.steps[step].camera);
 $("bAll").onclick = (e) => {
   showAll = !showAll;
   e.currentTarget.setAttribute("aria-pressed", String(showAll));
