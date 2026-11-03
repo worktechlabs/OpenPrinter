@@ -3,7 +3,7 @@
 Material de impresoras 3D que ya hay en el taller y su uso previsto. Las listas
 de compra lo cuentan a 0 €.
 
-| Material | Cantidad | Uso en OpenPrinter |
+| Material | Cantidad | Uso en OpenDTF |
 |---|---|---|
 | BTT SKR Mini E3 V3.0 (STM32G0B1, 4 × TMC2209) | 1 | Placa de control con Klipper: motores X e Y, y dos drivers libres |
 | Raspberry Pi 3 | 1 | Host de Klipper e interfaz web |

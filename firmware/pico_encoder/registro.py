@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""OpenPrinter - registro y análisis de los encoders (en la Raspberry Pi).
+"""OpenDTF - registro y análisis de los encoders (en la Raspberry Pi).
 
 Lee lo que manda el Pico (main.py), lo guarda en CSV en milímetros y analiza
 las dos pruebas de la fase 1 (docs/fase1_movimiento.md):

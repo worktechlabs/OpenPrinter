@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>OpenPrinter · Impresora DTF open source</title>
-<meta name="description" content="OpenPrinter: impresora DTF (Direct To Film) de hardware y software abiertos, diseñada para construirse con impresora 3D, perfil 4040 y placas cortadas.">
-<meta property="og:title" content="OpenPrinter · Impresora DTF open source">
+<title>OpenDTF · Impresora DTF open source</title>
+<meta name="description" content="OpenDTF: impresora DTF (Direct To Film) de hardware y software abiertos, diseñada para construirse con impresora 3D, perfil 4040 y placas cortadas.">
+<meta property="og:title" content="OpenDTF · Impresora DTF open source">
 <meta property="og:description" content="Impresora DTF de rollo de 600 mm, CMYK + blanco, diseñada desde cero para makers.">
 <meta property="og:image" content="img/general.png">
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
@@ -154,7 +154,7 @@
       <a href="#electronica">Electrónica</a>
       <a href="#compra">Lista de compra</a>
       <a href="#hoja">Hoja de ruta</a>
-      <a href="https://github.com/worktechlabs/OpenPrinter">GitHub</a>
+      <a href="https://github.com/worktechlabs/OpenDTF">GitHub</a>
     </nav>
   </div>
 </header>
@@ -163,21 +163,21 @@
   <div class="hero">
     <span class="badge">Fase 0 diseñada · fase 1 en diseño</span>
     <h1>Una impresora DTF que puedes construir, entender y reparar</h1>
-    <p class="lead">OpenPrinter es una impresora <strong>Direct To Film</strong> de rollo, de hardware y software abiertos.
+    <p class="lead">OpenDTF es una impresora <strong>Direct To Film</strong> de rollo, de hardware y software abiertos.
       Se construye con una impresora 3D, perfil de aluminio 4040, dos placas laterales de MDF y material reutilizado de
       impresoras 3D.</p>
     <div class="cta">
-      <a class="btn primary" href="https://github.com/worktechlabs/OpenPrinter">Ver en GitHub</a>
+      <a class="btn primary" href="https://github.com/worktechlabs/OpenDTF">Ver en GitHub</a>
       <a class="btn" href="#compra">Lista de compra</a>
       <a class="btn" href="plantillas/placa_lateral_A4.pdf" download>Plantilla de las placas (PDF A4)</a>
       <a class="btn primary" href="montaje.html">Montaje interactivo en 3D</a>
-      <a class="btn" href="model/openprinter.glb" download>Modelo 3D (.glb)</a>
-      <a class="btn" href="model/openprinter_completo.stl" download>Máquina completa (.stl)</a>
+      <a class="btn" href="model/opendtf.glb" download>Modelo 3D (.glb)</a>
+      <a class="btn" href="model/opendtf_completo.stl" download>Máquina completa (.stl)</a>
     </div>
   </div>
 
   <div class="viewer" id="modelo">
-    <model-viewer src="model/openprinter.glb" alt="Modelo 3D de OpenPrinter"
+    <model-viewer src="model/opendtf.glb" alt="Modelo 3D de OpenDTF"
       camera-controls touch-action="pan-y" interaction-prompt="auto"
       camera-orbit="215deg 58deg auto" field-of-view="30deg"
       shadow-intensity="0.6" exposure="1.05" environment-image="neutral"
@@ -272,7 +272,7 @@
     <h2>Montaje</h2>
     <p class="sub">Diez pasos, del bastidor a la tinta. En el <a href="montaje.html">montaje interactivo</a> giras la
       máquina en 3D, ves cada paso montándose y, al pulsar una pieza, qué es, en qué paso va y su STL para imprimirla.
-      Guía en texto: <a href="https://github.com/worktechlabs/OpenPrinter/blob/main/docs/montaje.md">montaje.md</a>.</p>
+      Guía en texto: <a href="https://github.com/worktechlabs/OpenDTF/blob/main/docs/montaje.md">montaje.md</a>.</p>
     <div class="cards">
       <a class="card step-card" href="montaje.html#paso-1">
         <img src="img/montaje_01.png" alt="Paso 1: Bastidor inferior" loading="lazy">
@@ -396,8 +396,8 @@
     <h2>Lista de compra</h2>
     <p class="sub">Generada desde el modelo por <code>cad/bom.py</code>. Los precios son orientativos; lo que se reutiliza
       de impresoras 3D cuenta 0 €. En Reino Unido, mira también la
-      <a href="https://github.com/worktechlabs/OpenPrinter/blob/main/docs/compra_uk.md">lista con enlaces de Amazon, eBay y AliExpress</a>
-      y el <a href="https://github.com/worktechlabs/OpenPrinter/blob/main/docs/inventario.md">inventario reutilizado</a>.</p>
+      <a href="https://github.com/worktechlabs/OpenDTF/blob/main/docs/compra_uk.md">lista con enlaces de Amazon, eBay y AliExpress</a>
+      y el <a href="https://github.com/worktechlabs/OpenDTF/blob/main/docs/inventario.md">inventario reutilizado</a>.</p>
     <div class="tabs" role="tablist">
       <button class="tab active" data-phase="0" role="tab">Fase 0 · mecánica</button>
       <button class="tab" data-phase="1" role="tab">Fase 1 · movimiento, tinta y electrónica</button>
@@ -410,8 +410,8 @@
       </table>
     </div>
     <p class="note">No incluye cabezales, tintas ni filamento. Listas completas con piezas impresas y gramos de filamento:
-      <a href="https://github.com/worktechlabs/OpenPrinter/blob/main/docs/compra_fase0.md">fase 0</a> ·
-      <a href="https://github.com/worktechlabs/OpenPrinter/blob/main/docs/compra_fase1.md">fase 1</a>.</p>
+      <a href="https://github.com/worktechlabs/OpenDTF/blob/main/docs/compra_fase0.md">fase 0</a> ·
+      <a href="https://github.com/worktechlabs/OpenDTF/blob/main/docs/compra_fase1.md">fase 1</a>.</p>
   </section>
 
   <section id="hoja">
@@ -431,8 +431,8 @@
 
 <footer>
   <div class="wrap">
-    OpenPrinter · Hardware bajo licencia CERN-OHL-S v2, software bajo GPL-3.0 ·
-    <a href="https://github.com/worktechlabs/OpenPrinter">github.com/worktechlabs/OpenPrinter</a>
+    OpenDTF · Hardware bajo licencia CERN-OHL-S v2, software bajo GPL-3.0 ·
+    <a href="https://github.com/worktechlabs/OpenDTF">github.com/worktechlabs/OpenDTF</a>
   </div>
 </footer>
 

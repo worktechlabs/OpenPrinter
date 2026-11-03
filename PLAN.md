@@ -1,4 +1,4 @@
-# OpenPrinter — Plan de diseño
+# OpenDTF — Plan de diseño
 
 Impresora DTF (Direct To Film) open source, de rollo, ancho de film 600 mm
 (configurable a 330 mm), diseñada desde cero: chasis de perfil de aluminio 4040,
@@ -63,7 +63,7 @@ diseño mecánico no los bloquee.
 ## Estructura del repositorio
 
 ```
-OpenPrinter/
+OpenDTF/
 ├── PLAN.md            este documento
 ├── cad/
 │   ├── params.py      cotas globales

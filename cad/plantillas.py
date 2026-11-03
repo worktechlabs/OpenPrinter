@@ -201,7 +201,7 @@ def main():
         "Los rodamientos del rodillo NO van en el MDF: van en el alojamiento",
         "impreso (rodillo_alojamiento_6001.stl), por dentro, con 3 tornillos M4.",
     ]
-    n = tiled_pdf(OUT_DIR / "placa_lateral_A4.pdf", f"OpenPrinter · placa lateral (x2, MDF {t} mm)",
+    n = tiled_pdf(OUT_DIR / "placa_lateral_A4.pdf", f"OpenDTF · placa lateral (x2, MDF {t} mm)",
                   geo, size, notes)
     print(f"Plantilla: {OUT_DIR / 'placa_lateral_A4.pdf'} (portada + {n} hojas A4)")
 

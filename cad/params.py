@@ -1,4 +1,4 @@
-"""Cotas globales de OpenPrinter (mm). Convenciones de ejes en PLAN.md.
+"""Cotas globales de OpenDTF (mm). Convenciones de ejes en PLAN.md.
 
 Solo se tocan los valores de la sección "Entradas"; lo demás se deriva.
 """

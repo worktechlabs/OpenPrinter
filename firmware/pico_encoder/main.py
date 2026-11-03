@@ -1,4 +1,4 @@
-"""OpenPrinter - monitor de encoders en un Raspberry Pi Pico (MicroPython).
+"""OpenDTF - monitor de encoders en un Raspberry Pi Pico (MicroPython).
 
 Lee los dos encoders de la fase 1 y manda sus cuentas por USB a la Raspberry Pi
 para las pruebas de movimiento (registro.py las guarda y las analiza):
@@ -146,7 +146,7 @@ class Vueltas:
 
 
 def info(periodo_us, vy):
-    print("# OpenPrinter encoders v%d x_cuentas_mm=%.4f y_cuentas_vuelta=%d y_mm_vuelta=%.4f "
+    print("# OpenDTF encoders v%d x_cuentas_mm=%.4f y_cuentas_vuelta=%d y_mm_vuelta=%.4f "
           "hz=%d errores_spi=%d" % (VERSION, X_CUENTAS_MM, Y_CUENTAS_VUELTA, Y_MM_VUELTA,
                                     1_000_000 // periodo_us, vy.errores))
 

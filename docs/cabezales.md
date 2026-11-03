@@ -20,7 +20,7 @@ No hay etapa intermedia en papel ni con cabezales térmicos.
 
 ## Opciones
 
-| Opción | Coste aprox. | ¿DTF? | Encaje con OpenPrinter |
+| Opción | Coste aprox. | ¿DTF? | Encaje con OpenDTF |
 |---|---|---|---|
 | 1× XP600, CMYK + WW | 150–300 € original nuevo; 20–40 € reacondicionado | Sí | Configuración DTF de sobremesa más común. **Elegida** |
 | 2× XP600 (CMYK + blanco dedicado) | el doble | Sí | Mejor capa de blanco. Ampliación futura |

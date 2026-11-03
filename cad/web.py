@@ -1,9 +1,9 @@
 """Modelo 3D para la web.
 
-- docs/model/openprinter.glb: ensamblaje con un nodo por pieza (nombre del
+- docs/model/opendtf.glb: ensamblaje con un nodo por pieza (nombre del
   ensamblaje), para el visor y el montaje interactivo.
 - docs/model/montaje.json: pasos de montaje y catálogo de piezas.
-- docs/model/openprinter_completo.stl y tinta_completo.stl: la máquina y el
+- docs/model/opendtf_completo.stl y tinta_completo.stl: la máquina y el
   sistema de tinta en un solo STL, para verlos en cualquier visor o laminador.
 - docs/stl/: el STL de cada pieza impresa.
 
@@ -25,7 +25,7 @@ CARRIAGE_X = -120            # carro en una posición intermedia, no en home
 
 def build():
     src = layout.build(carriage_x=CARRIAGE_X)
-    out = cq.Assembly(name="openprinter")
+    out = cq.Assembly(name="opendtf")
     for c in src.children:
         if c.name.startswith(("reserva", "envolvente")):
             continue
@@ -46,13 +46,13 @@ def export_stl(assy, path, prefix=None):
 def main():
     MODEL.mkdir(parents=True, exist_ok=True)
     assy = build()
-    path = MODEL / "openprinter.glb"
+    path = MODEL / "opendtf.glb"
     assy.export(str(path), tolerance=0.5, angularTolerance=0.5)
     print(f"GLB: {path} ({path.stat().st_size / 1e6:.1f} MB)")
     names = [c.name for c in assy.children]
     montaje.write_json(names, MODEL / "montaje.json")
     montaje.write_md(names)
-    export_stl(assy, MODEL / "openprinter_completo.stl")
+    export_stl(assy, MODEL / "opendtf_completo.stl")
     export_stl(assy, MODEL / "tinta_completo.stl", "tinta_")
     layout.export_printed(MODEL.parent / "stl")
 

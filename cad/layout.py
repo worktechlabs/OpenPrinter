@@ -48,7 +48,7 @@ def media_path(assy):
 
 
 def build(carriage_x=0.0):
-    assy = cq.Assembly(name="openprinter_layout")
+    assy = cq.Assembly(name="opendtf_layout")
     chassis.add(assy)
     x_axis(assy, carriage_x)
     media_path(assy)

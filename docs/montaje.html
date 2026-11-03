@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Montaje interactivo · OpenPrinter</title>
-<meta name="description" content="Montaje paso a paso de OpenPrinter en 3D: pulsa una pieza para ver qué es, en qué paso va y descargar su STL.">
+<title>Montaje interactivo · OpenDTF</title>
+<meta name="description" content="Montaje paso a paso de OpenDTF en 3D: pulsa una pieza para ver qué es, en qué paso va y descargar su STL.">
 <style>
   :root {
     --bg: #f6f7f9; --surface: #ffffff; --text: #1b1f24; --muted: #5b6470; --line: #e2e5ea;
@@ -379,7 +379,7 @@ function loop(now) {
 
 const [json, gltf] = await Promise.all([
   fetch("model/montaje.json").then((r) => r.json()),
-  new GLTFLoader().loadAsync("model/openprinter.glb"),
+  new GLTFLoader().loadAsync("model/opendtf.glb"),
 ]);
 data = json;
 root = gltf.scene.children[0];

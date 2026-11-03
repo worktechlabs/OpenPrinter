@@ -1,12 +1,12 @@
-# OpenPrinter
+# OpenDTF
 
 Impresora **DTF (Direct To Film)** de código y hardware abiertos, diseñada desde
 cero para construirse con herramientas de *maker*: impresora 3D, perfil de
 aluminio 4040 y placas cortadas por un servicio de láser o agua.
 
-![OpenPrinter, fase 0](docs/img/general.png)
+![OpenDTF, fase 0](docs/img/general.png)
 
-**[Modelo 3D interactivo](docs/model/openprinter.glb)** ·
+**[Modelo 3D interactivo](docs/model/opendtf.glb)** ·
 **[Lista de compra de la fase 0](docs/compra_fase0.md)** ·
 **[Fase 1: movimiento](docs/fase1_movimiento.md)** ·
 **[Plan de diseño](PLAN.md)**
@@ -32,9 +32,13 @@ modificadas. Su mayor problema es la **tinta blanca**: el dióxido de titanio se
 deposita y obstruye el cabezal si no circula. Además suelen tener firmware
 cerrado y contadores de mantenimiento.
 
-OpenPrinter quiere ser una máquina que se pueda entender, reparar y mejorar
+OpenDTF quiere ser una máquina que se pueda entender, reparar y mejorar
 pieza a pieza, con la circulación del blanco y el mantenimiento resueltos desde
 el diseño.
+
+El proyecto se llamaba antes OpenPrinter. No tiene relación con
+[Open Printer](https://www.opentools.studio/), la impresora de oficina de Open
+Tools.
 
 ## Alcance
 
@@ -121,9 +125,9 @@ diseño, está en [PLAN.md](PLAN.md).
 | ![Electrónica](docs/img/electronica.png) | ![Canaletas](docs/img/cableado.png) |
 | **Caja de electrónica y fuente** bajo la mesa | **Canaletas**, paneles de red y emergencia y cadena portacables |
 
-El modelo 3D completo está en [`docs/model/openprinter.glb`](docs/model/openprinter.glb)
+El modelo 3D completo está en [`docs/model/opendtf.glb`](docs/model/opendtf.glb)
 (GitHub lo muestra en 3D al abrirlo) y en un solo STL en
-[`docs/model/openprinter_completo.stl`](docs/model/openprinter_completo.stl); el sistema de
+[`docs/model/opendtf_completo.stl`](docs/model/opendtf_completo.stl); el sistema de
 tinta solo, en [`tinta_completo.stl`](docs/model/tinta_completo.stl). Los STL de cada pieza
 impresa están en [`docs/stl/`](docs/stl).
 
@@ -285,7 +289,7 @@ docs/
 ├── fase1_movimiento.md   arquitectura de la fase 1
 ├── img/          renders y esquemas de montaje
 ├── stl/          STL de cada pieza impresa
-└── model/        openprinter.glb, STL completos y montaje.json
+└── model/        opendtf.glb, STL completos y montaje.json
 ```
 
 ## Seguridad
@@ -321,7 +325,7 @@ Las mediciones, fotos y análisis propios sí son bienvenidos.
 
 ## English summary
 
-OpenPrinter is an open source **DTF (Direct To Film) printer** designed from
+OpenDTF is an open source **DTF (Direct To Film) printer** designed from
 scratch for makers:
 
 - 600 mm roll film, configurable to 330 mm (A3+).

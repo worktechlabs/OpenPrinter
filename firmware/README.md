@@ -9,7 +9,7 @@ revisa los pines con tu placa antes de conectar motores.
 | [`klipper/printer.cfg`](klipper/printer.cfg) | Placa SKR Mini E3 V3.0, ejes X e Y, vacío, sensores y la Raspberry Pi como segunda MCU |
 | [`klipper/macros.cfg`](klipper/macros.cfg) | Vacío, carro, film, inicio y fin de trabajo, pausa y pruebas de la fase 1 |
 | [`klipper/tinta.cfg`](klipper/tinta.cfg) | Bombas y flotadores: relleno automático de los subdepósitos con avisos |
-| [`klipper/KlipperScreen.conf`](klipper/KlipperScreen.conf) | Menú "OpenPrinter" en la pantalla táctil |
+| [`klipper/KlipperScreen.conf`](klipper/KlipperScreen.conf) | Menú "OpenDTF" en la pantalla táctil |
 | [`pico_encoder/main.py`](pico_encoder/main.py) | Pico con MicroPython: cuenta el encoder X con el PIO y lee el AS5047P del eje Y |
 | [`pico_encoder/registro.py`](pico_encoder/registro.py) | En la Raspberry Pi: registra los encoders en CSV y analiza las pruebas 1 y 2 |
 
